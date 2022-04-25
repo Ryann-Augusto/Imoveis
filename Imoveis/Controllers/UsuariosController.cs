@@ -22,7 +22,11 @@ namespace Imoveis.Controllers
         // GET: Usuarios
         public async Task<IActionResult> Index(Usuarios usuarios)
         {
-            return View(await _context.Usuarios.ToListAsync());
+            usuarios.Idade = DateTime.Today;
+            var result = await _context.Usuarios
+                .Include(u => u.Idade)
+                .ToListAsync();
+            return View(result);
         }
 
         // GET: Usuarios/Details/5
@@ -139,6 +143,11 @@ namespace Imoveis.Controllers
             _context.Usuarios.Remove(usuarios);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<Usuarios> Pesquisar(int id)
+        {
+            return await _context.Usuarios.FirstOrDefaultAsync(u => u.Id.Equals(id));
         }
 
         private bool UsuariosExists(int id)
