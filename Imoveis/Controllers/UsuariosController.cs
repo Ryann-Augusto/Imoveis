@@ -20,13 +20,9 @@ namespace Imoveis.Controllers
         }
 
         // GET: Usuarios
-        public async Task<IActionResult> Index(Usuarios usuarios)
+        public async Task<IActionResult> Index()
         {
-            usuarios.Idade = DateTime.Today;
-            var result = await _context.Usuarios
-                .Include(u => u.Idade)
-                .ToListAsync();
-            return View(result);
+            return View(await _context.Usuarios.ToListAsync());
         }
 
         // GET: Usuarios/Details/5
