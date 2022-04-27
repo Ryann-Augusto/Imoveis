@@ -12,6 +12,7 @@ namespace Imoveis.Models
             base.OnModelCreating(builder);
         }
 
-        public DbSet<Usuarios> Usuarios { get; set; }
+        public DbSet<Imovel> Imovel { get; set; }
+        public DbSet<Usuarios> Usuario { get; set; }
     }
 }

@@ -9,14 +9,21 @@ namespace Imoveis.Models
         [Key]
         public int Id { get; set; }
 
-        [MaxLength(45)] [Required]
+        [Column("nome", TypeName = "varchar(45)")]
+        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         public string Nome { get; set; }
 
-        public DateTime Data_Nascimento { get; set; }
+        [Column("email", TypeName = "varchar(100)")]
+        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
+        public string Email { get; set; }
 
-        [NotMapped]
-        public DateTime Idade { get; set; }
+        [DataType(DataType.Password)]
+        [Column("senha", TypeName = "varchar(45)")]
+        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
+        public int Senha { get; set; }
 
+        public int ImovelId { get; set; }
+        public Imovel Imovel { get; set; }  
 
         public Usuarios ConverterParaEntidade()
         {
@@ -24,8 +31,8 @@ namespace Imoveis.Models
 
             novoUsuario.Id = this.Id;
             novoUsuario.Nome = this.Nome;
-            novoUsuario.Data_Nascimento = this.Data_Nascimento;
-            novoUsuario.Idade = DateTime.Today;
+            novoUsuario.Email = this.Email;
+            novoUsuario.ImovelId = this.ImovelId;
 
             return (novoUsuario);
         }
