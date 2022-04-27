@@ -4,13 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Imoveis.Models
 {
     [Table("imovel")]
-    public class imovel
+    public class Imovel
     {
         [Key]
+        [Display(Name = "Id")]
         public int ImovelId { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [StringLength(200)]
+        [Display(Name = "Descrição do imovel")]
         public string ImovelDsc{ get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
@@ -46,6 +48,8 @@ namespace Imoveis.Models
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [StringLength(8)]
         public string CEPImovel { get; set; }
+
+        public List<Usuarios> Usuarios { get; set; }
 
     }
 }

@@ -2,6 +2,7 @@
 using Imoveis.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imoveis.Migrations
 {
     [DbContext(typeof(_DbContext))]
-    partial class _DbContextModelSnapshot : ModelSnapshot
+    [Migration("20220427011821_AdicionandoMetodosImoveis")]
+    partial class AdicionandoMetodosImoveis
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,7 +70,15 @@ namespace Imoveis.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("varchar(30)");
 
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuariosId")
+                        .HasColumnType("int");
+
                     b.HasKey("ImovelId");
+
+                    b.HasIndex("UsuariosId");
 
                     b.ToTable("imovel");
                 });
@@ -84,9 +94,6 @@ namespace Imoveis.Migrations
                         .HasColumnType("varchar(100)")
                         .HasColumnName("email");
 
-                    b.Property<int>("ImovelId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(45)")
@@ -99,25 +106,23 @@ namespace Imoveis.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImovelId");
-
                     b.ToTable("Usuario");
-                });
-
-            modelBuilder.Entity("Imoveis.Models.Usuarios", b =>
-                {
-                    b.HasOne("Imoveis.Models.Imovel", "Imovel")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("ImovelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Imovel");
                 });
 
             modelBuilder.Entity("Imoveis.Models.Imovel", b =>
                 {
+                    b.HasOne("Imoveis.Models.Usuarios", "Usuarios")
+                        .WithMany("Imoveis")
+                        .HasForeignKey("UsuariosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Usuarios");
+                });
+
+            modelBuilder.Entity("Imoveis.Models.Usuarios", b =>
+                {
+                    b.Navigation("Imoveis");
                 });
 #pragma warning restore 612, 618
         }

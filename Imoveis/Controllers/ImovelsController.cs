@@ -10,23 +10,22 @@ using Imoveis.Models;
 
 namespace Imoveis.Controllers
 {
-    public class UsuariosController : Controller
+    public class ImovelsController : Controller
     {
         private readonly _DbContext _context;
 
-        public UsuariosController(_DbContext context)
+        public ImovelsController(_DbContext context)
         {
             _context = context;
         }
 
-        // GET: Usuarios
+        // GET: Imovels
         public async Task<IActionResult> Index()
         {
-            var _DbContext = _context.Usuario.Include(u => u.Imovel);
-            return View(await _DbContext.ToListAsync());
+            return View(await _context.Imovel.ToListAsync());
         }
 
-        // GET: Usuarios/Details/5
+        // GET: Imovels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +33,39 @@ namespace Imoveis.Controllers
                 return NotFound();
             }
 
-            var usuarios = await _context.Usuario
-                .Include(u => u.Imovel)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuarios == null)
+            var imovel = await _context.Imovel
+                .FirstOrDefaultAsync(m => m.ImovelId == id);
+            if (imovel == null)
             {
                 return NotFound();
             }
 
-            return View(usuarios);
+            return View(imovel);
         }
 
-        // GET: Usuarios/Create
+        // GET: Imovels/Create
         public IActionResult Create()
         {
-            ViewData["ImovelId"] = new SelectList(_context.Imovel, "ImovelId", "BroImovel");
             return View();
         }
 
-        // POST: Usuarios/Create
+        // POST: Imovels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,ImovelId")] Usuarios usuarios)
+        public async Task<IActionResult> Create([Bind("ImovelId,ImovelDsc,ImovelVlr,NumQrtImovel,NumVagImovel,TipImovel,RuaImovel,BroImovel,CddImovel,UFImovel,CEPImovel")] Imovel imovel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(usuarios);
+                _context.Add(imovel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ImovelId"] = new SelectList(_context.Imovel, "ImovelId", "BroImovel", usuarios.ImovelId);
-            return View(usuarios);
+            return View(imovel);
         }
 
-        // GET: Usuarios/Edit/5
+        // GET: Imovels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +73,22 @@ namespace Imoveis.Controllers
                 return NotFound();
             }
 
-            var usuarios = await _context.Usuario.FindAsync(id);
-            if (usuarios == null)
+            var imovel = await _context.Imovel.FindAsync(id);
+            if (imovel == null)
             {
                 return NotFound();
             }
-            ViewData["ImovelId"] = new SelectList(_context.Imovel, "ImovelId", "BroImovel", usuarios.ImovelId);
-            return View(usuarios);
+            return View(imovel);
         }
 
-        // POST: Usuarios/Edit/5
+        // POST: Imovels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Senha,ImovelId")] Usuarios usuarios)
+        public async Task<IActionResult> Edit(int id, [Bind("ImovelId,ImovelDsc,ImovelVlr,NumQrtImovel,NumVagImovel,TipImovel,RuaImovel,BroImovel,CddImovel,UFImovel,CEPImovel")] Imovel imovel)
         {
-            if (id != usuarios.Id)
+            if (id != imovel.ImovelId)
             {
                 return NotFound();
             }
@@ -102,12 +97,12 @@ namespace Imoveis.Controllers
             {
                 try
                 {
-                    _context.Update(usuarios);
+                    _context.Update(imovel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UsuariosExists(usuarios.Id))
+                    if (!ImovelExists(imovel.ImovelId))
                     {
                         return NotFound();
                     }
@@ -118,11 +113,10 @@ namespace Imoveis.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ImovelId"] = new SelectList(_context.Imovel, "ImovelId", "BroImovel", usuarios.ImovelId);
-            return View(usuarios);
+            return View(imovel);
         }
 
-        // GET: Usuarios/Delete/5
+        // GET: Imovels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +124,30 @@ namespace Imoveis.Controllers
                 return NotFound();
             }
 
-            var usuarios = await _context.Usuario
-                .Include(u => u.Imovel)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuarios == null)
+            var imovel = await _context.Imovel
+                .FirstOrDefaultAsync(m => m.ImovelId == id);
+            if (imovel == null)
             {
                 return NotFound();
             }
 
-            return View(usuarios);
+            return View(imovel);
         }
 
-        // POST: Usuarios/Delete/5
+        // POST: Imovels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var usuarios = await _context.Usuario.FindAsync(id);
-            _context.Usuario.Remove(usuarios);
+            var imovel = await _context.Imovel.FindAsync(id);
+            _context.Imovel.Remove(imovel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UsuariosExists(int id)
+        private bool ImovelExists(int id)
         {
-            return _context.Usuario.Any(e => e.Id == id);
+            return _context.Imovel.Any(e => e.ImovelId == id);
         }
     }
 }
