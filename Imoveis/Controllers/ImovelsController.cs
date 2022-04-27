@@ -22,7 +22,8 @@ namespace Imoveis.Controllers
         // GET: Imovels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Imovel.ToListAsync());
+            var _DbContext = _context.Imovel.Include(i => i.Usuario);
+            return View(await _DbContext.ToListAsync());
         }
 
         // GET: Imovels/Details/5
@@ -34,6 +35,7 @@ namespace Imoveis.Controllers
             }
 
             var imovel = await _context.Imovel
+                .Include(i => i.Usuario)
                 .FirstOrDefaultAsync(m => m.ImovelId == id);
             if (imovel == null)
             {
@@ -46,6 +48,7 @@ namespace Imoveis.Controllers
         // GET: Imovels/Create
         public IActionResult Create()
         {
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Nome");
             return View();
         }
 
@@ -54,15 +57,11 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ImovelId,ImovelDsc,ImovelVlr,NumQrtImovel,NumVagImovel,TipImovel,RuaImovel,BroImovel,CddImovel,UFImovel,CEPImovel")] Imovel imovel)
-        {
-            if (ModelState.IsValid)
-            {
+        public async Task<IActionResult> Create([Bind("ImovelId,ImovelDsc,ImovelVlr,ImovelNumQrt,ImovelNumVag,ImovelTip,ImovelRua,ImovelBro,ImovelCdd,ImovelUF,ImovelCEP,UsuarioId")] Imovel imovel)
+        {   
                 _context.Add(imovel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(imovel);
         }
 
         // GET: Imovels/Edit/5
@@ -78,6 +77,7 @@ namespace Imoveis.Controllers
             {
                 return NotFound();
             }
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Email", imovel.UsuarioId);
             return View(imovel);
         }
 
@@ -86,7 +86,7 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ImovelId,ImovelDsc,ImovelVlr,NumQrtImovel,NumVagImovel,TipImovel,RuaImovel,BroImovel,CddImovel,UFImovel,CEPImovel")] Imovel imovel)
+        public async Task<IActionResult> Edit(int id, [Bind("ImovelId,ImovelDsc,ImovelVlr,ImovelNumQrt,ImovelNumVag,ImovelTip,ImovelRua,ImovelBro,ImovelCdd,ImovelUF,ImovelCEP,UsuarioId")] Imovel imovel)
         {
             if (id != imovel.ImovelId)
             {
@@ -113,6 +113,7 @@ namespace Imoveis.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Email", imovel.UsuarioId);
             return View(imovel);
         }
 
@@ -125,6 +126,7 @@ namespace Imoveis.Controllers
             }
 
             var imovel = await _context.Imovel
+                .Include(i => i.Usuario)
                 .FirstOrDefaultAsync(m => m.ImovelId == id);
             if (imovel == null)
             {

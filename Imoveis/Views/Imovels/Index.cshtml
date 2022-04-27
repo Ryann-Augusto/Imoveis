@@ -19,28 +19,31 @@
                 @Html.DisplayNameFor(model => model.ImovelVlr)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumQrtImovel)
+                @Html.DisplayNameFor(model => model.ImovelNumQrt)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumVagImovel)
+                @Html.DisplayNameFor(model => model.ImovelNumVag)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TipImovel)
+                @Html.DisplayNameFor(model => model.ImovelTip)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RuaImovel)
+                @Html.DisplayNameFor(model => model.ImovelRua)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BroImovel)
+                @Html.DisplayNameFor(model => model.ImovelBro)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CddImovel)
+                @Html.DisplayNameFor(model => model.ImovelCdd)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UFImovel)
+                @Html.DisplayNameFor(model => model.ImovelUF)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CEPImovel)
+                @Html.DisplayNameFor(model => model.ImovelCEP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
             </th>
             <th></th>
         </tr>
@@ -55,28 +58,31 @@
                 @Html.DisplayFor(modelItem => item.ImovelVlr)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NumQrtImovel)
+                @Html.DisplayFor(modelItem => item.ImovelNumQrt)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NumVagImovel)
+                @Html.DisplayFor(modelItem => item.ImovelNumVag)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TipImovel)
+                @Html.DisplayFor(modelItem => item.ImovelTip)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RuaImovel)
+                @Html.DisplayFor(modelItem => item.ImovelRua)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BroImovel)
+                @Html.DisplayFor(modelItem => item.ImovelBro)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CddImovel)
+                @Html.DisplayFor(modelItem => item.ImovelCdd)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UFImovel)
+                @Html.DisplayFor(modelItem => item.ImovelUF)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CEPImovel)
+                @Html.DisplayFor(modelItem => item.ImovelCEP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Email)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ImovelId">Edit</a> |

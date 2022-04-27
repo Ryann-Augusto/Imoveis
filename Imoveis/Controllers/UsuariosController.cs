@@ -22,8 +22,7 @@ namespace Imoveis.Controllers
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            var _DbContext = _context.Usuario.Include(u => u.Imovel);
-            return View(await _DbContext.ToListAsync());
+            return View(await _context.Usuario.ToListAsync());
         }
 
         // GET: Usuarios/Details/5
@@ -35,7 +34,6 @@ namespace Imoveis.Controllers
             }
 
             var usuarios = await _context.Usuario
-                .Include(u => u.Imovel)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usuarios == null)
             {
@@ -48,7 +46,6 @@ namespace Imoveis.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
-            ViewData["ImovelId"] = new SelectList(_context.Imovel, "ImovelId", "BroImovel");
             return View();
         }
 
@@ -57,16 +54,11 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,ImovelId")] Usuarios usuarios)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha")] Usuarios usuarios)
         {
-            if (ModelState.IsValid)
-            {
                 _context.Add(usuarios);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["ImovelId"] = new SelectList(_context.Imovel, "ImovelId", "BroImovel", usuarios.ImovelId);
-            return View(usuarios);
         }
 
         // GET: Usuarios/Edit/5
@@ -82,7 +74,6 @@ namespace Imoveis.Controllers
             {
                 return NotFound();
             }
-            ViewData["ImovelId"] = new SelectList(_context.Imovel, "ImovelId", "BroImovel", usuarios.ImovelId);
             return View(usuarios);
         }
 
@@ -91,7 +82,7 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Senha,ImovelId")] Usuarios usuarios)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Senha")] Usuarios usuarios)
         {
             if (id != usuarios.Id)
             {
@@ -118,7 +109,6 @@ namespace Imoveis.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ImovelId"] = new SelectList(_context.Imovel, "ImovelId", "BroImovel", usuarios.ImovelId);
             return View(usuarios);
         }
 
@@ -131,7 +121,6 @@ namespace Imoveis.Controllers
             }
 
             var usuarios = await _context.Usuario
-                .Include(u => u.Imovel)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usuarios == null)
             {

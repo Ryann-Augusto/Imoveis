@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Imoveis.Migrations
 {
-    public partial class AdicionandoMetodosImoveis : Migration
+    public partial class correcaoFKDosImoveis : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,32 +37,31 @@ namespace Imoveis.Migrations
                 {
                     ImovelId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ImovelDsc = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                    imoveldsc = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ImovelVlr = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    NumQrtImovel = table.Column<int>(type: "int", nullable: false),
-                    NumVagImovel = table.Column<int>(type: "int", nullable: false),
-                    TipImovel = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
+                    imovelvlr = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    imovelnumQrt = table.Column<int>(type: "int", nullable: false),
+                    imovelnumvag = table.Column<int>(type: "int", nullable: false),
+                    imoveltip = table.Column<string>(type: "varchar(15)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    RuaImovel = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                    imovelrua = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    BroImovel = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
+                    imovelbro = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CddImovel = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
+                    imovelcdd = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UFImovel = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
+                    imoveluf = table.Column<string>(type: "varchar(30)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CEPImovel = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: false)
+                    imovelcep = table.Column<string>(type: "varchar(8)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    UsuariosId = table.Column<int>(type: "int", nullable: false)
+                    usuarioid = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_imovel", x => x.ImovelId);
                     table.ForeignKey(
-                        name: "FK_imovel_Usuario_UsuariosId",
-                        column: x => x.UsuariosId,
+                        name: "FK_imovel_Usuario_usuarioid",
+                        column: x => x.usuarioid,
                         principalTable: "Usuario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -70,9 +69,9 @@ namespace Imoveis.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_imovel_UsuariosId",
+                name: "IX_imovel_usuarioid",
                 table: "imovel",
-                column: "UsuariosId");
+                column: "usuarioid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

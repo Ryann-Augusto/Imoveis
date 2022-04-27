@@ -22,8 +22,7 @@ namespace Imoveis.Models
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         public int Senha { get; set; }
 
-        public int ImovelId { get; set; }
-        public Imovel Imovel { get; set; }  
+        public List<Imovel> Imoveis { get; set; }
 
         public Usuarios ConverterParaEntidade()
         {
@@ -32,7 +31,6 @@ namespace Imoveis.Models
             novoUsuario.Id = this.Id;
             novoUsuario.Nome = this.Nome;
             novoUsuario.Email = this.Email;
-            novoUsuario.ImovelId = this.ImovelId;
 
             return (novoUsuario);
         }

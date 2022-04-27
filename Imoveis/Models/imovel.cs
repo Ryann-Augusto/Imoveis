@@ -11,45 +11,50 @@ namespace Imoveis.Models
         public int ImovelId { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [StringLength(200)]
+        [Column("imoveldsc", TypeName = "varchar(100)")]
         [Display(Name = "Descrição do imovel")]
         public string ImovelDsc{ get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column(TypeName= "decimal(18,2)")]
+        [Column("imovelvlr" ,TypeName= "decimal(18,2)")]
         public decimal ImovelVlr{ get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
+        [Column("imovelnumQrt")]
         public int ImovelNumQrt { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
+        [Column("imovelnumvag")]
         public int ImovelNumVag { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [StringLength(15)]
+        [Column("imoveltip", TypeName = "varchar(15)")]
         public string ImovelTip { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [StringLength(100)]
+        [Column("imovelrua", TypeName = "varchar(100)")]
         public string ImovelRua { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [StringLength(30)]
+        [Column("imovelbro", TypeName = "varchar(30)")]
         public string ImovelBro { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [StringLength(30)]
+        [Column("imovelcdd", TypeName = "varchar(30)")]
         public string ImovelCdd { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [StringLength(30)]
+        [Column("imoveluf", TypeName = "varchar(30)")]
         public string ImovelUF { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [StringLength(8)]
+        [Column("imovelcep", TypeName = "varchar(8)")]
         public string ImovelCEP { get; set; }
 
-        public List<Usuarios> Usuarios { get; set; }
+        [Column("usuarioid")]
+        public int UsuarioId { get; set; }
+        public Usuarios Usuario { get; set; }
 
     }
 }

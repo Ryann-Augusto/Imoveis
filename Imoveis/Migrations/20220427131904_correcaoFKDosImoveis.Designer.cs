@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imoveis.Migrations
 {
     [DbContext(typeof(_DbContext))]
-    [Migration("20220427013029_AdicionandoMetodosImoveisTeste")]
-    partial class AdicionandoMetodosImoveisTeste
+    [Migration("20220427131904_correcaoFKDosImoveis")]
+    partial class correcaoFKDosImoveis
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,51 +26,61 @@ namespace Imoveis.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("BroImovel")
+                    b.Property<string>("ImovelBro")
+                        .IsRequired()
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("imovelbro");
+
+                    b.Property<string>("ImovelCEP")
+                        .IsRequired()
+                        .HasColumnType("varchar(8)")
+                        .HasColumnName("imovelcep");
+
+                    b.Property<string>("ImovelCdd")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
-                    b.Property<string>("CEPImovel")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("varchar(8)");
-
-                    b.Property<string>("CddImovel")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("imovelcdd");
 
                     b.Property<string>("ImovelDsc")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("imoveldsc");
+
+                    b.Property<int>("ImovelNumQrt")
+                        .HasColumnType("int")
+                        .HasColumnName("imovelnumQrt");
+
+                    b.Property<int>("ImovelNumVag")
+                        .HasColumnType("int")
+                        .HasColumnName("imovelnumvag");
+
+                    b.Property<string>("ImovelRua")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("imovelrua");
+
+                    b.Property<string>("ImovelTip")
+                        .IsRequired()
+                        .HasColumnType("varchar(15)")
+                        .HasColumnName("imoveltip");
+
+                    b.Property<string>("ImovelUF")
+                        .IsRequired()
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("imoveluf");
 
                     b.Property<decimal>("ImovelVlr")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("imovelvlr");
 
-                    b.Property<int>("NumQrtImovel")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumVagImovel")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RuaImovel")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("TipImovel")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
-
-                    b.Property<string>("UFImovel")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int")
+                        .HasColumnName("usuarioid");
 
                     b.HasKey("ImovelId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("imovel");
                 });
@@ -86,9 +96,6 @@ namespace Imoveis.Migrations
                         .HasColumnType("varchar(100)")
                         .HasColumnName("email");
 
-                    b.Property<int>("ImovelId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(45)")
@@ -101,25 +108,23 @@ namespace Imoveis.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImovelId");
-
                     b.ToTable("Usuario");
-                });
-
-            modelBuilder.Entity("Imoveis.Models.Usuarios", b =>
-                {
-                    b.HasOne("Imoveis.Models.Imovel", "Imovel")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("ImovelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Imovel");
                 });
 
             modelBuilder.Entity("Imoveis.Models.Imovel", b =>
                 {
-                    b.Navigation("Usuarios");
+                    b.HasOne("Imoveis.Models.Usuarios", "Usuario")
+                        .WithMany("Imoveis")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Imoveis.Models.Usuarios", b =>
+                {
+                    b.Navigation("Imoveis");
                 });
 #pragma warning restore 612, 618
         }

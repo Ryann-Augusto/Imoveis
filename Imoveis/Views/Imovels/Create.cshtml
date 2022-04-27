@@ -23,44 +23,48 @@
                 <span asp-validation-for="ImovelVlr" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NumQrtImovel" class="control-label"></label>
-                <input asp-for="NumQrtImovel" class="form-control" />
-                <span asp-validation-for="NumQrtImovel" class="text-danger"></span>
+                <label asp-for="ImovelNumQrt" class="control-label"></label>
+                <input asp-for="ImovelNumQrt" class="form-control" />
+                <span asp-validation-for="ImovelNumQrt" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NumVagImovel" class="control-label"></label>
-                <input asp-for="NumVagImovel" class="form-control" />
-                <span asp-validation-for="NumVagImovel" class="text-danger"></span>
+                <label asp-for="ImovelNumVag" class="control-label"></label>
+                <input asp-for="ImovelNumVag" class="form-control" />
+                <span asp-validation-for="ImovelNumVag" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TipImovel" class="control-label"></label>
-                <input asp-for="TipImovel" class="form-control" />
-                <span asp-validation-for="TipImovel" class="text-danger"></span>
+                <label asp-for="ImovelTip" class="control-label"></label>
+                <input asp-for="ImovelTip" class="form-control" />
+                <span asp-validation-for="ImovelTip" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RuaImovel" class="control-label"></label>
-                <input asp-for="RuaImovel" class="form-control" />
-                <span asp-validation-for="RuaImovel" class="text-danger"></span>
+                <label asp-for="ImovelRua" class="control-label"></label>
+                <input asp-for="ImovelRua" class="form-control" />
+                <span asp-validation-for="ImovelRua" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BroImovel" class="control-label"></label>
-                <input asp-for="BroImovel" class="form-control" />
-                <span asp-validation-for="BroImovel" class="text-danger"></span>
+                <label asp-for="ImovelBro" class="control-label"></label>
+                <input asp-for="ImovelBro" class="form-control" />
+                <span asp-validation-for="ImovelBro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CddImovel" class="control-label"></label>
-                <input asp-for="CddImovel" class="form-control" />
-                <span asp-validation-for="CddImovel" class="text-danger"></span>
+                <label asp-for="ImovelCdd" class="control-label"></label>
+                <input asp-for="ImovelCdd" class="form-control" />
+                <span asp-validation-for="ImovelCdd" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UFImovel" class="control-label"></label>
-                <input asp-for="UFImovel" class="form-control" />
-                <span asp-validation-for="UFImovel" class="text-danger"></span>
+                <label asp-for="ImovelUF" class="control-label"></label>
+                <input asp-for="ImovelUF" class="form-control" />
+                <span asp-validation-for="ImovelUF" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CEPImovel" class="control-label"></label>
-                <input asp-for="CEPImovel" class="form-control" />
-                <span asp-validation-for="CEPImovel" class="text-danger"></span>
+                <label asp-for="ImovelCEP" class="control-label"></label>
+                <input asp-for="ImovelCEP" class="form-control" />
+                <span asp-validation-for="ImovelCEP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuarioId" class="control-label"></label>
+                <select asp-for="UsuarioId" class ="form-control" asp-items="ViewBag.UsuarioId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
