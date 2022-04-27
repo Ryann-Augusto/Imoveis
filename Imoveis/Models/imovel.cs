@@ -18,34 +18,34 @@ namespace Imoveis.Models
         public decimal ImovelVlr{ get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        public int NumQrtImovel { get; set; }
+        public int ImovelNumQrt { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        public int NumVagImovel { get; set; }
+        public int ImovelNumVag { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [StringLength(15)]
-        public string TipImovel { get; set; }
+        public string ImovelTip { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [StringLength(100)]
-        public string RuaImovel { get; set; }
+        public string ImovelRua { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [StringLength(30)]
-        public string BroImovel { get; set; }
+        public string ImovelBro { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [StringLength(30)]
-        public string CddImovel { get; set; }
+        public string ImovelCdd { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [StringLength(30)]
-        public string UFImovel { get; set; }
+        public string ImovelUF { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [StringLength(8)]
-        public string CEPImovel { get; set; }
+        public string ImovelCEP { get; set; }
 
     }
 }
