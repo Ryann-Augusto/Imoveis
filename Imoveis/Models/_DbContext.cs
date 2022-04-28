@@ -10,9 +10,11 @@ namespace Imoveis.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
         }
 
         public DbSet<Imovel> Imovel { get; set; }
         public DbSet<Usuarios> Usuario { get; set; }
+
     }
 }

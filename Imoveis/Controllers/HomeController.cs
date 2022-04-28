@@ -1,21 +1,23 @@
 ﻿using Imoveis.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Imoveis.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly _DbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(_DbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var _DbContext = _context.Imovel.Include(i => i.Usuario);
+            return View(await _DbContext.ToListAsync());
         }
 
         public IActionResult Privacy()

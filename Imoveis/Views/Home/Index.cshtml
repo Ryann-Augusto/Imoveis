@@ -1,8 +1,32 @@
-﻿@{
+﻿@model IEnumerable<Imoveis.Models.Imovel>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Lista de Imóveis</h1>
+</div>
+
+<div class="row">
+    @foreach(var imovel in Model)
+    {
+        <div class="col-sm-4">
+            <div class="card text-center bg-light mb-4">
+                <img class="card-img-top" src="/img/imoveis/@String.Concat(imovel.ImovelId.ToString("D6"),
+                ".jpg")" alt="Imagem de @imovel.ImovelDsc">
+                <div class="card-header">
+                    R$ @imovel.ImovelVlr.ToString("F2")
+                </div>
+                <div class="card-body" style="height:124px;">
+                    <h5 class="card-title">@imovel.ImovelDsc</h5>
+                    <p class="card-text">@imovel.ImovelBro</p>
+                </div>
+                <div class="card-footer">
+                    <div><a href="#" class="btn btn-primary">Entrar em Contato</a></div>
+                    <small class="text-muted">Cidade: @imovel.ImovelCdd</small>
+                </div>
+            </div>
+        </div>
+    }
 </div>
