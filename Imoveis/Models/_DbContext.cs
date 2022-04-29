@@ -13,7 +13,7 @@ namespace Imoveis.Models
 
         }
 
-        public DbSet<Imovel> Imovel { get; set; }
+        public DbSet<Imoveis> Imovel { get; set; }
         public DbSet<Usuarios> Usuario { get; set; }
 
     }

@@ -20,9 +20,13 @@ namespace Imoveis.Models
         [DataType(DataType.Password)]
         [Column("senha", TypeName = "varchar(45)")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        public int Senha { get; set; }
+        public string Senha { get; set; }
 
-        public List<Imovel> Imoveis { get; set; }
+        [Column("nivel", TypeName = "int")]
+        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
+        public int Nivel { get; set; }
+
+        public List<Imoveis> Imoveis { get; set; }
 
         public Usuarios ConverterParaEntidade()
         {

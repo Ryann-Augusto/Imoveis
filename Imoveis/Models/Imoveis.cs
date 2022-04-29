@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Imoveis.Models
 {
     [Table("imovel")]
-    public class Imovel
+    public class Imoveis
     {
         [Key]
         [Display(Name = "Id")]
