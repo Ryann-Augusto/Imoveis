@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Imoveis.Models
 {
     [Table("imovel")]
-    public class Imoveis
+    public class MdImoveis
     {
         [Key]
         [Display(Name = "Id")]
@@ -64,7 +64,7 @@ namespace Imoveis.Models
         [Column("usuarioid")]
         [Display(Name = "Anunciante")]
         public int UsuarioId { get; set; }
-        public Usuarios Usuario { get; set; }
+        public MdUsuarios Usuario { get; set; }
 
     }
 }

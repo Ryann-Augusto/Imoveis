@@ -57,7 +57,7 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ImovelId,ImovelDsc,ImovelVlr,ImovelNumQrt,ImovelNumVag,ImovelTip,ImovelRua,ImovelBro,ImovelCdd,ImovelUF,ImovelCEP,UsuarioId")] Models.Imoveis imovel)
+        public async Task<IActionResult> Create([Bind("ImovelId,ImovelDsc,ImovelVlr,ImovelNumQrt,ImovelNumVag,ImovelTip,ImovelRua,ImovelBro,ImovelCdd,ImovelUF,ImovelCEP,UsuarioId")] Models.MdImoveis imovel)
         {   
                 _context.Add(imovel);
                 await _context.SaveChangesAsync();
@@ -86,7 +86,7 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ImovelId,ImovelDsc,ImovelVlr,ImovelNumQrt,ImovelNumVag,ImovelTip,ImovelRua,ImovelBro,ImovelCdd,ImovelUF,ImovelCEP,UsuarioId")] Models.Imoveis imovel)
+        public async Task<IActionResult> Edit(int id, [Bind("ImovelId,ImovelDsc,ImovelVlr,ImovelNumQrt,ImovelNumVag,ImovelTip,ImovelRua,ImovelBro,ImovelCdd,ImovelUF,ImovelCEP,UsuarioId")] Models.MdImoveis imovel)
         {
             if (id != imovel.ImovelId)
             {

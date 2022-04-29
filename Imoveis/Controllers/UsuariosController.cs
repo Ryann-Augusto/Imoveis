@@ -56,7 +56,7 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha")] Usuarios usuarios)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha")] MdUsuarios usuarios)
         {
                 _context.Add(usuarios);
                 await _context.SaveChangesAsync();
@@ -84,7 +84,7 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Senha")] Usuarios usuarios)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Senha")] MdUsuarios usuarios)
         {
             if (id != usuarios.Id)
             {

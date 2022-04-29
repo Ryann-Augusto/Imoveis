@@ -18,7 +18,7 @@ namespace Imoveis.camada_Dal
 
         public DataTable ObterUsuarios()
         {
-            string queryString = "SELECT Id, nome, email, senha FROM usuario;";
+            string queryString = "SELECT Id, nome, email, senha, nivel FROM usuario;";
 
             using (MySqlConnection connection = new MySqlConnection(MysqlConn()))
             {
@@ -37,17 +37,18 @@ namespace Imoveis.camada_Dal
             }
         }
 
-        public List<Models.Usuarios> ObteveUsuarios()
+        public List<Models.MdUsuarios> ObteveUsuarios()
         {
-            var lista = new List<Models.Usuarios>();
+            var lista = new List<Models.MdUsuarios>();
             var planilhaDB = new Usuario();
             foreach (DataRow row in planilhaDB.ObterUsuarios().Rows)
             {
-                var usuario = new Models.Usuarios();
+                var usuario = new Models.MdUsuarios();
                 usuario.Id = Convert.ToInt32(row["Id"]);
                 usuario.Nome = Convert.ToString(row["nome"]);
                 usuario.Email = Convert.ToString(row["email"]);
-                usuario.Senha = Convert.ToInt32(row["senha"]);
+                usuario.Senha = Convert.ToString(row["senha"]);
+                usuario.Nivel = Convert.ToInt32(row["nivel"]);
 
                 lista.Add(usuario);
             }

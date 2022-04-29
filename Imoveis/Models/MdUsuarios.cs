@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Imoveis.Models
 {
     [Table(name:"Usuario")]
-    public class Usuarios
+    public class MdUsuarios
     {
         [Key]
         public int Id { get; set; }
@@ -26,11 +26,11 @@ namespace Imoveis.Models
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         public int Nivel { get; set; }
 
-        public List<Imoveis> Imoveis { get; set; }
+        public List<MdImoveis> Imoveis { get; set; }
 
-        public Usuarios ConverterParaEntidade()
+        public MdUsuarios ConverterParaEntidade()
         {
-            var novoUsuario = new Usuarios();
+            var novoUsuario = new MdUsuarios();
 
             novoUsuario.Id = this.Id;
             novoUsuario.Nome = this.Nome;
