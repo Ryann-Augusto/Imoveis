@@ -13,18 +13,18 @@
     {
         <div class="col-sm-4">
             <div class="card text-center bg-light mb-4">
-                <img class="card-img-top" src="/img/imoveis/@String.Concat(imovel.ImovelId.ToString("D6"),
-                ".jpg")" alt="Imagem de @imovel.ImovelDsc">
+                <img class="card-img-top" src="/img/imoveis/@String.Concat(imovel.Id.ToString("D6"),
+                ".jpg")" alt="Imagem de @imovel.Descricao">
                 <div class="card-header">
-                    R$ @imovel.ImovelVlr.ToString("F2")
+                    R$ @imovel.Valor.ToString("F2")
                 </div>
                 <div class="card-body" style="height:124px;">
-                    <h5 class="card-title">@imovel.ImovelDsc</h5>
-                    <p class="card-text">@imovel.ImovelBro</p>
+                    <h5 class="card-title">@imovel.Descricao</h5>
+                    <p class="card-text">@imovel.Bairro</p>
                 </div>
                 <div class="card-footer">
                     <div><a href="#" class="btn btn-primary">Entrar em Contato</a></div>
-                    <small class="text-muted">Cidade: @imovel.ImovelCdd</small>
+                    <small class="text-muted">Cidade: @imovel.Cidade</small>
                 </div>
             </div>
         </div>

@@ -22,9 +22,7 @@ namespace Imoveis.Controllers
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            ViewBag.Usuarios = new camada_Dal.Usuario().ObteveUsuarios();
-            return View();
-            //return View(await _context.Usuario.ToListAsync());
+            return View(await _context.Usuario.ToListAsync());
         }
 
         // GET: Usuarios/Details/5
@@ -35,14 +33,14 @@ namespace Imoveis.Controllers
                 return NotFound();
             }
 
-            var usuarios = await _context.Usuario
+            var mdUsuarios = await _context.Usuario
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuarios == null)
+            if (mdUsuarios == null)
             {
                 return NotFound();
             }
 
-            return View(usuarios);
+            return View(mdUsuarios);
         }
 
         // GET: Usuarios/Create
@@ -56,12 +54,12 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha")] MdUsuarios usuarios)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,Nivel")] MdUsuarios mdUsuarios)
         {
-                _context.Add(usuarios);
+                _context.Add(mdUsuarios);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-        }
+            }
 
         // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -71,12 +69,12 @@ namespace Imoveis.Controllers
                 return NotFound();
             }
 
-            var usuarios = await _context.Usuario.FindAsync(id);
-            if (usuarios == null)
+            var mdUsuarios = await _context.Usuario.FindAsync(id);
+            if (mdUsuarios == null)
             {
                 return NotFound();
             }
-            return View(usuarios);
+            return View(mdUsuarios);
         }
 
         // POST: Usuarios/Edit/5
@@ -84,23 +82,21 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Senha")] MdUsuarios usuarios)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Senha,Nivel")] MdUsuarios mdUsuarios)
         {
-            if (id != usuarios.Id)
+            if (id != mdUsuarios.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
                 try
                 {
-                    _context.Update(usuarios);
+                    _context.Update(mdUsuarios);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UsuariosExists(usuarios.Id))
+                    if (!MdUsuariosExists(mdUsuarios.Id))
                     {
                         return NotFound();
                     }
@@ -111,8 +107,6 @@ namespace Imoveis.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(usuarios);
-        }
 
         // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -122,14 +116,14 @@ namespace Imoveis.Controllers
                 return NotFound();
             }
 
-            var usuarios = await _context.Usuario
+            var mdUsuarios = await _context.Usuario
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuarios == null)
+            if (mdUsuarios == null)
             {
                 return NotFound();
             }
 
-            return View(usuarios);
+            return View(mdUsuarios);
         }
 
         // POST: Usuarios/Delete/5
@@ -137,15 +131,20 @@ namespace Imoveis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var usuarios = await _context.Usuario.FindAsync(id);
-            _context.Usuario.Remove(usuarios);
+            var mdUsuarios = await _context.Usuario.FindAsync(id);
+            _context.Usuario.Remove(mdUsuarios);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UsuariosExists(int id)
+        private bool MdUsuariosExists(int id)
         {
             return _context.Usuario.Any(e => e.Id == id);
+        }
+
+        public IActionResult Admin()
+        {
+            return View();
         }
     }
 }

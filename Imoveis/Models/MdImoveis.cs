@@ -7,59 +7,59 @@ namespace Imoveis.Models
     public class MdImoveis
     {
         [Key]
-        [Display(Name = "Id")]
-        public int ImovelId { get; set; }
+        [Display(Name = "id")]
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column("imoveldsc", TypeName = "varchar(100)")]
+        [Column("descricao", TypeName = "varchar(100)")]
         [Display(Name = "Descrição")]
-        public string ImovelDsc{ get; set; }
+        public string Descricao { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column("imovelvlr" ,TypeName= "decimal(18,2)")]
+        [Column("valor" ,TypeName= "decimal(18,2)")]
         [Display(Name = "Valor")]
-        public decimal ImovelVlr{ get; set; }
+        public decimal Valor { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column("imovelnumQrt")]
+        [Column("quartos")]
         [Display(Name = "Número de quartos")]
-        public int ImovelNumQrt { get; set; }
+        public int Quarto { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column("imovelnumvag")]
+        [Column("vagas")]
         [Display(Name = "Número de vagas")]
-        public int ImovelNumVag { get; set; }
+        public int Vagas { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column("imoveltip", TypeName = "varchar(15)")]
+        [Column("tipo", TypeName = "varchar(15)")]
         [Display(Name = "Tipo")]
-        public string ImovelTip { get; set; }
+        public string Tipo { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column("imovelrua", TypeName = "varchar(100)")]
+        [Column("endereco", TypeName = "varchar(100)")]
         [Display(Name = "Endereço")]
-        public string ImovelRua { get; set; }
+        public string Rua { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column("imovelbro", TypeName = "varchar(30)")]
+        [Column("bairro", TypeName = "varchar(30)")]
         [Display(Name = "Bairro")]
-        public string ImovelBro { get; set; }
+        public string Bairro { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [StringLength(30)]
-        [Column("imovelcdd", TypeName = "varchar(30)")]
+        [Column("cidade", TypeName = "varchar(30)")]
         [Display(Name = "Cidade")]
-        public string ImovelCdd { get; set; }
+        public string Cidade { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column("imoveluf", TypeName = "varchar(30)")]
+        [Column("estado", TypeName = "varchar(30)")]
         [Display(Name = "Estado")]
-        public string ImovelUF { get; set; }
+        public string Estado { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column("imovelcep", TypeName = "varchar(8)")]
+        [Column("cep", TypeName = "varchar(8)")]
         [Display(Name = "CEP")]
-        public string ImovelCEP { get; set; }
+        public string CEP { get; set; }
 
         [Column("usuarioid")]
         [Display(Name = "Anunciante")]

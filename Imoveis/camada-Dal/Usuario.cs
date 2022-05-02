@@ -48,7 +48,6 @@ namespace Imoveis.camada_Dal
                 usuario.Nome = Convert.ToString(row["nome"]);
                 usuario.Email = Convert.ToString(row["email"]);
                 usuario.Senha = Convert.ToString(row["senha"]);
-                usuario.Nivel = Convert.ToInt32(row["nivel"]);
 
                 lista.Add(usuario);
             }
