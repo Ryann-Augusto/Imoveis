@@ -40,9 +40,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Senha)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nivel)
-            </td>
+                @if(item.Nivel == 1)
+                {
+                    <td>Administrador</td>
+                }
+                else if(item.Nivel == 2)
+                {
+                    <td>Funcionario</td>
+                }
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
