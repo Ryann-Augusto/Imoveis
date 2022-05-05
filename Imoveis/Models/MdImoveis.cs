@@ -31,9 +31,9 @@ namespace Imoveis.Models
         public int Vagas { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column("tipo", TypeName = "varchar(15)")]
+        [Column("tipo", TypeName = "int")]
         [Display(Name = "Tipo")]
-        public string Tipo { get; set; }
+        public int Tipo { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [Column("endereco", TypeName = "varchar(100)")]

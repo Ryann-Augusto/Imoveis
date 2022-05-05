@@ -38,6 +38,7 @@ namespace Imoveis.Models
         [Column("telefone", TypeName = "varchar(14)")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [MaxLength(14, ErrorMessage = "O campo {0} deve ter no maximo {1} caracteres.")]
+        [UIHint("_CustomCELULAR")]
         public string Telefone { get; set; }
 
         [Column("nivel", TypeName = "int")]

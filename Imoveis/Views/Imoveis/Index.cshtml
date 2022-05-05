@@ -64,9 +64,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Vagas)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tipo)
-            </td>
+            @if(item.Tipo == 0)
+                {
+                    <td>Vendendo</td>
+                }
+                else if(item.Tipo == 1)
+                {
+                    <td>Alugando</td>
+                }
+                
             <td>
                 @Html.DisplayFor(modelItem => item.Rua)
             </td>
