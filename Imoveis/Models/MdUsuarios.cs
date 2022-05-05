@@ -29,6 +29,17 @@ namespace Imoveis.Models
         [MaxLength(45, ErrorMessage = "O campo {0} deve ter no maximo {1} caracteres.")]
         public string Senha { get; set; }
 
+        [Column("cpf", TypeName = "varchar(11)")]
+        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
+        [RegularExpression(@"[0-9]{11}$", ErrorMessage = "O campo {0} deve ser preenchido com um CPF.")]
+        [UIHint("_CustomCPF")]
+        public string Cpf { get; set; }
+
+        [Column("telefone", TypeName = "varchar(14)")]
+        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
+        [MaxLength(14, ErrorMessage = "O campo {0} deve ter no maximo {1} caracteres.")]
+        public string Telefone { get; set; }
+
         [Column("nivel", TypeName = "int")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         public int Nivel { get; set; }
