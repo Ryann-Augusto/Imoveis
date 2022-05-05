@@ -56,10 +56,14 @@ namespace Imoveis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,Cpf,Telefone,Nivel")] MdUsuarios mdUsuarios)
         {
+            if (ModelState.IsValid)
+            {
                 _context.Add(mdUsuarios);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            return View(mdUsuarios);
+        }
 
         // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -89,6 +93,8 @@ namespace Imoveis.Controllers
                 return NotFound();
             }
 
+            if (ModelState.IsValid)
+            {
                 try
                 {
                     _context.Update(mdUsuarios);
@@ -107,6 +113,8 @@ namespace Imoveis.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            return View(mdUsuarios);
+        }
 
         // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)

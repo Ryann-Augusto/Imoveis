@@ -45,7 +45,7 @@ namespace Imoveis.Models
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         public int Nivel { get; set; }
 
-        public List<MdImoveis> Imoveis { get; set; }
+        public List<MdImoveis>? Imoveis { get; set; }
 
 
         // Validação p/ Campo CPF

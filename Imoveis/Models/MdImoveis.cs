@@ -64,7 +64,7 @@ namespace Imoveis.Models
         [Column("usuarioid")]
         [Display(Name = "Anunciante")]
         public int UsuarioId { get; set; }
-        public MdUsuarios Usuario { get; set; }
+        public MdUsuarios? Usuario { get; set; }
 
     }
 }
