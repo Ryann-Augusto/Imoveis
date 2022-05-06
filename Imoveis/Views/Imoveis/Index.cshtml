@@ -29,19 +29,19 @@
                 @Html.DisplayNameFor(model => model.Tipo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rua)
+                @Html.DisplayNameFor(model => model.Endereco.Rua)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Bairro)
+                @Html.DisplayNameFor(model => model.Endereco.Bairro)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cidade)
+                @Html.DisplayNameFor(model => model.Endereco.Cidade)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Estado)
+                @Html.DisplayNameFor(model => model.Endereco.Estado)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CEP)
+                @Html.DisplayNameFor(model => model.Endereco.CEP)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Usuario)
@@ -74,22 +74,22 @@
                 }
                 
             <td>
-                @Html.DisplayFor(modelItem => item.Rua)
+                @Html.DisplayFor(modelItem => item.Endereco.Rua)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Bairro)
+                @Html.DisplayFor(modelItem => item.Endereco.Bairro)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cidade)
+                @Html.DisplayFor(modelItem => item.Endereco.Cidade)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Estado)
+                @Html.DisplayFor(modelItem => item.Endereco.Estado)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CEP)
+                @Html.DisplayFor(modelItem => item.Endereco.CEP)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Email)
+                @Html.DisplayFor(modelItem => item.Usuario.Nome)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

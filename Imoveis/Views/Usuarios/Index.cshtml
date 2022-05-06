@@ -62,9 +62,13 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                <button class="btn btn-danger" onclick="Alertal()">Teste</button>
+                <form class="d-inline-block" asp-page-handler="delete" asp-route-id="@item.Id" method="post">
+                    <button class="btn btn-danger btn-sm" onclick="confirmarExclusao();" type="button">Excluir</button>
+                </form>
             </td>
         </tr>
 }
     </tbody>
 </table>
+

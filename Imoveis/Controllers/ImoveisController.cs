@@ -12,6 +12,9 @@ namespace Imoveis.Controllers
 {
     public class ImoveisController : Controller
     {
+        [BindProperty]
+        public MdImoveis Imovel { get; set; }
+
         private readonly _DbContext _context;
 
         public ImoveisController(_DbContext context)
@@ -57,9 +60,9 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descricao,Valor,Quarto,Vagas,Tipo,Rua,Bairro,Cidade,Estado,CEP,UsuarioId")] MdImoveis mdImoveis)
+        public async Task<IActionResult> OnGetCreate()
         {
-            _context.Add(mdImoveis);
+            _context.Add(Imovel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
