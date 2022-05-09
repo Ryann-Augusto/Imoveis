@@ -89,9 +89,9 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descricao,Valor,Quarto,Vagas,Tipo,Rua,Bairro,Cidade,Estado,CEP,UsuarioId")] MdImoveis mdImoveis)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id != mdImoveis.Id)
+            if (id != Imovel.Id)
             {
                 return NotFound();
             }
@@ -101,12 +101,12 @@ namespace Imoveis.Controllers
                 try
                 {
 
-                    _context.Update(mdImoveis);
+                    _context.Update(Imovel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MdImoveisExists(mdImoveis.Id))
+                    if (!MdImoveisExists(Imovel.Id))
                     {
                         return NotFound();
                     }
@@ -117,7 +117,7 @@ namespace Imoveis.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(mdImoveis);
+            return View(Imovel);
         }
 
         // GET: Imoveis/Delete/5
