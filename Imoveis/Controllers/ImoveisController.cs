@@ -65,6 +65,8 @@ namespace Imoveis.Controllers
             ModelState["Id"].Errors.Clear();
             ModelState.Remove("Id");
 
+            Imovel.Situacao = 0;
+
             if (ModelState.IsValid)
             {
                 _context.Add(Imovel);
@@ -153,6 +155,26 @@ namespace Imoveis.Controllers
             var mdImoveis = await _context.Imovel.FindAsync(id);
             _context.Imovel.Remove(mdImoveis);
             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Block(int id)
+        {
+            var mdImoveis = await _context.Imovel.FindAsync(id);
+
+            if (mdImoveis.Situacao == 0)
+            {
+                mdImoveis.Situacao = 1;
+            }
+            else if (mdImoveis.Situacao == 1)
+            {
+                mdImoveis.Situacao = 0;
+            }
+            if (ModelState.IsValid)
+            {
+                _context.Update(mdImoveis);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToAction(nameof(Index));
         }
 

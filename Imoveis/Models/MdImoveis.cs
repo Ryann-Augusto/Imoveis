@@ -35,12 +35,15 @@ namespace Imoveis.Models
         [Display(Name = "Tipo")]
         public int Tipo { get; set; }
 
+        [Column("situacao", TypeName = "int")]
+        public int Situacao { get; set; }
+
+        public MdEndereco Endereco { get; set; }
+
         [Column("usuarioid")]
         [Display(Name = "Anunciante")]
         public int UsuarioId { get; set; }
         public MdUsuarios? Usuario { get; set; }
-
-        public MdEndereco Endereco { get; set; }
 
     }
 }

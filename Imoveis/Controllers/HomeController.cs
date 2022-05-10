@@ -16,7 +16,9 @@ namespace Imoveis.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var _DbContext = _context.Imovel.Include(i => i.Usuario);
+            var _DbContext = _context.Imovel.Include(i => i.Usuario)
+                .Where(i => i.Usuario.Situacao == 0 &&
+                            i.Situacao == 0);
             return View(await _DbContext.ToListAsync());
         }
 
