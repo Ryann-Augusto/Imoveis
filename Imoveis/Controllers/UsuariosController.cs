@@ -74,6 +74,8 @@ namespace Imoveis.Controllers
             }
 
             var mdUsuarios = await _context.Usuario.FindAsync(id);
+            mdUsuarios.Senha = String.Empty;
+
             if (mdUsuarios == null)
             {
                 return NotFound();
@@ -86,8 +88,19 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Senha,Cpf,Telefone,Nivel")] MdUsuarios mdUsuarios)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Cpf,Senha,Telefone,Nivel")] MdUsuarios mdUsuarios)
         {
+            var usuarios = await _context.Usuario.Select(m => new { m.Id, m.Cpf, m.Senha }).FirstOrDefaultAsync(m => m.Id == id);
+
+            mdUsuarios.Cpf = usuarios.Cpf;
+
+            if (mdUsuarios.Senha == null || mdUsuarios.Senha == String.Empty)
+            {
+                mdUsuarios.Senha = usuarios.Senha;
+                ModelState["Senha"].Errors.Clear();
+                ModelState.Remove("Senha");
+            }
+
             if (id != mdUsuarios.Id)
             {
                 return NotFound();

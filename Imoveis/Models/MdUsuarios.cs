@@ -24,9 +24,9 @@ namespace Imoveis.Models
         public string Email { get; set; }
 
         [DataType(DataType.Password)]
-        [Column("senha", TypeName = "varchar(45)")]
+        [Column("senha", TypeName = "varchar(20)")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [MaxLength(45, ErrorMessage = "O campo {0} deve ter no maximo {1} caracteres.")]
+        [MaxLength(20, ErrorMessage = "O campo {0} deve ter no maximo {1} caracteres.")]
         public string Senha { get; set; }
 
         [Column("cpf", TypeName = "varchar(11)")]
