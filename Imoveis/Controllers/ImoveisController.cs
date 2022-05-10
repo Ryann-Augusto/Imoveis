@@ -51,7 +51,7 @@ namespace Imoveis.Controllers
         // GET: Imoveis/Create
         public IActionResult Create()
         {
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(m=> m.Situacao == 0), "Id", "Nome");
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(m =>  m.Situacao == 0), "Id", "Nome");
             return View();
         }
 
@@ -62,8 +62,14 @@ namespace Imoveis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnGetCreate()
         {
-            _context.Add(Imovel);
-            await _context.SaveChangesAsync();
+            ModelState["Id"].Errors.Clear();
+            ModelState.Remove("Id");
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(Imovel);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToAction(nameof(Index));
         }
 
@@ -80,7 +86,7 @@ namespace Imoveis.Controllers
             {
                 return NotFound();
             }
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(m=> m.Situacao == 0), "Id", "Nome", mdImoveis.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Nome", mdImoveis.UsuarioId);
             return View(mdImoveis);
         }
 

@@ -1,93 +1,115 @@
-﻿@model Imoveis.Controllers.ImoveisController
+﻿@model Imoveis.Models.MdImoveis
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Criar Usuários";
 }
 
-<h1>Create</h1>
+<h1>@ViewData["Title"]</h1>
 
-<h4>MdImoveis</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="OnGetCreate">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Imovel.Descricao" class="control-label"></label>
-                <input asp-for="Imovel.Descricao" class="form-control" />
-                <span asp-validation-for="Imovel.Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.Valor" class="control-label"></label>
-                @Html.TextBoxFor(m => m.Imovel.Valor, new { data_val = "false" , @class = "form-control" , @data_rule_Required = "true" , @data_rule_maxlength = "18" })
-                <span asp-validation-for="Imovel.Valor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.Quarto" class="control-label"></label>
-                <input asp-for="Imovel.Quarto" class="form-control" />
-                <span asp-validation-for="Imovel.Quarto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.Vagas" class="control-label"></label>
-                <input asp-for="Imovel.Vagas" class="form-control" />
-                <span asp-validation-for="Imovel.Vagas" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.Tipo" class="control-label"></label>
-                <select asp-for="Imovel.Tipo" class="form-control">
-                    <option value="0">Vender</option>
-                    <option value="1">Alugar</option>
-                </select>
-                <span asp-validation-for="Imovel.Tipo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.Endereco.Rua" class="control-label"></label>
-                <input asp-for="Imovel.Endereco.Rua" class="form-control" />
-                <span asp-validation-for="Imovel.Endereco.Rua" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.Endereco.Numero" class="control-label"></label>
-                <input asp-for="Imovel.Endereco.Numero" class="form-control" />
-                <span asp-validation-for="Imovel.Endereco.Numero" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.Endereco.Complemento" class="control-label"></label>
-                <input asp-for="Imovel.Endereco.Complemento" class="form-control" />
-                <span asp-validation-for="Imovel.Endereco.Complemento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.Endereco.Referencia" class="control-label"></label>
-                <input asp-for="Imovel.Endereco.Referencia" class="form-control" />
-                <span asp-validation-for="Imovel.Endereco.Rua" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.Endereco.Bairro" class="control-label"></label>
-                <input asp-for="Imovel.Endereco.Bairro" class="form-control" />
-                <span asp-validation-for="Imovel.Endereco.Bairro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.Endereco.Cidade" class="control-label"></label>
-                <input asp-for="Imovel.Endereco.Cidade" class="form-control" />
-                <span asp-validation-for="Imovel.Endereco.Cidade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.Endereco.Estado" class="control-label"></label>
-                <input asp-for="Imovel.Endereco.Estado" class="form-control" />
-                <span asp-validation-for="Imovel.Endereco.Estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.Endereco.CEP" class="control-label"></label>
-                <input asp-for="Imovel.Endereco.CEP" class="form-control" />
-                <span asp-validation-for="Imovel.Endereco.CEP" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imovel.UsuarioId" class="control-label"></label>
-                <select asp-for="Imovel.UsuarioId" class ="form-control" asp-items="ViewBag.UsuarioId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="OnGetCreate">
+                <br />
+                <fieldset>
+                    <legend>Imovel</legend>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group mt-1">
+                        <label asp-for="Descricao" class="control-label"></label>
+                        <input asp-for="Descricao" class="form-control" />
+                        <span asp-validation-for="Descricao" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label asp-for="Valor" class="control-label"></label>
+                        @Html.TextBoxFor(m => m.Valor, new { data_val = "false" , @class = "form-control" , @data_rule_Required = "true" , @data_rule_maxlength = "18" })
+                        <span asp-validation-for="Valor" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label asp-for="Quarto" class="control-label"></label>
+                        <input asp-for="Quarto" class="form-control" />
+                        <span asp-validation-for="Quarto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label asp-for="Vagas" class="control-label"></label>
+                        <input asp-for="Vagas" class="form-control" />
+                        <span asp-validation-for="Vagas" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label asp-for="Tipo" class="control-label"></label>
+                        <select asp-for="Tipo" class="form-control">
+                            <option value="0">Vender</option>
+                            <option value="1">Alugar</option>
+                        </select>
+                        <span asp-validation-for="Tipo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label asp-for="UsuarioId" class="control-label"></label>
+                        <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
+                        <span asp-validation-for="UsuarioId" class="text-danger"></span>
+                    </div>
+                </fieldset>
+                <br />
+                <fieldset>
+                    <legend>Endereço</legend>
+                    <div class="form-group mt-2">
+                        <label asp-for="Endereco.CEP" class="control-label"></label>
+                        <span>(Somente Números)</span>
+                        <div class="input-group">
+                            <input asp-for="Endereco.CEP" class="form-control col-2" />
+                            <div class="input-group-append">
+                                <span class="input-group-text p-2">
+                                    <i class="fi-xnsrsl-loading d-none" id="cep_loading"></i>
+                                    <i class="fi-xwsuxl-check d-none" id="cep_checked"></i>
+                                    <i class="fi-xwsuxl-times-wide" id="cep_none"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span class="text-muted d-block" id="endereco">Digite um CEP válido e aguarde</span>
+                        <span asp-validation-for="Endereco.CEP" class="text-danger"></span>
+                        <div class="form-group mt-2">
+                            <label asp-for="Endereco.Rua" class="control-label"></label>
+                            <input asp-for="Endereco.Rua" class="form-control" />
+                            <span asp-validation-for="Endereco.Rua" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label asp-for="Endereco.Bairro" class="control-label"></label>
+                            <input asp-for="Endereco.Bairro" class="form-control" />
+                            <span asp-validation-for="Endereco.Bairro" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label asp-for="Endereco.Cidade" class="control-label"></label>
+                            <input asp-for="Endereco.Cidade" class="form-control" />
+                            <span asp-validation-for="Endereco.Cidade" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label asp-for="Endereco.Estado" class="control-label"></label>
+                            <input asp-for="Endereco.Estado" class="form-control" />
+                            <span asp-validation-for="Endereco.Estado" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label asp-for="Endereco.Numero" class="control-label"></label>
+                            <input asp-for="Endereco.Numero" class="form-control" />
+                            <span asp-validation-for="Endereco.Numero" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label asp-for="Endereco.Referencia" class="control-label"></label>
+                            <input asp-for="Endereco.Referencia" class="form-control" />
+                            <span asp-validation-for="Endereco.Referencia" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label asp-for="Endereco.Complemento" class="control-label"></label>
+                            <input asp-for="Endereco.Complemento" class="form-control" />
+                            <span asp-validation-for="Endereco.Complemento" class="text-danger"></span>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group mt-3">
+                    <input type="submit" value="Salvar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -97,4 +119,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{await Html.RenderPartialAsync("_ConsultaCEP");}
 }
