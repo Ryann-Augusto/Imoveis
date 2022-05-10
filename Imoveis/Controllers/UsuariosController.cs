@@ -54,8 +54,10 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,Cpf,Telefone,Nivel,Numero,Referencia,Complemento")] MdUsuarios mdUsuarios)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,Cpf,Telefone,Nivel")] MdUsuarios mdUsuarios)
         {
+            mdUsuarios.Situacao = 0;
+
             if (ModelState.IsValid)
             {
                 _context.Add(mdUsuarios);
@@ -156,6 +158,28 @@ namespace Imoveis.Controllers
             _context.Usuario.Remove(mdUsuarios);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Block(int id)
+        {
+            var mdUsuario = await _context.Usuario.FindAsync(id);
+
+            if (mdUsuario.Situacao == 0)
+            {
+                mdUsuario.Situacao = 1;
+            }
+            else if (mdUsuario.Situacao == 1)
+            {
+                mdUsuario.Situacao = 0;
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.Update(mdUsuario);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+
         }
 
         private bool MdUsuariosExists(int id)

@@ -45,6 +45,9 @@ namespace Imoveis.Models
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         public int Nivel { get; set; }
 
+        [Column("situacao", TypeName = "int")]
+        public int Situacao { get; set; }
+
         public List<MdImoveis>? Imoveis { get; set; }
 
 

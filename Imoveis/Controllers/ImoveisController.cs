@@ -26,7 +26,7 @@ namespace Imoveis.Controllers
         public async Task<IActionResult> Index()
         {
             var _DbContext = _context.Imovel.Include(m => m.Usuario);
-            return View(await _DbContext.ToListAsync());
+            return View(await _DbContext.Where(m => m.Usuario.Situacao == 0).ToListAsync());
         }
 
         // GET: Imoveis/Details/5
@@ -51,7 +51,7 @@ namespace Imoveis.Controllers
         // GET: Imoveis/Create
         public IActionResult Create()
         {
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Nome");
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(m=> m.Situacao == 0), "Id", "Nome");
             return View();
         }
 
@@ -80,7 +80,7 @@ namespace Imoveis.Controllers
             {
                 return NotFound();
             }
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Nome", mdImoveis.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(m=> m.Situacao == 0), "Id", "Nome", mdImoveis.UsuarioId);
             return View(mdImoveis);
         }
 
