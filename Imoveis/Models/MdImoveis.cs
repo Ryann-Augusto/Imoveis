@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Imoveis.Models
@@ -44,6 +45,15 @@ namespace Imoveis.Models
         [Display(Name = "Anunciante")]
         public int UsuarioId { get; set; }
         public MdUsuarios? Usuario { get; set; }
+
+        [BindProperty]
+        [Display(Name = "Imagem do Imovel")]
+        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatório.")]
+        [NotMapped]
+        public IFormFileCollection ImagemImovel { get; set; }
+
+        [NotMapped]
+        public string CaminhoImagem { get; set; }
 
     }
 }

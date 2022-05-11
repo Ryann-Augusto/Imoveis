@@ -16,10 +16,13 @@ namespace Imoveis.Controllers
         public MdImoveis Imovel { get; set; }
 
         private readonly _DbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ImoveisController(_DbContext context)
+        public ImoveisController(_DbContext context, IWebHostEnvironment env, MdImoveis mdImoveis)
         {
             _context = context;
+            _webHostEnvironment = env;
+            mdImoveis.CaminhoImagem = "~/img/imoveis/sem_imagem.jpg";
         }
 
         // GET: Imoveis

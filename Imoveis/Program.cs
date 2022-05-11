@@ -1,4 +1,5 @@
 using Imoveis.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -13,8 +14,11 @@ builder.Services.AddDbContext<_DbContext>(x => x.UseMySql(
         ServerVersion.Parse("8.0.28")
         ));
 
-
 var app = builder.Build();
+
+IWebHostEnvironment env = app.Environment;
+env.IsDevelopment();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
