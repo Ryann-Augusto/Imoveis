@@ -52,8 +52,5 @@ namespace Imoveis.Models
         [NotMapped]
         public IFormFileCollection ImagemImovel { get; set; }
 
-        [NotMapped]
-        public string CaminhoImagem { get; set; }
-
     }
 }

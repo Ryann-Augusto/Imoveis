@@ -15,14 +15,16 @@ namespace Imoveis.Controllers
         [BindProperty]
         public MdImoveis Imovel { get; set; }
 
+        public string CaminhoImagem { get; set; }
+
         private readonly _DbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ImoveisController(_DbContext context, IWebHostEnvironment env, MdImoveis mdImoveis)
+        public ImoveisController(_DbContext context, IWebHostEnvironment env)
         {
             _context = context;
             _webHostEnvironment = env;
-            mdImoveis.CaminhoImagem = "~/img/imoveis/sem_imagem.jpg";
+            CaminhoImagem = "~/img/imoveis/sem_imagem.jpg";
         }
 
         // GET: Imoveis
@@ -54,6 +56,7 @@ namespace Imoveis.Controllers
         // GET: Imoveis/Create
         public IActionResult Create()
         {
+            ViewData["img"] = "~/img/imoveis/sem_imagem.jpg";
             ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(m =>  m.Situacao == 0), "Id", "Nome");
             return View();
         }
