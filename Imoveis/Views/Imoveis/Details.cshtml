@@ -1,6 +1,7 @@
 ﻿@model Imoveis.Models.MdImoveis
 
 @{
+    List<Imoveis.Models.MdImagens> Imagem = ViewBag.Imagens;
     ViewData["Title"] = "Details";
 }
 
@@ -10,6 +11,11 @@
     <h4>MdImoveis</h4>
     <hr />
     <dl class="row">
+
+        @foreach(var img in Imagem)
+        {
+            <img class="card-img-top" src="@Url.Action("VisualizarVariasImg", "Home", new {id = img.Id})" alt="Imagem de @img.Descricao" style="height:230px;">
+        }
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Descricao)
         </dt>

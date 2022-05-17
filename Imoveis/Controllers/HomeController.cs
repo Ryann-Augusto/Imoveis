@@ -22,6 +22,25 @@ namespace Imoveis.Controllers
             return View(await _DbContext.ToListAsync());
         }
 
+        public IActionResult VisualizarUmaImg(int id)
+        {
+            var imagemBanco = _context.Imagem.FirstOrDefault(a => a.ImovelId == id);
+
+            return File(imagemBanco.Dados, imagemBanco.ContentType);
+        }
+
+        public async Task<IActionResult> VisualizarVariasImg(int id)
+        {
+            var Imagem = await _context.Imagem.Where(m => m.ImovelId == id).ToListAsync();
+
+            foreach(var img in Imagem)
+            {
+                ViewBag["Imagens"] = File(img.Dados, img.ContentType);
+            }
+            
+            return View(ViewBag.Imagens);
+        }
+
         public IActionResult Privacy()
         {
             return View();

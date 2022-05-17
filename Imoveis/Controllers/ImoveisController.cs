@@ -40,6 +40,14 @@ namespace Imoveis.Controllers
             var mdImoveis = await _context.Imovel
                 .Include(m => m.Usuario)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            var Imagem = await _context.Imagem.Where(m => m.ImovelId == id).ToListAsync();
+
+            foreach (var img in Imagem)
+            {
+                ViewBag.Imagens = File(img.Dados, img.ContentType);
+            }
+
             if (mdImoveis == null)
             {
                 return NotFound();

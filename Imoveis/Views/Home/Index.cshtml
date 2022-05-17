@@ -1,4 +1,4 @@
-﻿@model             IEnumerable<MdImoveis>
+﻿@model IEnumerable<MdImoveis>
 
 @{
     ViewData["Title"] = "Home Page";
@@ -9,12 +9,11 @@
 </div>
 
 <div class="row">
-    @foreach(var imovel in Model)
+    @foreach  (var imovel in Model)
     {
         <div class="col-sm-4">
             <div class="card text-center bg-light mb-4">
-                <img class="card-img-top" src="/img/imoveis/@String.Concat(imovel.Id.ToString("D6"),
-                ".jpg")" alt="Imagem de @imovel.Descricao">
+                <img class="card-img-top" src="@Url.Action("VisualizarUmaImg", "Home", new {id = imovel.Id})" alt="Imagem de @imovel.Descricao" style="height:230px;">
                 <div class="card-header">
                     R$ @imovel.Valor.ToString("F2")
                 </div>
