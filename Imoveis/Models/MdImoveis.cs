@@ -41,16 +41,11 @@ namespace Imoveis.Models
 
         public MdEndereco Endereco { get; set; }
 
+        public List<MdImagens>? Imagens { get; set; }
+
         [Column("usuarioid")]
         [Display(Name = "Anunciante")]
         public int UsuarioId { get; set; }
         public MdUsuarios? Usuario { get; set; }
-
-        [BindProperty]
-        [Display(Name = "Imagem do Imovel")]
-        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatório.")]
-        [NotMapped]
-        public IFormFileCollection ImagemImovel { get; set; }
-
     }
 }

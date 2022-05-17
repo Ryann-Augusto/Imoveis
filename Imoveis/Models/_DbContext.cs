@@ -15,6 +15,7 @@ namespace Imoveis.Models
 
         public DbSet<MdImoveis> Imovel { get; set; }
         public DbSet<MdUsuarios> Usuario { get; set; }
+        public DbSet<MdImagens> Imagem { get; set; }
 
     }
 }

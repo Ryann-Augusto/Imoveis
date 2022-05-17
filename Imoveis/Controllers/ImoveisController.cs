@@ -15,16 +15,11 @@ namespace Imoveis.Controllers
         [BindProperty]
         public MdImoveis Imovel { get; set; }
 
-        public string CaminhoImagem { get; set; }
-
         private readonly _DbContext _context;
-        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ImoveisController(_DbContext context, IWebHostEnvironment env)
+        public ImoveisController(_DbContext context)
         {
             _context = context;
-            _webHostEnvironment = env;
-            CaminhoImagem = "~/img/imoveis/sem_imagem.jpg";
         }
 
         // GET: Imoveis
@@ -66,7 +61,7 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnGetCreate()
+        public async Task<IActionResult> OnGetCreate(IList<IFormFile> imagens)
         {
             ModelState["Id"].Errors.Clear();
             ModelState.Remove("Id");
@@ -78,6 +73,25 @@ namespace Imoveis.Controllers
                 _context.Add(Imovel);
                 await _context.SaveChangesAsync();
             }
+            IFormFile imagemCarregada = imagens.FirstOrDefault();
+
+            if (imagemCarregada != null)
+            {
+                MemoryStream ms = new MemoryStream();
+                imagemCarregada.OpenReadStream().CopyTo(ms);
+
+                MdImagens mdImagens = new MdImagens()
+                {
+                    Descricao = imagemCarregada.FileName,
+                    Dados = ms.ToArray(),
+                    ContentType = imagemCarregada.ContentType,
+                    ImovelId = Imovel.Id
+                    
+                };
+                _context.Add(mdImagens);
+                _context.SaveChanges();
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
