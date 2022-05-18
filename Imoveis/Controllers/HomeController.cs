@@ -24,9 +24,18 @@ namespace Imoveis.Controllers
 
         public IActionResult VisualizarUmaImg(int id)
         {
-            var imagemBanco = _context.Imagem.FirstOrDefault(a => a.ImovelId == id);
+            //var imagemBanco = _context.Imagem.FirstOrDefault(a => a.ImovelId == id);
 
-            return File(imagemBanco.Dados, imagemBanco.ContentType);
+            var _DbContext = _context.Imagem
+                .Where(a => a.ImovelId == id);
+            _DbContext.ToList();
+
+            foreach (var img in _DbContext)
+            {
+                return File(img.Dados, img.ContentType);
+            }
+
+            return View();
         }
 
         public async Task<IActionResult> VisualizarVariasImg(int id)
