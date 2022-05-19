@@ -15,6 +15,9 @@ namespace Imoveis.Controllers
         [BindProperty]
         public MdImoveis Imovel { get; set; }
 
+        public const string SessionIdImovel = "_IdImovel";
+
+
         private readonly _DbContext _context;
 
         public ImoveisController(_DbContext context)
@@ -35,7 +38,7 @@ namespace Imoveis.Controllers
             var model = new AgruparModels();
 
             model.oMdImoveis = DetailsImoveis(id);
-            model.oMdImagens = ObterImagem();
+            model.oMdImagens = ObterImagem(ViewBag.idImovel);
 
             return View(model);
         }
@@ -45,31 +48,15 @@ namespace Imoveis.Controllers
         MdImoveis DetailsImoveis(int? id)
         {
             var mdImoveis = _context.Imovel.Include(m => m.Usuario).FirstOrDefault(m => m.Id == id);
+            ViewBag.idImovel = mdImoveis.Id;
 
-            mdImovel.Id = mdImoveis.Id;
-
-
-            mdImovel.Descricao = mdImoveis.Descricao;
-            mdImovel.Valor = mdImoveis.Valor;
-            mdImovel.Quarto = mdImoveis.Quarto;
-            mdImovel.Vagas = mdImoveis.Vagas;
-            mdImovel.Tipo = mdImoveis.Tipo;
-            mdImovel.Situacao = mdImoveis.Situacao;
-            mdImovel.Endereco.Rua = mdImoveis.Endereco.Rua;
-            mdImovel.Endereco.Numero = mdImoveis.Endereco.Numero;
-            mdImovel.Endereco.Complemento = mdImoveis.Endereco.Complemento;
-            mdImovel.Endereco.Referencia = mdImoveis.Endereco.Referencia;
-            mdImovel.Endereco.Bairro = mdImoveis.Endereco.Bairro;
-            mdImovel.Endereco.Cidade = mdImoveis.Endereco.Cidade;
-            mdImovel.Endereco.Estado = mdImoveis.Endereco.Estado;
-            mdImovel.Endereco.CEP = mdImoveis.Endereco.CEP;
-
-            return (mdImovel);
+            return (mdImoveis);
         }
 
-        IEnumerable<MdImagens> ObterImagem()
+        IEnumerable<MdImagens> ObterImagem(int? idImovel)
         {
-            var imagens = _context.Imagem.ToList();
+            var imagens = _context.Imagem.Where(m => m.ImovelId == idImovel)
+                .ToList();
             List<MdImagens> mdImagens = new List<MdImagens>();
             foreach (var img in imagens)
             {
@@ -117,7 +104,8 @@ namespace Imoveis.Controllers
                 _context.Add(Imovel);
                 await _context.SaveChangesAsync();
             }
-            IFormFile imagemCarregada = imagens.FirstOrDefault();
+            
+            foreach(IFormFile imagemCarregada in imagens)
 
             if (imagemCarregada != null)
             {

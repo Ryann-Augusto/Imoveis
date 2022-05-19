@@ -12,7 +12,7 @@
     <dl class="row">
         @foreach(var item in Model.oMdImagens)
         {
-            <img class="card-img-top" src="@Url.Action("VisualizarUmaImg", "Home", new {id = item.Id, idImovel = item.ImovelId})" alt="Imagem de @item.Descricao" style="height:230px;">
+            <img class="card-img-top mb-2" src="@Url.Action("VisualizarVariasImg", "Imoveis", new {id = item.Id, idImovel = @ViewBag.idImovel })" alt="Imagem de @item.Descricao" style="height:500px;">
         }
         
         <dt class = "col-sm-2 mt-2">
