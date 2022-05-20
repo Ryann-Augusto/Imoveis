@@ -35,15 +35,21 @@ namespace Imoveis.Controllers
         // GET: Imoveis/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
             var model = new AgruparModels();
-
             model.oMdImoveis = DetailsImoveis(id);
             model.oMdImagens = ObterImagem(ViewBag.idImovel);
 
+            if (model.oMdImoveis == null || model.oMdImoveis == null)
+            {
+                return NotFound();
+            }
+
             return View(model);
         }
-
-        public MdImoveis mdImovel { get; set; }
 
         MdImoveis DetailsImoveis(int? id)
         {
@@ -88,8 +94,6 @@ namespace Imoveis.Controllers
         }
 
         // POST: Imoveis/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnGetCreate(IList<IFormFile> imagens)
@@ -130,18 +134,26 @@ namespace Imoveis.Controllers
         // GET: Imoveis/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var mdImoveis = await _context.Imovel.FindAsync(id);
-            if (mdImoveis == null)
-            {
-                return NotFound();
-            }
+            var model = new AgruparModels();
+
+            model.oMdImoveis = EditImovel(id);
+            model.oMdImagens = ObterImagem(ViewBag.IdImovel);
+
+            return View(model);
+
+            
+        }
+
+        MdImoveis EditImovel(int? id)
+        {
+            var mdImoveis = _context.Imovel.Find(id);
+
+            ViewBag.IdImovel = mdImoveis.Id;
+
+            
             ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Nome", mdImoveis.UsuarioId);
-            return View(mdImoveis);
+            return (mdImoveis);
         }
 
         // POST: Imoveis/Edit/5
