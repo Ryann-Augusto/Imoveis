@@ -4,28 +4,37 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    a{
+        text-decoration:none;
+        color:black;
+    }
+</style>
+
 <div class="text-center">
     <h1 class="display-4">Lista de Imóveis</h1>
 </div>
 
 <div class="row">
-    @foreach  (var imovel in Model)
+    @foreach (var imovel in Model)
     {
         <div class="col-sm-4">
-            <div class="card text-center bg-light mb-4">
-                <img class="card-img-top" src="@Url.Action("VisualizarUmaImg", "Home", new {id = imovel.Id})" alt="Imagem de @imovel.Descricao" style="height:230px;">
-                <div class="card-header">
-                    R$ @imovel.Valor.ToString("F2")
+            <a asp-controller="imoveis" asp-action="Details" asp-route-id="@imovel.Id">
+                <div class="card text-center bg-light mb-4">
+                    <img class="card-img-top" src="@Url.Action("VisualizarUmaImg", "Home", new {id = imovel.Id})" alt="Imagem de @imovel.Descricao" style="height:230px;">
+                    <div class="card-header">
+                        R$ @imovel.Valor.ToString("F2")
+                    </div>
+                    <div class="card-body" style="height:124px;">
+                        <h5 class="card-title">@imovel.Descricao</h5>
+                        <p class="card-text">@imovel.Endereco.Bairro</p>
+                    </div>
+                    <div class="card-footer">
+                        <div><a href="#" class="btn btn-primary">Entrar em Contato</a></div>
+                        <small class="text-muted">Cidade: @imovel.Endereco.Cidade</small>
+                    </div>
                 </div>
-                <div class="card-body" style="height:124px;">
-                    <h5 class="card-title">@imovel.Descricao</h5>
-                    <p class="card-text">@imovel.Endereco.Bairro</p>
-                </div>
-                <div class="card-footer">
-                    <div><a href="#" class="btn btn-primary">Entrar em Contato</a></div>
-                    <small class="text-muted">Cidade: @imovel.Endereco.Cidade</small>
-                </div>
-            </div>
+            </a>
         </div>
     }
 </div>

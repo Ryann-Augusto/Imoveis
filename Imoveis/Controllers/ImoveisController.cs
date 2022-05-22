@@ -15,9 +15,6 @@ namespace Imoveis.Controllers
         [BindProperty]
         public MdImoveis Imovel { get; set; }
 
-        public const string SessionIdImovel = "_IdImovel";
-
-
         private readonly _DbContext _context;
 
         public ImoveisController(_DbContext context)
