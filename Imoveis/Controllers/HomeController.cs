@@ -18,24 +18,26 @@ namespace Imoveis.Controllers
         {
             var _DbContext = _context.Imovel.Include(i => i.Usuario)
                 .Where(i => i.Usuario.Situacao == 0 &&
-                            i.Situacao == 0);
-            return View(await _DbContext.ToListAsync());
+                            i.Situacao == 0).ToListAsync();
+            return View(await _DbContext);
         }
 
         public IActionResult VisualizarUmaImg(int id)
         {
-            //var imagemBanco = _context.Imagem.FirstOrDefault(a => a.ImovelId == id);
+            var imagemBanco = _context.Imagem.FirstOrDefault(a => a.ImovelId == id);
 
-            var _DbContext = _context.Imagem
-                .Where(a => a.ImovelId == id);
-            _DbContext.ToList();
-
-            foreach (var img in _DbContext)
+            if (imagemBanco == null)
             {
-                return File(img.Dados, img.ContentType);
-            }
+                var filePath = "~/img/imoveis/sem_imagem.jpg";
 
-            return View();
+                return File(filePath, "image/jpeg");
+
+            }
+            else
+            {
+                return File(imagemBanco.Dados, imagemBanco.ContentType);
+            }
+            
         }
 
         public async Task<IActionResult> VisualizarVariasImg(int id)

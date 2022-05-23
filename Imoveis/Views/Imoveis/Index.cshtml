@@ -103,9 +103,53 @@
                     {
                         <a asp-action="Block" asp-route-id="@item.Id">Desbloquear</a>
                     } |
-                    <a asp-page-handler="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-danger fa fa-trash-o" data-bs-toggle="modal" data-bs-target="#excluirImovel">Deletar</a>
                 </td>
             </tr>
+
+            <!-- INICIO DO POPUP DELETE-->
+            <div class="modal fade" id="excluirImovel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                            <div class="modal-title"><h3><span class="fa fa-info-circle fa-2x popupExcluir"></span><b>  Excluir Usuario @Html.DisplayFor(modelItem => item.Descricao)</b></h3></div>
+                        </div>
+                        <div class="modal-body">
+                            <p>Essa exclusão é permanente, todos os dados do usuario será perdido!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a asp-action="Delete" asp-route-id="@item.Id">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         }
+
+                  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
     </tbody>
 </table>
+

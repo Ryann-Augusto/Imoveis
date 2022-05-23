@@ -75,7 +75,7 @@ namespace Imoveis.Controllers
             }
             return (mdImagens);
         }
-        public async Task<IActionResult> VisualizarVariasImg(int id, int idImovel)
+        public IActionResult VisualizarVariasImg(int id, int idImovel)
         {
             var imagensBanco = _context.Imagem.Where(m => m.ImovelId == idImovel).FirstOrDefault(a => a.Id == id);
 
