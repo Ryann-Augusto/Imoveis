@@ -205,11 +205,11 @@ namespace Imoveis.Controllers
                 return NotFound();
             }
 
-            return View(mdImoveis);
+            return PartialView("_DeleteModalPartial", mdImoveis);
         }
 
         // POST: Imoveis/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

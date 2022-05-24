@@ -75,6 +75,7 @@
                 }
 
                 <td>
+                    <input type="hidden" asp-for="@item.Id" />
                     @Html.DisplayFor(modelItem => item.Endereco.Rua)
                 </td>
                 <td>
@@ -103,53 +104,112 @@
                     {
                         <a asp-action="Block" asp-route-id="@item.Id">Desbloquear</a>
                     } |
-                    <a class="btn btn-danger fa fa-trash-o" data-bs-toggle="modal" data-bs-target="#excluirImovel">Deletar</a>
+                    <a href="#" data-toggle="modal" data-target="#DeleteRecord" class="delete" data-id="@item.Id">Delete</a>
+
+                    
                 </td>
             </tr>
 
             <!-- INICIO DO POPUP DELETE-->
-            <div class="modal fade" id="excluirImovel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button data-dismiss="modal" class="close"><span>&times;</span></button>
-                            <div class="modal-title"><h3><span class="fa fa-info-circle fa-2x popupExcluir"></span><b>  Excluir Usuario @Html.DisplayFor(modelItem => item.Descricao)</b></h3></div>
-                        </div>
-                        <div class="modal-body">
-                            <p>Essa exclusão é permanente, todos os dados do usuario será perdido!</p>
-                        </div>
-                        <div class="modal-footer">
-                            <a asp-action="Delete" asp-route-id="@item.Id">Edit</a>
-                        </div>
+        }
+
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
-
-        }
-
-                  <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+        </div>
     </tbody>
 </table>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="DeleteRecord">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Record</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" asp-controller="Home" asp-action="DeleteRecord">
+                <div class="modal-body">
+                    <h3 style="color:red;">Do you want to delete this record?</h3>
+                    <div class="form-group">
+                        <label>ID:</label>
+                        <input type="text" class="form-control" name="id" id=id required readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" class="form-control" name="Name" id="name" required readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="text" class="form-control" name="Email" id="email" required  readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="text" class="form-control" name="phone" id="phone" required readonly />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('table .edit').on('click', function () {
+            var id = $(this).data("id");
+
+            $.ajax({
+                type: 'POST',
+                url: 'Home/FindRecord/',
+                data: { "cusid": id },
+                success: function (response) {
+                    $('#EditRecord #id').val(response.id);
+                    $('#EditRecord #name').val(response.name);
+                    $('#EditRecord #email').val(response.email);
+                    $('#EditRecord #phone').val(response.phone);
+                }
+            })
+        });
+
+        $('table .delete').on('click', function () {
+            var id = $(this).data("id");
+
+            $.ajax({
+                type: 'POST',
+                url: 'Imoveis/FindRecord/',
+                data: { "cusid": id },
+                success: function (response) {
+                    $('#DeleteRecord #id').val(response.id);
+                    $('#DeleteRecord #name').val(response.name);
+                    $('#DeleteRecord #email').val(response.email);
+                    $('#DeleteRecord #phone').val(response.phone);
+                }
+            })
+        });
+    });
+</script>
