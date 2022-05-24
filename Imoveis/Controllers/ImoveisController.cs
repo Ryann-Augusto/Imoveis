@@ -137,7 +137,7 @@ namespace Imoveis.Controllers
             model.oMdImoveis = EditImovel(id);
             model.oMdImagens = ObterImagem(ViewBag.IdImovel);
 
-            return View(model);
+            return PartialView("_EditModalPartial", model);
 
             
         }
@@ -209,7 +209,7 @@ namespace Imoveis.Controllers
         }
 
         // POST: Imoveis/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

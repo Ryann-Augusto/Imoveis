@@ -1,29 +1,25 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$(document).ready(function () {
 
-// Write your JavaScript code.
+    $(".btnEdit").click(function () {
 
-$(function () {
-    var PlaceHolderElement = $('#PlaceHolderHere');
-    $('button[data-toggle="ajax-modal"]').click(function (event) {
+        var id = $(this).data("value");
 
-        var url = $(this).data('url');
-        var decodedUrl = decodeURIComponent(url);
-        $.get(decodedUrl.done(function (data) {
-            PlaceHolderElement.html(data);
-            PlaceHolderElement.find('.modal').modal('show');
-        })
+        $("#conteudoModal").load("/Imoveis/Edit/" + id,
+            function () {
+                $("#myModal").modal("show");
+            }
+        );
     })
 
 
-    PlaceHolderElement.on('click', 'data-save="modal"]', function (event) {
-        var form = $(this).parents('.modal').find('form');
-        var actionUrl = form.attr('action');
-        var url = "/imovel/" + actionUrl;
-        var sendData = form.serialize();
-        $.post(url, sendData).done(function (data) {
-            PlaceHolderElement.find('.modal').modal('hide');
-        })
-    })
+    $(".btnDelete").click(function () {
 
-})
+        var id = $(this).data("value");
+
+        $("#conteudoModal").load("/Imoveis/Delete/" + id,
+            function () {
+                $("#myModal").modal("show");
+            }
+        );
+    });
+});
