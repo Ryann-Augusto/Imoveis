@@ -94,7 +94,7 @@
                     @Html.DisplayFor(modelItem => item.Usuario.Nome)
                 </td>
                 <td>
-                    <a href="#" class="btn btn-primary btnEdit" data-value="@item.Id">Editar</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     @if (item.Situacao == 0)
                     {

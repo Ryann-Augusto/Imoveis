@@ -137,7 +137,7 @@ namespace Imoveis.Controllers
             model.oMdImoveis = EditImovel(id);
             model.oMdImagens = ObterImagem(ViewBag.IdImovel);
 
-            return PartialView("_EditModalPartial", model);
+            return View(model);
 
             
         }
@@ -158,24 +158,33 @@ namespace Imoveis.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id, AgruparModels model)
         {
-            if (id != Imovel.Id)
+            if (id != model.oMdImoveis.Id)
             {
                 return NotFound();
             }
+
+            ModelState["Endereco"].Errors.Clear();
+            ModelState.Remove("Endereco");
+
+            ModelState["Descricao"].Errors.Clear();
+            ModelState.Remove("Descricao");
+
+            ModelState["oMdImagens"].Errors.Clear();
+            ModelState.Remove("oMdImagens");
 
             if (ModelState.IsValid)
             {
                 try
                 {
 
-                    _context.Update(Imovel);
+                    _context.Update(model.oMdImoveis);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MdImoveisExists(Imovel.Id))
+                    if (!MdImoveisExists(model.oMdImoveis.Id))
                     {
                         return NotFound();
                     }
@@ -186,7 +195,7 @@ namespace Imoveis.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(Imovel);
+            return View(model.oMdImoveis);
         }
 
         // GET: Imoveis/Delete/5
