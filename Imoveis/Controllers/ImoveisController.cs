@@ -160,6 +160,10 @@ namespace Imoveis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, AgruparModels model)
         {
+            var mdImovel = await _context.Imovel.Select(m => new { m.Id, m.UsuarioId }).FirstOrDefaultAsync(m => m.Id == id);
+
+            model.oMdImoveis.UsuarioId = mdImovel.UsuarioId;
+
             if (id != model.oMdImoveis.Id)
             {
                 return NotFound();
