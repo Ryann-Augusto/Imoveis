@@ -86,7 +86,7 @@ namespace Imoveis.Controllers
         public IActionResult Create()
         {
             ViewData["img"] = "~/img/imoveis/sem_imagem.jpg";
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(m =>  m.Situacao == 0), "Id", "Nome");
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(m => m.Situacao == 0), "Id", "Nome");
             return View();
         }
 
@@ -105,25 +105,24 @@ namespace Imoveis.Controllers
                 _context.Add(Imovel);
                 await _context.SaveChangesAsync();
             }
-            
-            foreach(IFormFile imagemCarregada in imagens)
 
-            if (imagemCarregada != null)
-            {
-                MemoryStream ms = new MemoryStream();
-                imagemCarregada.OpenReadStream().CopyTo(ms);
+            foreach (IFormFile imagemCarregada in imagens)
 
-                MdImagens mdImagens = new MdImagens()
+                if (imagemCarregada != null)
                 {
-                    Descricao = imagemCarregada.FileName,
-                    Dados = ms.ToArray(),
-                    ContentType = imagemCarregada.ContentType,
-                    ImovelId = Imovel.Id
-                    
-                };
-                _context.Add(mdImagens);
-                _context.SaveChanges();
-            }
+                    var img = Auxiliares.ResizeImg.ResizeImage(imagemCarregada);
+
+                    MdImagens mdImagens = new MdImagens()
+                    {
+                        Descricao = imagemCarregada.FileName,
+                        Dados = img.ToArray(),
+                        ContentType = imagemCarregada.ContentType,
+                        ImovelId = Imovel.Id
+
+                    };
+                    _context.Add(mdImagens);
+                    _context.SaveChanges();
+                }
 
             return RedirectToAction(nameof(Index));
         }
@@ -139,7 +138,7 @@ namespace Imoveis.Controllers
 
             return View(model);
 
-            
+
         }
 
         MdImoveis EditImovel(int? id)
@@ -148,7 +147,7 @@ namespace Imoveis.Controllers
 
             ViewBag.IdImovel = mdImoveis.Id;
 
-            
+
             ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Nome", mdImoveis.UsuarioId);
             return (mdImoveis);
         }
