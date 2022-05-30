@@ -11,4 +11,15 @@
             }
         );
     });
+
+    $(".btnDeleteImage").click(function () {
+
+        var id = $(this).data("value");
+
+        $("#conteudoModal").load("/Imoveis/DeleteImage/" + id,
+            function () {
+                $("#myModal").modal("show");
+            }
+        );
+    });
 });

@@ -75,9 +75,9 @@ namespace Imoveis.Controllers
             }
             return (mdImagens);
         }
-        public IActionResult VisualizarVariasImg(int id, int idImovel)
+        public async Task<IActionResult> VisualizarVariasImg(int id, int idImovel)
         {
-            var imagensBanco = _context.Imagem.Where(m => m.ImovelId == idImovel).FirstOrDefault(a => a.Id == id);
+            var imagensBanco = await _context.Imagem.Where(m => m.ImovelId == idImovel).FirstOrDefaultAsync(a => a.Id == id);
 
             return File(imagensBanco.Dados, imagensBanco.ContentType);
         }
@@ -121,14 +121,14 @@ namespace Imoveis.Controllers
 
                     };
                     _context.Add(mdImagens);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
 
             return RedirectToAction(nameof(Index));
         }
 
         // GET: Imoveis/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
 
             var model = new AgruparModels();
@@ -153,11 +153,9 @@ namespace Imoveis.Controllers
         }
 
         // POST: Imoveis/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, AgruparModels model)
+        public async Task<IActionResult> Edit(int id, IList<IFormFile> imagens, AgruparModels model)
         {
             var mdImovel = await _context.Imovel.Select(m => new { m.Id, m.UsuarioId }).FirstOrDefaultAsync(m => m.Id == id);
 
@@ -184,6 +182,24 @@ namespace Imoveis.Controllers
 
                     _context.Update(model.oMdImoveis);
                     await _context.SaveChangesAsync();
+
+                    foreach (IFormFile imagemCarregada in imagens)
+
+                        if (imagemCarregada != null)
+                        {
+                            var img = Auxiliares.ResizeImg.ResizeImage(imagemCarregada);
+
+                            MdImagens mdImagens = new MdImagens()
+                            {
+                                Descricao = imagemCarregada.FileName,
+                                Dados = img.ToArray(),
+                                ContentType = imagemCarregada.ContentType,
+                                ImovelId = Imovel.Id
+
+                            };
+                            _context.Add(mdImagens);
+                            await _context.SaveChangesAsync();
+                        }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -227,6 +243,34 @@ namespace Imoveis.Controllers
         {
             var mdImoveis = await _context.Imovel.FindAsync(id);
             _context.Imovel.Remove(mdImoveis);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> DeleteImage(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var mdImages = await _context.Imagem
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (mdImages == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_DeleteImagePartial", mdImages);
+        }
+
+        [HttpPost, ActionName("DeleteImage")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteImgConfirmad(int id)
+        {
+            var mdImagens = await _context.Imagem.FindAsync(id);
+            _context.Imagem.Remove(mdImagens);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
