@@ -156,7 +156,7 @@ namespace Imoveis.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, IList<IFormFile> imagens, AgruparModels model)
-        {
+        
             var mdImovel = await _context.Imovel.Select(m => new { m.Id, m.UsuarioId }).FirstOrDefaultAsync(m => m.Id == id);
 
             model.oMdImoveis.UsuarioId = mdImovel.UsuarioId;
