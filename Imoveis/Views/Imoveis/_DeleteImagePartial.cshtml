@@ -19,7 +19,7 @@
             @Html.DisplayFor(model => model.Descricao)
         </dd>
         <dd>
-             <img src="@Url.Action("VisualizarVariasImg", "Imoveis", new {id = Model.Id, idImovel = Model.ImovelId })" style="width:480px; height:270px;">
+             <img class="img-fluid" src="@Url.Action("VisualizarVariasImg", "Imoveis", new {id = Model.Id, idImovel = Model.ImovelId })" style="width:480px; height:270px;">
         </dd>
     </dl>
 </div>

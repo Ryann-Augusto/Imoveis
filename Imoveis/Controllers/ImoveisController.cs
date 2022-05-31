@@ -30,7 +30,7 @@ namespace Imoveis.Controllers
         }
 
         // GET: Imoveis/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -95,34 +95,43 @@ namespace Imoveis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnGetCreate(IList<IFormFile> imagens)
         {
-            ModelState["Id"].Errors.Clear();
-            ModelState.Remove("Id");
-
-            Imovel.Situacao = 0;
-
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(Imovel);
-                await _context.SaveChangesAsync();
-            }
+                ModelState["Id"].Errors.Clear();
+                ModelState.Remove("Id");
 
-            foreach (IFormFile imagemCarregada in imagens)
+                Imovel.Situacao = 0;
 
-                if (imagemCarregada != null)
+                if (ModelState.IsValid)
                 {
-                    var img = Auxiliares.ResizeImg.ResizeImage(imagemCarregada);
-
-                    MdImagens mdImagens = new MdImagens()
-                    {
-                        Descricao = imagemCarregada.FileName,
-                        Dados = img.ToArray(),
-                        ContentType = imagemCarregada.ContentType,
-                        ImovelId = Imovel.Id
-
-                    };
-                    _context.Add(mdImagens);
+                    _context.Add(Imovel);
                     await _context.SaveChangesAsync();
                 }
+
+                foreach (IFormFile imagemCarregada in imagens)
+
+                    if (imagemCarregada != null)
+                    {
+                        var img = Auxiliares.ResizeImg.ResizeImage(imagemCarregada);
+
+                        MdImagens mdImagens = new MdImagens()
+                        {
+                            Descricao = imagemCarregada.FileName,
+                            Dados = img.ToArray(),
+                            ContentType = imagemCarregada.ContentType,
+                            ImovelId = Imovel.Id
+
+                        };
+                        _context.Add(mdImagens);
+                        await _context.SaveChangesAsync();
+                        TempData["sucesso"] = "Imovel adicionado com sucesso!";
+                    }
+            }
+            catch
+            {
+                TempData["erro"] = "Não foi possível adicionar este imovel!";
+            }
+            
 
             return RedirectToAction(nameof(Index));
         }
@@ -156,7 +165,7 @@ namespace Imoveis.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, IList<IFormFile> imagens, AgruparModels model)
-        
+        {
             var mdImovel = await _context.Imovel.Select(m => new { m.Id, m.UsuarioId }).FirstOrDefaultAsync(m => m.Id == id);
 
             model.oMdImoveis.UsuarioId = mdImovel.UsuarioId;
@@ -199,6 +208,7 @@ namespace Imoveis.Controllers
                             };
                             _context.Add(mdImagens);
                             await _context.SaveChangesAsync();
+                            TempData["sucesso"] = "Imovel alterado com sucesso!";
                         }
                 }
                 catch (DbUpdateConcurrencyException)
@@ -209,6 +219,7 @@ namespace Imoveis.Controllers
                     }
                     else
                     {
+                        TempData["erro"] = "Não foi possível alterar este imovel!";
                         throw;
                     }
                 }
@@ -241,10 +252,20 @@ namespace Imoveis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var mdImoveis = await _context.Imovel.FindAsync(id);
-            _context.Imovel.Remove(mdImoveis);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var mdImoveis = await _context.Imovel.FindAsync(id);
+                _context.Imovel.Remove(mdImoveis);
+                await _context.SaveChangesAsync();
+                TempData["sucesso"] = "Imovel excluido com sucesso!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                TempData["erro"] = "Não foi possível excluir este imovel!";
+                throw;
+            }
+            
         }
 
         public async Task<IActionResult> DeleteImage(int? id)
@@ -269,10 +290,26 @@ namespace Imoveis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteImgConfirmad(int id)
         {
-            var mdImagens = await _context.Imagem.FindAsync(id);
-            _context.Imagem.Remove(mdImagens);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (id != 0)
+            {
+                try
+                {
+                    var mdImagens = await _context.Imagem.FindAsync(id);
+                    _context.Imagem.Remove(mdImagens);
+                    await _context.SaveChangesAsync();
+                    TempData["sucesso"] = "Imagem excluida com sucesso!";
+                    return RedirectToAction(nameof(Edit), new { id = mdImagens.ImovelId });
+                }
+                catch
+                {
+                    TempData["erro"] = "Não foi possivel excluir a imagem!";
+                    return NotFound();
+                }
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         public async Task<IActionResult> Block(int id)
