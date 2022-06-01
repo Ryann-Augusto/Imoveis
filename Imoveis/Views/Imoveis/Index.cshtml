@@ -13,117 +13,82 @@
     <div class="alert alert-danger" id="notfyHome">@TempData["erro"] <span class="fa fa-times fa-2x"></span></div>
 }
 
-<body>
+<div class="row">
     <h1>@ViewData["Title"]</h1>
 
 
     <p style="text-align:right">
         <a asp-action="Create" class="btn btn-success">Novo Imovel</a>
     </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Descricao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Valor)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Quarto)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Vagas)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tipo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Endereco.Rua)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Endereco.Bairro)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Endereco.Cidade)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Endereco.Estado)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Endereco.CEP)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Usuario)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Descricao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Valor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Quarto)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Vagas)
-                    </td>
-                    @if (item.Tipo == 0)
-                    {
-                        <td>Vendendo</td>
-                    }
-                    else if (item.Tipo == 1)
-                    {
-                        <td>Alugando</td>
-                    }
-
-                    <td>
-                        <input type="hidden" asp-for="@item.Id" />
-                        @Html.DisplayFor(modelItem => item.Endereco.Rua)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Endereco.Bairro)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Endereco.Cidade)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Endereco.Estado)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Endereco.CEP)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Usuario.Nome)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        @if (item.Situacao == 0)
-                        {
-                            <a asp-action="Block" asp-route-id="@item.Id">Bloquear</a>
-                        }
-                        else if (item.Situacao == 1)
-                        {
-                            <a asp-action="Block" asp-route-id="@item.Id">Desbloquear</a>
-                        } |
-                        <a href="#" class="btn btn-danger btnDelete" data-value="@item.Id">Delete</a>
-
-
-                    </td>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Descricao)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Valor)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Tipo)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Endereco.Cidade)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Endereco.Estado)
+                    </th>
+                    <th></th>
                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descricao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Valor)
+                        </td>
+                        @if (item.Tipo == 0)
+                        {
+                            <td>Vendendo</td>
+                        }
+                        else if (item.Tipo == 1)
+                        {
+                            <td>Alugando</td>
+                        }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Endereco.Cidade)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Endereco.Estado)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editar</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Detalhes</a>
+                            @if (item.Situacao == 0)
+                            {
+                                <a asp-action="Block" asp-route-id="@item.Id" class="btn btn-warning">Bloquear</a>
+                            }
+                            else if (item.Situacao == 1)
+                            {
+                                <a asp-action="Block" asp-route-id="@item.Id" class="btn btn-success">Desbloquear</a>
+                            }
+                            <a href="#" class="btn btn-danger btnDelete" data-value="@item.Id">Excluir</a>
 
-                <!-- INICIO DO POPUP DELETE-->
-            }
-        </tbody>
-    </table>
+
+                        </td>
+                    </tr>
+
+                    <!-- INICIO DO POPUP DELETE-->
+                }
+            </tbody>
+        </table>
+    </div>
+
     <!-- Modal -->
     <div class="modal fade" id="myModal">
         <div class="modal-dialog" role="document">
@@ -132,4 +97,4 @@
             </div>
         </div>
     </div>
-</body>
+</div>
