@@ -9,9 +9,14 @@
     <link rel="stylesheet" href="~/Imoveis.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <style>
+        .inline {
+            display: inline-block;
+        }
+    </style>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+            <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Imoveis</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +37,12 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+                    <form action="Index" method="get" class="form-row my-2 my-lg-0">
+                        <div class="input-group">
+                            <input type="text" name="termoBusca" placeholder="Nome do imovel a buscar..." class="form-control mr-sm-2" />
+                            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -52,7 +63,9 @@
     <script defer src="https://friconix.com/cdn/friconix.js"> </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @section Scripts {
-        @{await Html.RenderPartialAsync("_CustomConfirm.cshtml");}
+    @{
+        await Html.RenderPartialAsync("_CustomConfirm.cshtml");
+}
     }
 
     @await RenderSectionAsync("Scripts", required: false)

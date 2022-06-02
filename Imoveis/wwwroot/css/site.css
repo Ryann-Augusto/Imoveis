@@ -23,3 +23,13 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.Editinline {
+    font-size: 18px;
+    display: inline-block;
+    width: 49.4%;
+}
+
+.inline {
+    display: inline-block;
+}

@@ -20,12 +20,6 @@
         align-items: center;
     }
 
-    .inline {
-        font-size: 18px;
-        display: inline-block;
-        width: 49.4%;
-    }
-
     .btnInline {
         font-size: 18px;
         display: inline-block;
@@ -94,27 +88,27 @@
                     <legend>Imovel</legend>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="oMdImoveis.Id" />
-                    <div class="form-group mt-1 inline">
+                    <div class="form-group mt-1 Editinline">
                         <label asp-for="oMdImoveis.Descricao" class="control-label"></label>
                         <input asp-for="oMdImoveis.Descricao" class="form-control" />
                         <span asp-validation-for="oMdImoveis.Descricao" class="text-danger"></span>
                     </div>
-                    <div class="form-group mt-2 inline">
+                    <div class="form-group mt-2 Editinline">
                         <label asp-for="oMdImoveis.Valor" class="control-label"></label>
                         @Html.TextBoxFor(m => m.oMdImoveis.Valor, new { data_val = "false" , @class = "form-control" , @data_rule_Required = "true" , @data_rule_maxlength = "18" })
                         <span asp-validation-for="oMdImoveis.Valor" class="text-danger"></span>
                     </div>
-                    <div class="form-group mt-2 inline">
+                    <div class="form-group mt-2 Editinline">
                         <label asp-for="oMdImoveis.Quarto" class="control-label"></label>
                         <input asp-for="oMdImoveis.Quarto" class="form-control" />
                         <span asp-validation-for="oMdImoveis.Quarto" class="text-danger"></span>
                     </div>
-                    <div class="form-group mt-2 inline">
+                    <div class="form-group mt-2 Editinline">
                         <label asp-for="oMdImoveis.Vagas" class="control-label"></label>
                         <input asp-for="oMdImoveis.Vagas" class="form-control" />
                         <span asp-validation-for="oMdImoveis.Vagas" class="text-danger"></span>
                     </div>
-                    <div class="form-group mt-2 inline">
+                    <div class="form-group mt-2 Editinline">
                         <label asp-for="oMdImoveis.Tipo" class="control-label"></label>
                         <select asp-for="oMdImoveis.Tipo" class="form-control">
                             <option value="0">Vender</option>
@@ -142,37 +136,37 @@
                         </div>
                         <span class="text-muted d-block" id="endereco">Digite um CEP válido e aguarde</span>
                         <span asp-validation-for="oMdImoveis.Endereco.CEP" class="text-danger"></span>
-                        <div class="form-group mt-2 inline">
+                        <div class="form-group mt-2 Editinline">
                             <label asp-for="oMdImoveis.Endereco.Rua" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Rua" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Rua" class="text-danger"></span>
                         </div>
-                        <div class="form-group mt-2 inline">
+                        <div class="form-group mt-2 Editinline">
                             <label asp-for="oMdImoveis.Endereco.Bairro" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Bairro" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Bairro" class="text-danger"></span>
                         </div>
-                        <div class="form-group mt-2 inline">
+                        <div class="form-group mt-2 Editinline">
                             <label asp-for="oMdImoveis.Endereco.Cidade" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Cidade" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Cidade" class="text-danger"></span>
                         </div>
-                        <div class="form-group mt-2 inline">
+                        <div class="form-group mt-2 Editinline">
                             <label asp-for="oMdImoveis.Endereco.Estado" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Estado" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Estado" class="text-danger"></span>
                         </div>
-                        <div class="form-group mt-2 inline">
+                        <div class="form-group mt-2 Editinline">
                             <label asp-for="oMdImoveis.Endereco.Numero" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Numero" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Numero" class="text-danger"></span>
                         </div>
-                        <div class="form-group mt-2 inline">
+                        <div class="form-group mt-2 Editinline">
                             <label asp-for="oMdImoveis.Endereco.Referencia" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Referencia" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Referencia" class="text-danger"></span>
                         </div>
-                        <div class="form-group mt-2 inline">
+                        <div class="form-group mt-2 Editinline">
                             <label asp-for="oMdImoveis.Endereco.Complemento" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Complemento" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Complemento" class="text-danger"></span>

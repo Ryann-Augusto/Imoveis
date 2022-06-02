@@ -14,12 +14,24 @@ namespace Imoveis.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery] string TermoBusca)
         {
-            var _DbContext = _context.Imovel.Include(i => i.Usuario)
+            if (string.IsNullOrEmpty(TermoBusca))
+            {
+                var _dbContext = _context.Imovel.Include(i => i.Usuario)
                 .Where(i => i.Usuario.Situacao == 0 &&
                             i.Situacao == 0).ToListAsync();
-            return View(await _DbContext);
+
+                return View(await _dbContext);
+            }
+            else
+            {
+                var _dbContext = _context.Imovel.Where(i => i.Descricao.Contains(TermoBusca)).ToListAsync();
+
+                return View(await _dbContext);
+            }
+
+            
         }
 
         public IActionResult VisualizarUmaImg(int id)
@@ -37,19 +49,24 @@ namespace Imoveis.Controllers
             {
                 return File(imagemBanco.Dados, imagemBanco.ContentType);
             }
-            
+
         }
 
         public async Task<IActionResult> VisualizarVariasImg(int id)
         {
             var Imagem = await _context.Imagem.Where(m => m.ImovelId == id).ToListAsync();
 
-            foreach(var img in Imagem)
+            foreach (var img in Imagem)
             {
                 ViewBag["Imagens"] = File(img.Dados, img.ContentType);
             }
-            
+
             return View(ViewBag.Imagens);
+        }
+
+        public async Task Busca()
+        {
+            var BuscarImoveis = await _context.Imovel.ToListAsync();
         }
 
         public IActionResult Privacy()

@@ -92,6 +92,12 @@ namespace Imoveis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Cpf,Senha,Telefone,Nivel")] MdUsuarios mdUsuarios)
         {
+
+            if (id != mdUsuarios.Id)
+            {
+                return NotFound();
+            }
+
             var usuarios = await _context.Usuario.Select(m => new { m.Id, m.Cpf, m.Senha }).FirstOrDefaultAsync(m => m.Id == id);
 
             mdUsuarios.Cpf = usuarios.Cpf;
@@ -101,11 +107,6 @@ namespace Imoveis.Controllers
                 mdUsuarios.Senha = usuarios.Senha;
                 ModelState["Senha"].Errors.Clear();
                 ModelState.Remove("Senha");
-            }
-
-            if (id != mdUsuarios.Id)
-            {
-                return NotFound();
             }
 
             if (ModelState.IsValid)
