@@ -14,9 +14,9 @@ namespace Imoveis.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index([FromQuery] string TermoBusca)
+        public async Task<IActionResult> Index([FromQuery] string termoBusca)
         {
-            if (string.IsNullOrEmpty(TermoBusca))
+            if (string.IsNullOrEmpty(termoBusca))
             {
                 var _dbContext = _context.Imovel.Include(i => i.Usuario)
                 .Where(i => i.Usuario.Situacao == 0 &&
@@ -26,7 +26,10 @@ namespace Imoveis.Controllers
             }
             else
             {
-                var _dbContext = _context.Imovel.Where(i => i.Descricao.Contains(TermoBusca)).ToListAsync();
+                var _dbContext = _context.Imovel.Where(
+                    i => i.Descricao.ToUpper().Contains(termoBusca.ToUpper())).ToListAsync();
+
+                ViewData["busca"] = termoBusca;
 
                 return View(await _dbContext);
             }
