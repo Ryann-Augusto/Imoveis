@@ -18,6 +18,19 @@
 @if(Model.Count() > 0)
 {
 <div class="row">
+    <div class="col-12 mb-3">
+        <form class="form-inline float-right">
+            <label>Ordem de Exibição:</label>&nbsp;
+            <select class="form-control custom-select-sm" id="selectOrdem">
+                <option value="0">Selecione a ordem desejada</option>
+                <option value="1">Nome</option>
+                <option value="2">Valor</option>
+                <option value="3">Valor decrecente</option>
+                <option value="4">Quartos</option>
+                <option value="5">Quarto decrescente</option>
+            </select>
+        </form>
+    </div>
     @foreach (var imovel in Model)
     {
         <div class="col-sm-4">
@@ -46,16 +59,37 @@ else
     @if(ViewBag.busca != null)
     {
         <div class="col-12">
-            <h1>Sua busca por <b>@ViewBag.busca</b> não obteve resultados.</h1>
+            <h3>Sua busca por <b>@ViewBag.busca</b> não obteve resultados.</h3>
         </div>
     }
     else
     {
         <div class="col-12">
-            <h1>Não há imoveis cadastrados.</h1>
+            <h3>Não há imoveis cadastrados.</h3>
         </div>
     }
     
+}
+
+@section Scripts {
+    <script>
+        function getUrlVars(){
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1 ).split('&');
+            for (var i = 0; i < hashes.length; i++){
+                hash = hashes[i].split('=');
+                vars.push(hash[]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+        $("#selectOrdem").change(function () {
+            $("#o").val($("#selectOrder").val());
+            console.log("1" + 1);
+            $("#formBusca").submit();
+        });
+    </script>
 }
 
 

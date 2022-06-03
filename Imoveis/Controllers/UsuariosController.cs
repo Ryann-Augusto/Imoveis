@@ -22,7 +22,7 @@ namespace Imoveis.Controllers
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Usuario.ToListAsync());
+            return View(await _context.Usuario.OrderByDescending(u => u.Id).ToListAsync());
         }
 
         // GET: Usuarios/Details/5

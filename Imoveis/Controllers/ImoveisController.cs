@@ -25,8 +25,8 @@ namespace Imoveis.Controllers
         // GET: Imoveis
         public async Task<IActionResult> Index()
         {
-            var _DbContext = _context.Imovel.Include(m => m.Usuario);
-            return View(await _DbContext.Where(m => m.Usuario.Situacao == 0).ToListAsync());
+            var _DbContext = _context.Imovel.Include(i => i.Usuario);
+            return View(await _DbContext.Where(i => i.Usuario.Situacao == 0).OrderByDescending(i => i.Id).ToListAsync());
         }
 
         // GET: Imoveis/Details/5

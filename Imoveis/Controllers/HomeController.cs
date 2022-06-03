@@ -14,27 +14,44 @@ namespace Imoveis.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index([FromQuery] string termoBusca)
+        public async Task<IActionResult> Index([FromQuery(Name ="b")] string termoBusca, [FromQuery(Name = "o")]int ordem)
         {
-            if (string.IsNullOrEmpty(termoBusca))
-            {
-                var _dbContext = _context.Imovel.Include(i => i.Usuario)
-                .Where(i => i.Usuario.Situacao == 0 &&
-                            i.Situacao == 0).ToListAsync();
+            var query = _context.Imovel.Include(u => u.Usuario)
+                    .Where(i => i.Usuario.Situacao == 0 && i.Situacao == 0).OrderByDescending(i => i.Id).AsQueryable();
 
-                return View(await _dbContext);
-            }
-            else
+
+            if (!string.IsNullOrEmpty(termoBusca))
             {
-                var _dbContext = _context.Imovel.Where(
-                    i => i.Descricao.ToUpper().Contains(termoBusca.ToUpper())).ToListAsync();
+                query = query.Where(i => i.Endereco.Cidade.ToUpper().Contains(termoBusca.ToUpper()) 
+                        || i.Descricao.ToUpper().Contains(termoBusca.ToUpper()));
 
                 ViewData["busca"] = termoBusca;
-
-                return View(await _dbContext);
+            }
+            
+            if(ordem != 0)
+            {
+                
+                switch(ordem)
+                {
+                    case 1:
+                        query = query.OrderBy(i => i.Descricao);
+                        break;
+                    case 2:
+                        query = query.OrderBy(i => i.Valor);
+                        break;
+                    case 3:
+                        query = query.OrderByDescending(i => i.Valor);
+                        break;
+                    case 4:
+                        query = query.OrderBy(i => i.Quarto);
+                        break;
+                    case 5:
+                        query = query.OrderByDescending(i => i.Quarto);
+                        break;
+                }
             }
 
-            
+            return View(await query.ToListAsync());
         }
 
         public IActionResult VisualizarUmaImg(int id)
