@@ -16,22 +16,25 @@ namespace Imoveis.Controllers
 
         public async Task<IActionResult> Index([FromQuery(Name ="b")] string termoBusca, [FromQuery(Name = "o")]int ordem)
         {
-            var query = _context.Imovel.Include(u => u.Usuario)
-                    .Where(i => i.Usuario.Situacao == 0 && i.Situacao == 0).OrderByDescending(i => i.Id).AsQueryable();
 
+            var query = _context.Imovel.Include(u => u.Usuario)
+                    .Where(i => i.Usuario.Situacao == 0 && i.Situacao == 0).AsQueryable();
 
             if (!string.IsNullOrEmpty(termoBusca))
             {
-                query = query.Where(i => i.Endereco.Cidade.ToUpper().Contains(termoBusca.ToUpper()) 
+                query = query.Where(i => i.Endereco.Cidade.ToUpper().Contains(termoBusca.ToUpper())
                         || i.Descricao.ToUpper().Contains(termoBusca.ToUpper()));
 
                 ViewData["busca"] = termoBusca;
             }
-            
-            if(ordem != 0)
+
+            if (ordem == 0)
             {
-                
-                switch(ordem)
+                query = query.OrderByDescending(i => i.Id).AsQueryable();
+            }
+            else
+            {
+                switch (ordem)
                 {
                     case 1:
                         query = query.OrderBy(i => i.Descricao);
