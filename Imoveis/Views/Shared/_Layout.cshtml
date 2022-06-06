@@ -33,13 +33,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Imoveis" asp-action="Index">Imoveis</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
                     </ul>
                     <form asp-action="Index" method="get" class="form-row my-2 my-lg-0" id="formBusca">
                         <div class="input-group">
-                            <input type="text" name="b" placeholder="Nome do imovel a buscar..." class="form-control mr-sm-2"/>
+                            <input type="text" name="b" placeholder="Nome do imovel a buscar..." class="form-control mr-sm-2" />
                             <input type="hidden" name="o" id="o" value="0" />
                             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
                         </div>
@@ -56,7 +53,14 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - Imoveis - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col">
+                    &copy; @DateTime.Now.Year - Imoveis - <a asp-area="" asp-controller="Home" asp-action="Privacy">Politica de Privacidade</a>
+                </div>
+                <div class="col text-end">
+                    <a asp-area="" asp-controller="Usuarios" asp-action="Index">Administrar</a>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -65,8 +69,8 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @section Scripts {
     @{
-        await Html.RenderPartialAsync("_CustomConfirm.cshtml");
-}
+    await Html.RenderPartialAsync("_CustomConfirm.cshtml");
+    }
     }
 
     @await RenderSectionAsync("Scripts", required: false)

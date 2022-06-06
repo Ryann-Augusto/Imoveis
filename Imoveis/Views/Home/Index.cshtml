@@ -33,14 +33,14 @@
     </div>
     @foreach (var imovel in Model)
     {
-        <div class="col-sm-4">
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex align-items-stretch">
             <a asp-controller="imoveis" asp-action="Details" asp-route-id="@imovel.Id">
                 <div class="card text-center bg-light mb-4">
-                    <img class="card-img-top img-thumbnail" src="@Url.Action("VisualizarUmaImg", "Home", new {id = imovel.Id})" alt="Imagem de @imovel.Descricao" style="height:230px;">
+                    <img class="card-img-top img-thumbnail" src="@Url.Action("VisualizarUmaImg", "Home", new {id = imovel.Id})" alt="Imagem de @imovel.Descricao">
                     <div class="card-header">
                         R$ @imovel.Valor.ToString("F2")
                     </div>
-                    <div class="card-body" style="height:124px;">
+                    <div class="card-body">
                         <h5 class="card-title">@imovel.Descricao</h5>
                         <p class="card-text">@imovel.Endereco.Bairro</p>
                     </div>
