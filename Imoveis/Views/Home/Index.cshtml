@@ -15,48 +15,63 @@
     <h1 class="display-4">Lista de Imóveis</h1>
 </div>
 
-@if(Model.Count() > 0)
+@if (Model.Count() > 0)
 {
-<div class="row">
-    <div class="col-12 mb-3">
-        <form class="form-inline float-right">
-            <label>Ordem de Exibição:</label>&nbsp;
-            <select class="form-control custom-select-sm" id="selectOrdem">
-                <option value="0">Selecione a ordem desejada</option>
-                <option value="1">Nome</option>
-                <option value="2">Valor</option>
-                <option value="3">Valor decrecente</option>
-                <option value="4">Quartos</option>
-                <option value="5">Quarto decrescente</option>
-            </select>
-        </form>
-    </div>
-    @foreach (var imovel in Model)
-    {
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex align-items-stretch">
-            <a asp-controller="imoveis" asp-action="Details" asp-route-id="@imovel.Id">
-                <div class="card text-center bg-light mb-4">
-                    <img class="card-img-top img-thumbnail" src="@Url.Action("VisualizarUmaImg", "Home", new {id = imovel.Id})" alt="Imagem de @imovel.Descricao">
-                    <div class="card-header">
-                        R$ @imovel.Valor.ToString("F2")
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">@imovel.Descricao</h5>
-                        <p class="card-text">@imovel.Endereco.Bairro</p>
-                    </div>
-                    <div class="card-footer">
-                        <div><a href="#" class="btn btn-primary">Entrar em Contato</a></div>
-                        <small class="text-muted">Cidade: @imovel.Endereco.Cidade</small>
-                    </div>
-                </div>
-            </a>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="d-flex flex-row justify-content-center justify-content-md-start mb-3 mb-md-0">
+                <form class="d-inline-block">
+                    <select class="form-control" id="selectOrdem">
+                        <option value="0">Selecione a ordem desejada</option>
+                        <option value="1">Nome</option>
+                        <option value="2">Valor</option>
+                        <option value="3">Valor decrecente</option>
+                        <option value="4">Quartos</option>
+                        <option value="5">Quarto decrescente</option>
+                    </select>
+                </form>
+            </div>
         </div>
-    }
-</div>
+        <div class="col-12 col-md-6">
+            <div class="d-flex flex-row-reverse justify-content-center justify-content-md-start mb-3 mb-md-0">
+                <form class="d-inline-block" asp-controller="Home" asp-action="Index" method="get" id="formBusca">
+                    <div class="input-group">
+                        <input type="text" name="b" id="b" placeholder="Nome do imovel a buscar..." class="form-control" />
+                        <input type="hidden" name="o" id="o" value="0" />
+                        <button class="btn btn-sm btn-secondary" type="submit">Buscar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-3" />
+    <div class="row">
+        @foreach (var imovel in Model)
+        {
+            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex align-items-stretch">
+                <a asp-controller="imoveis" asp-action="Details" asp-route-id="@imovel.Id">
+                    <div class="card text-center bg-light mb-4">
+                        <img class="card-img-top img-thumbnail" src="@Url.Action("VisualizarUmaImg", "Home", new {id = imovel.Id})" alt="Imagem de @imovel.Descricao">
+                        <div class="card-header">
+                            R$ @imovel.Valor.ToString("F2")
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@imovel.Descricao</h5>
+                            <p class="card-text">@imovel.Endereco.Bairro</p>
+                        </div>
+                        <div class="card-footer">
+                            <div><a href="#" class="btn btn-primary">Entrar em Contato</a></div>
+                            <small class="text-muted">Cidade: @imovel.Endereco.Cidade</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
 }
 else
 {
-    @if(ViewBag.busca != null)
+    @if (ViewBag.busca != null)
     {
         <div class="col-12">
             <h3>Sua busca por <b>@ViewBag.busca</b> não obteve resultados.</h3>
@@ -68,7 +83,7 @@ else
             <h3>Não há imoveis cadastrados.</h3>
         </div>
     }
-    
+
 }
 
 

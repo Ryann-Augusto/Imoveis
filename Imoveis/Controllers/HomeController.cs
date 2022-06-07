@@ -14,7 +14,8 @@ namespace Imoveis.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index([FromQuery(Name ="b")] string termoBusca, [FromQuery(Name = "o")]int ordem)
+        public async Task<IActionResult> Index([FromQuery(Name = "b")] string termoBusca, [FromQuery(Name = "o")]int? ordem,
+            [FromQuery(Name ="p")] int? pagina = 1)
         {
 
             var query = _context.Imovel.Include(u => u.Usuario)
@@ -37,7 +38,7 @@ namespace Imoveis.Controllers
                 switch (ordem)
                 {
                     case 1:
-                        query = query.OrderBy(i => i.Descricao);
+                        query = query.OrderBy(i => i.Descricao.ToUpper());
                         break;
                     case 2:
                         query = query.OrderBy(i => i.Valor);

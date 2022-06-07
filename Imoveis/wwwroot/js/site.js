@@ -15,6 +15,9 @@ $(document).ready(function () {
         $("#selectOrdem").val(qs["o"]);
         $("#o").val(qs["o"]);
     }
+    if (qs["b"] != null) {
+        $("#b").val(qs["b"])
+    }
 });
 
 $("#selectOrdem").change(function () {
