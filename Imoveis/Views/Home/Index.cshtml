@@ -18,10 +18,10 @@
 @if (Model.Count() > 0)
 {
     <div class="row">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4">
             <div class="d-flex flex-row justify-content-center justify-content-md-start mb-3 mb-md-0">
                 <form class="d-inline-block">
-                    <select class="form-control" id="selectOrdem">
+                    <select class="form-control selectOrdem">
                         <option value="0">Selecione a ordem desejada</option>
                         <option value="1">Nome</option>
                         <option value="2">Valor</option>
@@ -32,12 +32,46 @@
                 </form>
             </div>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4 center">
+            <div class="d-flex flex-row mb-3 mb-md-0">
+                <div class="input-group">
+                    <form class="d-inline-block">
+                        <select class="form-control tamanhoPage">
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </form>
+                    <nav class="d-inline-block ms-3">
+                        <ul class="pagination">
+                            @for (int i = 1; i <= ViewBag.QuantidadePaginas; i++)
+                            {
+                                @if (i == ViewBag.PaginaAtual)
+                                {
+                                    <li class="page-item disabled">
+                                        <button class="page-link" value="@i">@i</button>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item">
+                                        <button class="page-link" value="@i">@i</button>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
             <div class="d-flex flex-row-reverse justify-content-center justify-content-md-start mb-3 mb-md-0">
-                <form class="d-inline-block" asp-controller="Home" asp-action="Index" method="get" id="formBusca">
+                <form class="d-inline-block ms-3" asp-controller="Home" asp-action="Index" method="get" id="formBusca">
                     <div class="input-group">
                         <input type="text" name="b" id="b" placeholder="Nome do imovel a buscar..." class="form-control" />
                         <input type="hidden" name="o" id="o" value="0" />
+                        <input type="hidden" name="p" id="p" value="1" />
+                        <input type="hidden" name="t" id="t" />
                         <button class="btn btn-sm btn-secondary" type="submit">Buscar</button>
                     </div>
                 </form>
@@ -67,6 +101,34 @@
                 </a>
             </div>
         }
+    </div>
+    <hr class="mt-0" />
+    <div class="row">
+        <div class="col-12 center">
+            <div class="d-flex flex-row mb-3 mb-md-0">
+                <div class="input-group">
+                    <nav class="d-inline-block ms-3">
+                        <ul class="pagination">
+                            @for (int i = 1; i <= ViewBag.QuantidadePaginas; i++)
+                            {
+                                @if (i == ViewBag.PaginaAtual)
+                                {
+                                    <li class="page-item disabled">
+                                        <button class="page-link" value="@i">@i</button>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="page-item">
+                                        <button class="page-link" value="@i">@i</button>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
     </div>
 }
 else

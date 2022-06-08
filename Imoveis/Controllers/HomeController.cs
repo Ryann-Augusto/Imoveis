@@ -14,9 +14,13 @@ namespace Imoveis.Controllers
             _context = context;
         }
 
+        public int PaginaAtual { get; set; }
+
         public async Task<IActionResult> Index([FromQuery(Name = "b")] string termoBusca, [FromQuery(Name = "o")]int? ordem,
-            [FromQuery(Name ="p")] int? pagina = 1)
+            [FromQuery(Name ="p")] int? pagina = 1, [FromQuery(Name = "t")] int tamanhoPagina = 20)
         {
+            this.PaginaAtual = pagina.Value;
+            ViewBag.PaginaAtual = pagina.Value;
 
             var query = _context.Imovel.Include(u => u.Usuario)
                     .Where(i => i.Usuario.Situacao == 0 && i.Situacao == 0).AsQueryable();
@@ -54,6 +58,12 @@ namespace Imoveis.Controllers
                         break;
                 }
             }
+
+            var queryCount = query;
+            int qtdImovel = queryCount.Count();
+            ViewBag.QuantidadePaginas = Convert.ToInt32(Math.Ceiling(qtdImovel*1M / tamanhoPagina));
+
+            query = query.Skip(tamanhoPagina * (this.PaginaAtual -1 )).Take(tamanhoPagina);
 
             return View(await query.ToListAsync());
         }

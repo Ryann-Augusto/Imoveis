@@ -12,16 +12,33 @@
 $(document).ready(function () {
     var qs = getUrlVars();
     if (qs["o"] != null) {
-        $("#selectOrdem").val(qs["o"]);
+        $(".selectOrdem").val(qs["o"]);
         $("#o").val(qs["o"]);
     }
+
     if (qs["b"] != null) {
         $("#b").val(qs["b"])
     }
+
+    if (qs["t"] != null) {
+        $(".tamanhoPage").val(qs["t"]);
+        $("#t").val(qs["t"]);
+    }
+
 });
 
-$("#selectOrdem").change(function () {
-    $("#o").val($("#selectOrdem").val());
+$(".selectOrdem").change(function () {
+    $("#o").val($(".selectOrdem").val());
+    $("#formBusca").submit();
+});
+
+$(".page-link").click(function () {
+    $("#p").val($(this).val());
+    $("#formBusca").submit();
+});
+
+$(".tamanhoPage").change(function () {
+    $("#t").val($(".tamanhoPage").val());
     $("#formBusca").submit();
 });
 
