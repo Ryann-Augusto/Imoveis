@@ -1,0 +1,22 @@
+﻿@model Imoveis.Models.DadosLogin
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<div class="justify-content-center">
+    <form class="form-check-inline align-content-center" method="post" asp-action="Autenticar">
+        <h4 class="mt-5 mb-3 font-weight-normal">Identifique-se</h4>
+        <div asp-validation-summary="ModelOnly" class="val-summary text-danger mb-3"></div>
+
+        <input asp-for="Email" class="form-control" placeholder="Digite seu E-mail." required autofocus />
+        <span asp-validation-for="Email" class="text-danger"></span>
+        
+        <input asp-for="Senha" class="form-control" placeholder="Digite sua senha." required />
+        <span asp-validation-for="Senha" class="text-danger"></span>
+        
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
+    </form>
+</div>

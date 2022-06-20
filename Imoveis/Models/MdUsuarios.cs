@@ -29,6 +29,13 @@ namespace Imoveis.Models
         [MaxLength(20, ErrorMessage = "O campo {0} deve ter no maximo {1} caracteres.")]
         public string Senha { get; set; }
 
+        [NotMapped]
+        [DataType(DataType.Password)]
+        [Column("Confirmação de Senha", TypeName = "varchar(20)")]
+        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
+        [Compare("Senha", ErrorMessage = "A confirmação de senha não confere com a senha informada.")]
+        public string ConfirmSenha { get; set; }
+
         [Column("cpf", TypeName = "varchar(11)")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [RegularExpression(@"[0-9]{11}$", ErrorMessage = "O campo {0} deve ser preenchido com um CPF.")]

@@ -1,4 +1,6 @@
 ﻿using Imoveis.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -13,6 +15,14 @@ namespace Imoveis.Controllers
         {
             _context = context;
         }
+
+        [BindProperty]
+        public DadosLogin Dados { get; set; }
+
+        public string ReturnUrl { get; set; }
+
+        [TempData]
+        public string MensagemDeErro { get; set; }
 
         public int PaginaAtual { get; set; }
 
@@ -112,6 +122,42 @@ namespace Imoveis.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public async Task<IActionResult> Login(string returnUrl, bool erroLogin)
+        {
+            if (erroLogin)
+            {
+                ViewBag.erro = "Usuario ou senha incorreto.";
+            }
+
+            ReturnUrl = returnUrl ?? Url.Content("~/");
+
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return View();
+        }
+
+        public async Task<IActionResult> Autenticar(string returnUrl)
+        {
+            ReturnUrl = returnUrl ?? Url.Content("~/");
+
+            var Usuario = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == Dados.Email);
+
+            if (!Usuario.Email.Equals(Dados.Email) ||
+                !Usuario.Senha.Equals(Dados.Senha))
+            {
+                return RedirectToAction(nameof(Login), "Home", new { erroLogin = true });
+            }
+
+            await new Auxiliares.Autenticacao().Login(HttpContext, Dados, Usuario.Nivel.ToString());
+            return RedirectToAction(nameof(Index), "Imoveis");
+        }
+
+        public async Task<IActionResult> Sair()
+        {
+            await new Auxiliares.Autenticacao().Logout(HttpContext);
+            return RedirectToAction(nameof(Login), "Home");
         }
     }
 }
