@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Imoveis.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Imoveis.Controllers
 {
+    [Authorize(Policy = "Admin")]
     public class ImoveisController : Controller
     {
         [BindProperty]

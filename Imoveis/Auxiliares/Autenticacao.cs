@@ -8,11 +8,12 @@ namespace Imoveis.Auxiliares
 {
     public class Autenticacao
     {
-        public async Task Login(HttpContext context, DadosLogin Dados, string Nivel)
+        public async Task Login(HttpContext context, DadosLogin Dados, string Nome, string Nivel)
         {
             var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name, Nome));
             claims.Add(new Claim(ClaimTypes.Email, Dados.Email));
-            claims.Add(new Claim(ClaimTypes.Role, Nivel.ToString()));
+            claims.Add(new Claim(ClaimTypes.Role, Nivel));
 
             var claimsIdentity =
                 new ClaimsPrincipal(

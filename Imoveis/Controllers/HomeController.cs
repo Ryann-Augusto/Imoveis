@@ -10,10 +10,12 @@ namespace Imoveis.Controllers
     public class HomeController : Controller
     {
         private readonly _DbContext _context;
+        private readonly HttpContext _httpContext;
 
-        public HomeController(_DbContext context)
+        public HomeController(_DbContext context, HttpContext httpContext)
         {
             _context = context;
+            _httpContext = httpContext;
         }
 
         [BindProperty]
@@ -150,7 +152,7 @@ namespace Imoveis.Controllers
                 return RedirectToAction(nameof(Login), "Home", new { erroLogin = true });
             }
 
-            await new Auxiliares.Autenticacao().Login(HttpContext, Dados, Usuario.Nivel.ToString());
+            await new Auxiliares.Autenticacao().Login(HttpContext, Dados, Usuario.Nome, Usuario.Nivel.ToString());
             return RedirectToAction(nameof(Index), "Imoveis");
         }
 

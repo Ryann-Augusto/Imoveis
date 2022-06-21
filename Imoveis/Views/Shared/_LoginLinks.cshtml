@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Imoveis.Models
+
+@inject SignInManager<MdUsuarios> SignManager
+@inject UserManager<MdUsuarios> UserManager
+
+@{ var appUser = await UserManager.GetUserAsync(User); }
+
+<ul class="navbar-nav">
+    @if(SignManager.IsSignedIn(User))
+    {
+        <li class="nav-link">
+            <a id="manager" class="nav-link text-dark" asp-area="" asp-action="Index" title="Manager">Olá
+                @appUser.Nome.Substring(0, appUser.Nome.IndexOf(' '))!</a>
+        </li>
+        <li class="nav-link">
+            <a class="nav-link btn-primary btn-link text-dark" asp-route-returnUrl="@Url.Page("/Index", new { area = ""})" asp-action="Sair" asp-controller="Home">Sair</a>
+        </li>
+    }
+</ul>

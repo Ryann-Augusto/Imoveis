@@ -18,6 +18,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = new PathString("/Home/Login");
     });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", p => p.RequireRole("1"));
+    options.AddPolicy("User", p => p.RequireRole("2"));
+});
+
 builder.Services.AddDbContext<_DbContext>(x => x.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         ServerVersion.Parse("8.0.28")
