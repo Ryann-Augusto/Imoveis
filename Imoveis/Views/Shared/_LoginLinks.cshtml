@@ -1,20 +1,21 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Imoveis.Models
+@using System.Security.Claims;
 
-@inject SignInManager<MdUsuarios> SignManager
-@inject UserManager<MdUsuarios> UserManager
+@inject IHttpContextAccessor _acessor;
 
-@{ var appUser = await UserManager.GetUserAsync(User); }
+@{
+    var appUser = _acessor.HttpContext.User.Identity.Name; 
+}
 
 <ul class="navbar-nav">
-    @if(SignManager.IsSignedIn(User))
+    @if(_acessor.HttpContext.User.Identity.IsAuthenticated)
     {
         <li class="nav-link">
-            <a id="manager" class="nav-link text-dark" asp-area="" asp-action="Index" title="Manager">Olá
-                @appUser.Nome.Substring(0, appUser.Nome.IndexOf(' '))!</a>
+            <a id="manager" class="nav-link text-dark" asp-area="" asp-action="Index" title="Manager">Olá @appUser !</a>
         </li>
         <li class="nav-link">
-            <a class="nav-link btn-primary btn-link text-dark" asp-route-returnUrl="@Url.Page("/Index", new { area = ""})" asp-action="Sair" asp-controller="Home">Sair</a>
+            <a class="nav-link btn-link text-dark" asp-route-returnUrl="@Url.Page("/Index", new { area = ""})" asp-action="Sair" asp-controller="Conta">Sair</a>
         </li>
     }
 </ul>

@@ -10,21 +10,11 @@ namespace Imoveis.Controllers
     public class HomeController : Controller
     {
         private readonly _DbContext _context;
-        private readonly HttpContext _httpContext;
 
-        public HomeController(_DbContext context, HttpContext httpContext)
+        public HomeController(_DbContext context)
         {
             _context = context;
-            _httpContext = httpContext;
         }
-
-        [BindProperty]
-        public DadosLogin Dados { get; set; }
-
-        public string ReturnUrl { get; set; }
-
-        [TempData]
-        public string MensagemDeErro { get; set; }
 
         public int PaginaAtual { get; set; }
 
@@ -124,42 +114,6 @@ namespace Imoveis.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public async Task<IActionResult> Login(string returnUrl, bool erroLogin)
-        {
-            if (erroLogin)
-            {
-                ViewBag.erro = "Usuario ou senha incorreto.";
-            }
-
-            ReturnUrl = returnUrl ?? Url.Content("~/");
-
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-            return View();
-        }
-
-        public async Task<IActionResult> Autenticar(string returnUrl)
-        {
-            ReturnUrl = returnUrl ?? Url.Content("~/");
-
-            var Usuario = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == Dados.Email);
-
-            if (!Usuario.Email.Equals(Dados.Email) ||
-                !Usuario.Senha.Equals(Dados.Senha))
-            {
-                return RedirectToAction(nameof(Login), "Home", new { erroLogin = true });
-            }
-
-            await new Auxiliares.Autenticacao().Login(HttpContext, Dados, Usuario.Nome, Usuario.Nivel.ToString());
-            return RedirectToAction(nameof(Index), "Imoveis");
-        }
-
-        public async Task<IActionResult> Sair()
-        {
-            await new Auxiliares.Autenticacao().Logout(HttpContext);
-            return RedirectToAction(nameof(Login), "Home");
         }
     }
 }

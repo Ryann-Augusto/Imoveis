@@ -11,11 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = new PathString("/Home/Login");
-        options.AccessDeniedPath = new PathString("/Home/Login");
+        options.LoginPath = new PathString("/Conta/Login");
+        options.AccessDeniedPath = new PathString("/Conta/Login");
     });
 
 builder.Services.AddAuthorization(options =>
