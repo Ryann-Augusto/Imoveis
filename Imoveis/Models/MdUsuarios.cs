@@ -25,13 +25,14 @@ namespace Imoveis.Models
 
         [DataType(DataType.Password)]
         [Column("senha", TypeName = "varchar(20)")]
+        [Display(Name = "Senha")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [MaxLength(20, ErrorMessage = "O campo {0} deve ter no maximo {1} caracteres.")]
         public string Senha { get; set; }
 
         [NotMapped]
         [DataType(DataType.Password)]
-        [Column("Confirmação de Senha", TypeName = "varchar(20)")]
+        [Display(Name = "Confirme sua senha")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [Compare("Senha", ErrorMessage = "A confirmação de senha não confere com a senha informada.")]
         public string ConfirmSenha { get; set; }
@@ -45,11 +46,13 @@ namespace Imoveis.Models
         [Column("telefone", TypeName = "varchar(14)")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [MaxLength(14, ErrorMessage = "O campo {0} deve ter no maximo {1} caracteres.")]
+        [Display(Name = "Telefone")]
         [Phone]
         [UIHint("_CustomCELULAR")]
         public string Telefone { get; set; }
 
         [Column("nivel", TypeName = "int")]
+        [Display(Name = "Nivel de Usuário")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         public int Nivel { get; set; }
 

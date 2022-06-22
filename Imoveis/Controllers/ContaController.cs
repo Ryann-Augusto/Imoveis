@@ -31,7 +31,7 @@ namespace Imoveis.Controllers
         {
             if (erroLogin)
             {
-                ViewBag.erro = "Usuario ou senha incorreto.";
+                TempData["erro"] = "Usuario ou senha incorreto.";
             }
 
             ReturnUrl = returnUrl ?? Url.Content("~/");
@@ -47,14 +47,19 @@ namespace Imoveis.Controllers
 
             var Usuario = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == Dados.Email);
 
+            if (Usuario == null)
+            {
+                return RedirectToAction(nameof(Login), new { erroLogin = true });
+            }
+
             if (!Usuario.Email.Equals(Dados.Email) ||
                 !Usuario.Senha.Equals(Dados.Senha))
             {
-                return RedirectToAction(nameof(Login), "Home", new { erroLogin = true });
+                return RedirectToAction(nameof(Login), new { erroLogin = true });
             }
 
             await Autenticar(Usuario.Nome, Usuario.Nivel.ToString());
-            return RedirectToAction(nameof(Index), "Imoveis");
+            return RedirectToAction(nameof(Index), "Home");
         }
 
         public async Task<IActionResult> Sair()

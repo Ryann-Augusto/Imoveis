@@ -4,6 +4,18 @@
     ViewData["Title"] = "Login";
 }
 
+@if (TempData["sucesso"] != null)
+{
+    <div class="alert alert-success" id="notfyHome">@TempData["sucesso"] <span class="fa fa-check fa-2x"></span></div>
+}
+@if (TempData["erro"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["erro"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 <h1>Login</h1>
 
 <div class="justify-content-center">
@@ -13,10 +25,10 @@
 
         <input asp-for="Email" class="form-control" placeholder="Digite seu E-mail." required autofocus />
         <span asp-validation-for="Email" class="text-danger"></span>
-        
+
         <input asp-for="Senha" class="form-control" placeholder="Digite sua senha." required />
         <span asp-validation-for="Senha" class="text-danger"></span>
-        
+
         <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
     </form>
 </div>

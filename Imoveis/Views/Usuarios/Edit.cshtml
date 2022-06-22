@@ -4,6 +4,15 @@
     ViewData["Title"] = "Edit";
 }
 
+@if (TempData["sucesso"] != null)
+{
+    <div class="alert alert-success" id="notfyHome">@TempData["sucesso"] <span class="fa fa-check fa-2x"></span></div>
+}
+@if (TempData["erro"] != null)
+{
+    <div class="alert alert-danger" id="notfyHome">@TempData["erro"] <span class="fa fa-times fa-2x"></span></div>
+}
+
 <h1>Edit</h1>
 
 <h4>MdUsuarios</h4>
@@ -30,7 +39,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ConfirmSenha" class="control-label"></label>
-                @Html.TextBoxFor(m => m.Senha, new { data_val = "false", @type="password", @class = "form-control", @data_rule_required = "false", @data_rule_maxlength = "20" })
+                @Html.TextBoxFor(m => m.ConfirmSenha, new { data_val = "false", @type="password", @class = "form-control", @data_rule_required = "false", @data_rule_maxlength = "20" })
                 <span asp-validation-for="ConfirmSenha" class="text-danger"></span>
             </div>
             <div class="form-group">
