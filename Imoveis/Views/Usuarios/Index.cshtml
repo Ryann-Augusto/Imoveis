@@ -55,25 +55,32 @@
                     {
                         <td>Funcionario</td>
                     }
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                    <td class="btn-group btn-group-justified">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editar</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Detalhes</a>
                         @if (item.Situacao == 0)
                         {
-                            <a asp-action="Block" asp-route-id="@item.Id">Bloquear</a>
+                            <a asp-action="Block" asp-route-id="@item.Id" class="btn btn-warning">Bloquear</a>
                         }
                         else if (item.Situacao == 1)
                         {
-                            <a asp-action="Block" asp-route-id="@item.Id">Desbloquear</a>
+                            <a asp-action="Block" asp-route-id="@item.Id" class="btn btn-success">Desbloquear</a>
                         }
-
-                        <form class="d-inline-block" asp-page-handler="delete" asp-route-id="@item.Id" method="post">
-                            <button class="btn btn-danger btn-sm" onclick="confirmarExclusao();" type="button">Excluir</button>
-                        </form>
+                            <a href="#" class="btn btn-danger btnDeleteUsuario" data-value="@item.Id">Excluir</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+</div>
+<!-- INICIO DO POPUP DELETE-->
+<!-- Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="conteudoModal"></div>
+        </div>
+    </div>
+</div>
 </div>
 

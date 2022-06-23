@@ -12,9 +12,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Imoveis.Controllers
 {
+    [Authorize(Policy = "Admin")]
     public class UsuariosController : Controller
     {
         private readonly _DbContext _context;
@@ -55,8 +57,6 @@ namespace Imoveis.Controllers
         }
 
         // POST: Usuarios/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,ConfirmSenha,Cpf,Telefone,Nivel")] MdUsuarios mdUsuarios)
@@ -92,8 +92,6 @@ namespace Imoveis.Controllers
         }
 
         // POST: Usuarios/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Cpf,Senha,ConfirmSenha,Telefone,Nivel")] MdUsuarios mdUsuarios)
@@ -161,7 +159,7 @@ namespace Imoveis.Controllers
                 return NotFound();
             }
 
-            return View(mdUsuarios);
+            return PartialView("_DeleteModalPartial", mdUsuarios);
         }
 
         // POST: Usuarios/Delete/5

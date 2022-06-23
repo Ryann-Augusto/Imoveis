@@ -45,7 +45,7 @@ $(".tamanhoPage").change(function () {
 
 $(document).ready(function () {
 
-    $(".btnDelete").click(function () {
+    $(".btnDeleteImovel").click(function () {
 
         var id = $(this).data("value");
 
@@ -61,6 +61,17 @@ $(document).ready(function () {
         var id = $(this).data("value");
 
         $("#conteudoModal").load("/Imoveis/DeleteImage/" + id,
+            function () {
+                $("#myModal").modal("show");
+            }
+        );
+    });
+
+    $(".btnDeleteUsuario").click(function () {
+
+        var id = $(this).data("value");
+
+        $("#conteudoModal").load("/Usuarios/Delete/" + id,
             function () {
                 $("#myModal").modal("show");
             }

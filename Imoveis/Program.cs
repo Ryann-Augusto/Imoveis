@@ -23,7 +23,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Admin", p => p.RequireRole("1"));
-    options.AddPolicy("User", p => p.RequireRole("2"));
+    options.AddPolicy("User", p => p.RequireRole("1", "2"));
 });
 
 builder.Services.AddDbContext<_DbContext>(x => x.UseMySql(

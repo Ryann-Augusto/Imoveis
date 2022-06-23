@@ -8,28 +8,32 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Imoveis.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Imoveis.Controllers
 {
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "User")]
     public class ImoveisController : Controller
     {
         [BindProperty]
         public MdImoveis Imovel { get; set; }
 
         private readonly _DbContext _context;
+        private readonly IHttpContextAccessor _httpContextAcessor;
 
-        public ImoveisController(_DbContext context)
+        public ImoveisController(_DbContext context, IHttpContextAccessor httpContextAcessor)
         {
             _context = context;
+            _httpContextAcessor = httpContextAcessor;
         }
 
         // GET: Imoveis
         public async Task<IActionResult> Index()
         {
-            var u = User;
-            var _DbContext = _context.Imovel.Include(i => i.Usuario);
-            return View(await _DbContext.Where(i => i.Usuario.Situacao == 0).OrderByDescending(i => i.Id).ToListAsync());
+            var UserId = _httpContextAcessor.HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
+            var _DbContext = _context.Imovel.Include(i => i.Usuario).Where(i => i.UsuarioId == Convert.ToInt32(UserId)).OrderByDescending(i => i.Id);
+            var imovel = await _DbContext.ToListAsync();
+            return View(imovel);
         }
 
         // GET: Imoveis/Details/5
@@ -100,10 +104,12 @@ namespace Imoveis.Controllers
         {
             try
             {
+                var UserId = _httpContextAcessor.HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
                 ModelState["Id"].Errors.Clear();
                 ModelState.Remove("Id");
 
                 Imovel.Situacao = 0;
+                Imovel.UsuarioId = Convert.ToInt32(UserId);
 
                 if (ModelState.IsValid)
                 {
@@ -144,13 +150,18 @@ namespace Imoveis.Controllers
         {
 
             var model = new AgruparModels();
+            var UserId = _httpContextAcessor.HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
 
             model.oMdImoveis = EditImovel(id);
+
+            if (model.oMdImoveis.UsuarioId != Convert.ToInt32(UserId))
+            {
+                return RedirectToAction(nameof(Index), "Home");
+            }
+
             model.oMdImagens = ObterImagem(ViewBag.IdImovel);
 
             return View(model);
-
-
         }
 
         MdImoveis EditImovel(int? id)
@@ -159,8 +170,8 @@ namespace Imoveis.Controllers
 
             ViewBag.IdImovel = mdImoveis.Id;
 
-
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Nome", mdImoveis.UsuarioId);
+            //SELECIONAR UMA LISTA DO BANCO DE DADOS
+            //ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Nome", mdImoveis.UsuarioId);
             return (mdImoveis);
         }
 

@@ -1,12 +1,14 @@
 ﻿using Imoveis.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace Imoveis.Controllers
 {
+    [AllowAnonymous]
     public class ContaController : Controller
     {
 
@@ -22,7 +24,7 @@ namespace Imoveis.Controllers
         [BindProperty]
         public DadosLogin? Dados { get; set; }
 
-        public string? ReturnUrl { get; set; }
+        public string ReturnUrl { get; set; }
 
         [TempData]
         public string? MensagemDeErro { get; set; }
@@ -43,7 +45,7 @@ namespace Imoveis.Controllers
 
         public async Task<IActionResult> Entrar(string returnUrl)
         {
-            ReturnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = ReturnUrl ?? Url.Content("~/");
 
             var Usuario = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == Dados.Email);
 
@@ -58,7 +60,7 @@ namespace Imoveis.Controllers
                 return RedirectToAction(nameof(Login), new { erroLogin = true });
             }
 
-            await Autenticar(Usuario.Nome, Usuario.Nivel.ToString());
+            await Autenticar(Usuario.Id.ToString(), Usuario.Nome, Usuario.Nivel.ToString());
             return RedirectToAction(nameof(Index), "Home");
         }
 
@@ -68,9 +70,10 @@ namespace Imoveis.Controllers
             return RedirectToAction(nameof(Login), "Conta");
         }
 
-        public async Task Autenticar(string Nome, string Nivel)
+        public async Task Autenticar(string Id, string Nome, string Nivel)
         {
             var claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Sid, Id));
             claims.Add(new Claim(ClaimTypes.Name, Nome));
             claims.Add(new Claim(ClaimTypes.Email, Dados.Email));
             claims.Add(new Claim(ClaimTypes.Role, Nivel));

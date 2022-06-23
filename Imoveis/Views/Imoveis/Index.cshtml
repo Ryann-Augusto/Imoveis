@@ -77,16 +77,14 @@
                             {
                                 <a asp-action="Block" asp-route-id="@item.Id" class="btn btn-success">Desbloquear</a>
                             }
-                            <a href="#" class="btn btn-danger btnDelete" data-value="@item.Id">Excluir</a>
+                            <a href="#" class="btn btn-danger btnDeleteImovel" data-value="@item.Id">Excluir</a>
                         </td>
                     </tr>
-
-                    <!-- INICIO DO POPUP DELETE-->
                 }
             </tbody>
         </table>
     </div>
-
+    <!-- INICIO DO POPUP DELETE-->
     <!-- Modal -->
     <div class="modal fade" id="myModal">
         <div class="modal-dialog" role="document">
