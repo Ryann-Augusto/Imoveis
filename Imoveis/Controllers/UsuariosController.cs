@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Imoveis.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Cryptography;
 
 namespace Imoveis.Controllers
 {
-    [Authorize(Policy = "Admin")]
+    //[Authorize(Policy = "Admin")]
     public class UsuariosController : Controller
     {
         private readonly _DbContext _context;
@@ -51,6 +52,9 @@ namespace Imoveis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,ConfirmSenha,Cpf,Telefone,Nivel")] MdUsuarios mdUsuarios)
         {
+            Auxiliares.Hash hash = new Auxiliares.Hash(SHA256.Create());
+            mdUsuarios.Senha = hash.CriptografarSenha(mdUsuarios.Senha);
+
             mdUsuarios.Situacao = 0;
 
             if (ModelState.IsValid)
@@ -101,7 +105,12 @@ namespace Imoveis.Controllers
                 return View(mdUsuarios);
             }
 
-            if (mdUsuarios.Senha == null || mdUsuarios.Senha == String.Empty)
+            if (!string.IsNullOrEmpty(mdUsuarios.Senha))
+            {
+                Auxiliares.Hash hash = new Auxiliares.Hash(SHA256.Create());
+                mdUsuarios.Senha = hash.CriptografarSenha(mdUsuarios.Senha);
+            }
+            else
             {
                 mdUsuarios.Senha = usuarios.Senha;
                 ModelState["Senha"].Errors.Clear();

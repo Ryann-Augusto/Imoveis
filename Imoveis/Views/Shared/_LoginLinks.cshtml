@@ -9,19 +9,10 @@
     var appId = _acessor.HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
 }
 <ul class="navbar-nav">
-    @*@if(_acessor.HttpContext.User.IsInRole("1"))
-        {
-        <li class="nav-link">
-        <a class="nav-link btn-link text-dark">Admin</a>
-        </li>
-        }*@
     @if (_acessor.HttpContext.User.Identity.IsAuthenticated)
     {
         <li class="nav-link">
-            <a id="manager" class="nav-link text-dark" asp-area="" asp-action="Index" title="Manager">Olá @appUser !</a>
-        </li>
-        <li class="nav-link">
-            <p>@appId</p>
+            <a id="manager" class="nav-link text-dark" asp-area="" asp-action="Index" title="Manager">Olá @appUser</a>
         </li>
         <li class="nav-link">
             <a class="nav-link btn-link text-dark" asp-route-returnUrl="@Url.Page("/Index", new { area = ""})" asp-action="Sair" asp-controller="Conta">Sair</a>

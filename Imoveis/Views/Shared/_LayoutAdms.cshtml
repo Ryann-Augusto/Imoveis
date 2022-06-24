@@ -9,13 +9,8 @@
     <link rel="stylesheet" href="~/Imoveis.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <style>
-        .inline {
-            display: inline-block;
-        }
-    </style>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <header class="bg-dark">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Imoveis</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -23,9 +18,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <partial name="_PageLink" />
+                    <partial name="_PageLinkAdm" />
                     <div class="align-self-end">
-                        <partial name="_LoginLinks" />
+                        <partial name="_LoginLinksAdm" />
                     </div>
                 </div>
             </div>
@@ -39,25 +34,13 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    &copy; @DateTime.Now.Year - Imoveis - <a asp-area="" asp-controller="Home" asp-action="Privacy">Politica de Privacidade</a>
-                </div>
-                <div class="col text-end">
-                    <a asp-area="" asp-controller="Usuarios" asp-action="Index">Adm</a>
-                </div>
-            </div>
+            &copy; @DateTime.Now.Year - Imoveis - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="https://friconix.com/cdn/friconix.js"> </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @section Scripts {
-    @{
-    await Html.RenderPartialAsync("_CustomConfirm.cshtml");
-    }
-    }
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace Imoveis.Controllers
 {
@@ -58,8 +59,11 @@ namespace Imoveis.Controllers
                 return RedirectToAction(nameof(Login), new { erroLogin = true });
             }
 
+            Auxiliares.Hash hash = new Auxiliares.Hash(SHA256.Create());
+            var comparar = hash.VerificarSenha(Dados.Senha, Usuario.Senha);
+
             if (!Usuario.Email.Equals(Dados.Email) ||
-                !Usuario.Senha.Equals(Dados.Senha))
+                !comparar)
             {
                 return RedirectToAction(nameof(Login), new { erroLogin = true });
             }
