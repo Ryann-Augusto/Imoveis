@@ -1,4 +1,5 @@
-﻿using Imoveis.Models;
+﻿#nullable disable
+using Imoveis.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -22,12 +23,13 @@ namespace Imoveis.Controllers
         }
 
         [BindProperty]
-        public DadosLogin? Dados { get; set; }
+        public DadosLogin Dados { get; set; }
 
+        [TempData]
         public string ReturnUrl { get; set; }
 
         [TempData]
-        public string? MensagemDeErro { get; set; }
+        public string MensagemDeErro { get; set; }
 
         public async Task<IActionResult> Login(string returnUrl, bool erroLogin)
         {
@@ -36,9 +38,11 @@ namespace Imoveis.Controllers
                 TempData["erro"] = "Usuario ou senha incorreto.";
             }
 
-            ReturnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? Url.Content("~/");
 
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            ReturnUrl = returnUrl;
 
             return View();
         }
@@ -59,9 +63,11 @@ namespace Imoveis.Controllers
             {
                 return RedirectToAction(nameof(Login), new { erroLogin = true });
             }
-
-            await Autenticar(Usuario.Id.ToString(), Usuario.Nome, Usuario.Nivel.ToString());
-            return RedirectToAction(nameof(Index), "Home");
+            else
+            {
+                await Autenticar(Usuario.Id.ToString(), Usuario.Nome, Usuario.Nivel.ToString());
+                return LocalRedirect(returnUrl);
+            }
         }
 
         public async Task<IActionResult> Sair()

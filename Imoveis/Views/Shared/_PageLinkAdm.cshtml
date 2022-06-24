@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using Imoveis.Models;
+@using System.Security.Claims;
+
+@inject IHttpContextAccessor _acessor;
+
+@{
+    var appUser = _acessor.HttpContext.User.Identity.Name;
+    var appId = _acessor.HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
+}
+
+<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+        <a class="nav-link text-white-50" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    </li>
+    @if (_acessor.HttpContext.User.Identity.IsAuthenticated)
+    {
+        @if (_acessor.HttpContext.User.IsInRole("1"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-white-50" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+            </li>
+        }
+        <li class="nav-item">
+            <a class="nav-link text-white-50" asp-area="" asp-controller="Imoveis" asp-action="Index">Imoveis</a>
+        </li>
+    }
+</ul>
