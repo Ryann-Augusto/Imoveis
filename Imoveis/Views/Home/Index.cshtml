@@ -94,7 +94,8 @@
                             <p class="card-text">@imovel.Endereco.Bairro</p>
                         </div>
                         <div class="card-footer">
-                            <div><a href="#" class="btn btn-primary">Entrar em Contato</a></div>
+                            <div><a href="@Url.Content("https://wa.me/55" + @imovel.Usuario.Telefone + "?text=Eu%20tenho%20interesse%20no%20" + @imovel.Descricao.Replace(" ", "%20"))" class="btn btn-primary">Entrar em Contato</a></div>
+                            <a href =" http://www.facebook.com/sharer.php?u=http://www.youtube.com/watch?v=h5y9yTMGuSA&ab_channel=Frontman " title ="compartilhar no facebook"> compartilhar no facebook </a>
                             <small class="text-muted">Cidade: @imovel.Endereco.Cidade</small>
                         </div>
                     </div>
