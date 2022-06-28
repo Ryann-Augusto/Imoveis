@@ -77,6 +77,21 @@ $(document).ready(function () {
             }
         );
     });
+
+    $(".compWhats").click(function () {
+
+        var id = $(this).data("id");
+        var telefone = $(this).data("telefone");
+        var descricao = $(this).data("descricao");
+        var url_atual = window.location.href.replace("#","");
+
+        //alert("Número de telefone: " + telefone + "\nDescrição: " + descricao);
+
+        var texto = window.encodeURIComponent(descricao);
+        var links = window.encodeURIComponent(url_atual);
+
+        window.open("https://wa.me/55" + telefone + "?text=Eu%20tenho%20interesse%20no%20" + texto + "\n \n" + links + "Imoveis/details/" + id);
+    });
 });
 
 

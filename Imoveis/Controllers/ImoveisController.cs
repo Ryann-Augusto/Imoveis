@@ -33,15 +33,16 @@ namespace Imoveis.Controllers
         }
 
         // GET: Imoveis/Details/5
-        public IActionResult Details(int? id)
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
             var model = new AgruparModels();
-            model.oMdImoveis = DetailsImoveis(id);
-            model.oMdImagens = ObterImagem(ViewBag.idImovel);
+            model.oMdImoveis = await DetailsImoveis(id);
+            model.oMdImagens = await ObterImagem(ViewBag.idImovel);
 
             if (model.oMdImoveis == null || model.oMdImoveis == null)
             {
@@ -51,18 +52,18 @@ namespace Imoveis.Controllers
             return View(model);
         }
 
-        MdImoveis DetailsImoveis(int? id)
+        public async Task<MdImoveis> DetailsImoveis(int? id)
         {
-            var mdImoveis = _context.Imovel.Include(m => m.Usuario).FirstOrDefault(m => m.Id == id);
+            var mdImoveis = await _context.Imovel.Include(m => m.Usuario).FirstOrDefaultAsync(m => m.Id == id);
             ViewBag.idImovel = mdImoveis.Id;
 
             return (mdImoveis);
         }
 
-        IEnumerable<MdImagens> ObterImagem(int? idImovel)
+        public async Task<IEnumerable<MdImagens>> ObterImagem(int? idImovel)
         {
-            var imagens = _context.Imagem.Where(m => m.ImovelId == idImovel)
-                .ToList();
+            var imagens = await _context.Imagem.Where(m => m.ImovelId == idImovel)
+                .ToListAsync();
             List<MdImagens> mdImagens = new List<MdImagens>();
             foreach (var img in imagens)
             {
