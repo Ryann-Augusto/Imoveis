@@ -90,7 +90,7 @@ $(document).ready(function () {
         var texto = window.encodeURIComponent(descricao);
         var links = window.encodeURIComponent(url_atual);
 
-        window.open("https://wa.me/55" + telefone + "?text=Eu%20tenho%20interesse%20no%20" + texto + "\n \n" + links + "Imoveis/details/" + id);
+        window.open("https://wa.me/55" + telefone + "?text=Eu%20tenho%20interesse%20no%20" + texto + "%20\n%20" + links + "Home/Visualizar/" + id);
     });
 });
 

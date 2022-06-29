@@ -83,19 +83,19 @@
         @foreach (var imovel in Model)
         {
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex align-items-stretch">
-                <a asp-controller="imoveis" asp-action="Details" asp-route-id="@imovel.Id">
+                <a asp-controller="Home" asp-action="Visualizar" asp-route-id="@imovel.Id">
                     <div class="card text-center bg-light mb-4">
                         <img class="card-img-top img-thumbnail" src="@Url.Action("VisualizarUmaImg", "Home", new {id = imovel.Id})" alt="Imagem de @imovel.Descricao">
                         <div class="card-header">
-                            R$ @imovel.Valor.ToString("F2")
+                            R$ @imovel.Valor.ToString("#,##0.00")
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">@imovel.Descricao</h5>
+                            <h5 class="card-title">@imovel.Nome</h5>
                             <p class="card-text">@imovel.Endereco.Bairro</p>
                         </div>
                         <div class="card-footer">
-                            <div><a href="@Url.Content("https://wa.me/55" + @imovel.Usuario.Telefone + "?text=Eu%20tenho%20interesse%20no%20" + @imovel.Descricao.Replace(" ", "%20"))" class="btn btn-primary">Entrar em Contato</a></div>
-                            <a href="#" class="compWhats" data-id="@imovel.Id" data-telefone="@imovel.Usuario.Telefone" data-descricao="@imovel.Descricao">Compartilhar</a>
+                            <div><a href="#" class="btn btn-primary compWhats" data-id="@imovel.Id" data-telefone="@imovel.Usuario.Telefone" data-descricao="@imovel.Nome">Entrar em Contato</a></div>
+                            @*<a href="#" class="compWhats" data-id="@imovel.Id" data-telefone="@imovel.Usuario.Telefone" data-descricao="@imovel.Descricao">Compartilhar</a>*@
                             <small class="text-muted">Cidade: @imovel.Endereco.Cidade</small>
                         </div>
                     </div>

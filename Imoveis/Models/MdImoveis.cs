@@ -12,13 +12,19 @@ namespace Imoveis.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column("descricao", TypeName = "varchar(100)")]
+        [Column("nome", TypeName = "varchar(100)")]
+        [Display(Name = "Nome")]
+        public string Nome { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
+        [Column("descricao", TypeName = "text")]
         [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [Column("valor" ,TypeName= "decimal(18,2)")]
         [Display(Name = "Valor")]
+        [DisplayFormat(DataFormatString = "{0:C}")]
         public decimal Valor { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]

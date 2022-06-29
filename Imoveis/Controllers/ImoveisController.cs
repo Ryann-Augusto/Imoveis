@@ -33,7 +33,6 @@ namespace Imoveis.Controllers
         }
 
         // GET: Imoveis/Details/5
-        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -79,6 +78,7 @@ namespace Imoveis.Controllers
             }
             return (mdImagens);
         }
+
         public async Task<IActionResult> VisualizarVariasImg(int id, int idImovel)
         {
             var imagensBanco = await _context.Imagem.Where(m => m.ImovelId == idImovel).FirstOrDefaultAsync(a => a.Id == id);
@@ -143,27 +143,27 @@ namespace Imoveis.Controllers
         }
 
         // GET: Imoveis/Edit/5
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
 
             var model = new AgruparModels();
             var UserId = _httpContextAcessor.HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
 
-            model.oMdImoveis = EditImovel(id);
+            model.oMdImoveis = await EditImovel(id);
 
             if (model.oMdImoveis.UsuarioId != Convert.ToInt32(UserId))
             {
                 return RedirectToAction(nameof(Index), "Home");
             }
 
-            model.oMdImagens = ObterImagem(ViewBag.IdImovel);
+            model.oMdImagens = await ObterImagem(ViewBag.IdImovel);
 
             return View(model);
         }
 
-        MdImoveis EditImovel(int? id)
+        public async Task<MdImoveis> EditImovel(int? id)
         {
-            var mdImoveis = _context.Imovel.Find(id);
+            var mdImoveis = await _context.Imovel.FindAsync(id);
 
             ViewBag.IdImovel = mdImoveis.Id;
 
@@ -192,6 +192,9 @@ namespace Imoveis.Controllers
             ModelState["Descricao"].Errors.Clear();
             ModelState.Remove("Descricao");
 
+            ModelState["Nome"].Errors.Clear();
+            ModelState.Remove("Nome");
+
             ModelState["oMdImagens"].Errors.Clear();
             ModelState.Remove("oMdImagens");
 
@@ -199,7 +202,6 @@ namespace Imoveis.Controllers
             {
                 try
                 {
-
                     _context.Update(model.oMdImoveis);
                     await _context.SaveChangesAsync();
 

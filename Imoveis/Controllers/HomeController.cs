@@ -71,6 +71,26 @@ namespace Imoveis.Controllers
             return View(await query.ToListAsync());
         }
 
+        public async Task<IEnumerable<MdImagens>> ObterImagem(int? idImovel)
+        {
+            var imagens = await _context.Imagem.Where(m => m.ImovelId == idImovel)
+                .ToListAsync();
+            List<MdImagens> mdImagens = new List<MdImagens>();
+            foreach (var img in imagens)
+            {
+                MdImagens Imag = new MdImagens()
+                {
+                    Id = img.Id,
+                    Descricao = img.Descricao,
+                    Dados = img.Dados,
+                    ContentType = img.ContentType,
+                    ImovelId = img.ImovelId
+                };
+                mdImagens.Add(Imag);
+            }
+            return (mdImagens);
+        }
+
         public IActionResult VisualizarUmaImg(int id)
         {
             var imagemBanco = _context.Imagem.FirstOrDefault(a => a.ImovelId == id);
@@ -89,17 +109,24 @@ namespace Imoveis.Controllers
 
         }
 
-        public async Task<IActionResult> VisualizarVariasImg(int id)
+        public async Task<IActionResult> VisualizarVariasImg(int id, int idImovel)
         {
-            var Imagem = await _context.Imagem.Where(m => m.ImovelId == id).ToListAsync();
+            var imagensBanco = await _context.Imagem.Where(m => m.ImovelId == idImovel).FirstOrDefaultAsync(a => a.Id == id);
 
-            foreach (var img in Imagem)
-            {
-                ViewBag["Imagens"] = File(img.Dados, img.ContentType);
-            }
-
-            return View(ViewBag.Imagens);
+            return File(imagensBanco.Dados, imagensBanco.ContentType);
         }
+
+        //public async Task<IActionResult> VisualizarVariasImg(int id)
+        //{
+        //    var Imagem = await _context.Imagem.Where(m => m.ImovelId == id).ToListAsync();
+
+        //    foreach (var img in Imagem)
+        //    {
+        //        ViewBag["Imagens"] = File(img.Dados, img.ContentType);
+        //    }
+
+        //    return View(ViewBag.Imagens);
+        //}
 
         public async Task Busca()
         {
@@ -109,6 +136,18 @@ namespace Imoveis.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Visualizar(int id)
+        {
+            var models = new AgruparModels();
+            models.oMdImoveis = await _context.Imovel.Include(u => u.Usuario).FirstOrDefaultAsync(i => i.Id == id);
+
+            ViewBag.idImovel = models.oMdImoveis.Id;
+
+            models.oMdImagens = await ObterImagem(ViewBag.idImovel);
+
+            return View(models);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
