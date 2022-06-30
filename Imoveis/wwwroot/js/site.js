@@ -78,6 +78,17 @@ $(document).ready(function () {
         );
     });
 
+    $(".btnImage").click(function () {
+
+        var id = $(this).data("value");
+
+        $("#conteudoModal").load("/Home/Teste/" + id,
+            function () {
+                $("#myModal").modal("show");
+            }
+        );
+    });
+
     $(".compWhats").click(function () {
 
         var id = $(this).data("id");

@@ -325,6 +325,12 @@ namespace Imoveis.Controllers
             }
         }
 
+        [AllowAnonymous]
+        public void Teste(int id)
+        {
+            var a = id;
+        }
+
         public async Task<IActionResult> Block(int id)
         {
             var mdImoveis = await _context.Imovel.FindAsync(id);

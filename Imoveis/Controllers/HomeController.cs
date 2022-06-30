@@ -133,6 +133,32 @@ namespace Imoveis.Controllers
             var BuscarImoveis = await _context.Imovel.ToListAsync();
         }
 
+        public async Task<IActionResult> ObterImagemPartial(int idImovel)
+        {
+            var imagens = await _context.Imagem.Where(m => m.ImovelId == idImovel)
+                .ToListAsync();
+            List<MdImagens> mdImagens = new List<MdImagens>();
+            foreach (var img in imagens)
+            {
+                MdImagens Imag = new MdImagens()
+                {
+                    Id = img.Id,
+                    Descricao = img.Descricao,
+                    Dados = img.Dados,
+                    ContentType = img.ContentType,
+                    ImovelId = img.ImovelId
+                };
+                mdImagens.Add(Imag);
+            }
+            return PartialView("_VisualizarImagensModalPartial", mdImagens);
+        }
+
+        [AllowAnonymous]
+        public void Teste(int id)
+        {
+            var a = id;
+        }
+
         public IActionResult Privacy()
         {
             return View();
