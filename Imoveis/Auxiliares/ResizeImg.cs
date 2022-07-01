@@ -11,17 +11,67 @@ namespace Imoveis.Auxiliares
     {
         public static MemoryStream ResizeImage(IFormFile imagemCarregada)
         {
-            int width = 1920;
-            int height = 1080;
             Image image = Image.FromStream(imagemCarregada.OpenReadStream(), true, true);
-            var newImage = new Bitmap(width, height);
-            using (Graphics g = Graphics.FromImage(newImage))
+
+            MemoryStream ms = new MemoryStream();
+
+            if (image.Width > image.Height)
             {
-                MemoryStream ms = new MemoryStream();
-                g.DrawImage(image, 0, 0, width, height);
-                newImage.Save(ms, ImageFormat.Jpeg);
-                return ms;
+                int width = 1920;
+                int height = 1080;
+                var newImage = new Bitmap(width, height);
+                using (Graphics g = Graphics.FromImage(newImage))
+                {
+                    g.DrawImage(image, 0, 0, width, height);
+                    newImage.Save(ms, ImageFormat.Jpeg);
+                }
             }
+            else
+            {
+                int width = 900;
+                int height = 2000;
+                var newImage = new Bitmap(width, height);
+                using (Graphics g = Graphics.FromImage(newImage))
+                {
+                    g.DrawImage(image, 0, 0, width, height);
+                    newImage.Save(ms, ImageFormat.Jpeg);
+                }
+            }
+            return ms;
+        }
+        public static MemoryStream TesteResizeImage(IFormFile imagemCarregada)
+        {
+            Image image = Image.FromStream(imagemCarregada.OpenReadStream(), true, true);
+
+            MemoryStream ms = new MemoryStream();
+
+            if (image.Width > image.Height)
+            {
+                int width = 1920;
+                int height = 1080;
+                var newImage = new Bitmap(width, height);
+                using (Graphics g = Graphics.FromImage(newImage))
+                {
+                    g.DrawImage(newImage, 0, 0, width, height);
+                    newImage.Save(ms, ImageFormat.Jpeg);
+                }
+            }
+            else
+            {
+                int width = 900;
+                int height = 2000;
+
+                float y = (image.Height - image.Width) / 2.0F;
+                var retanguloCorte = new Rectangle(0, (int)y, image.Width, image.Width);
+
+                GraphicsUnit units = GraphicsUnit.Pixel;
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    g.DrawImage(image, width, height, retanguloCorte, units);
+                    image.Save(ms, ImageFormat.Jpeg);
+                }
+            }
+            return ms;
         }
     }
 }

@@ -116,26 +116,12 @@ namespace Imoveis.Controllers
             return File(imagensBanco.Dados, imagensBanco.ContentType);
         }
 
-        //public async Task<IActionResult> VisualizarVariasImg(int id)
-        //{
-        //    var Imagem = await _context.Imagem.Where(m => m.ImovelId == id).ToListAsync();
-
-        //    foreach (var img in Imagem)
-        //    {
-        //        ViewBag["Imagens"] = File(img.Dados, img.ContentType);
-        //    }
-
-        //    return View(ViewBag.Imagens);
-        //}
-
-        public async Task Busca()
+        public async Task<IActionResult> RecuperarImagem(int id)
         {
-            var BuscarImoveis = await _context.Imovel.ToListAsync();
-        }
 
-        public async Task<IActionResult> ObterImagemPartial(int idImovel)
-        {
-            var imagens = await _context.Imagem.Where(m => m.ImovelId == idImovel)
+            ViewBag.idImovel = id;
+
+            var imagens = await _context.Imagem.Where(m => m.ImovelId == id)
                 .ToListAsync();
             List<MdImagens> mdImagens = new List<MdImagens>();
             foreach (var img in imagens)
@@ -151,12 +137,6 @@ namespace Imoveis.Controllers
                 mdImagens.Add(Imag);
             }
             return PartialView("_VisualizarImagensModalPartial", mdImagens);
-        }
-
-        [AllowAnonymous]
-        public void Teste(int id)
-        {
-            var a = id;
         }
 
         public IActionResult Privacy()

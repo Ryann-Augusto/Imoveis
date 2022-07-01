@@ -82,7 +82,7 @@ $(document).ready(function () {
 
         var id = $(this).data("value");
 
-        $("#conteudoModal").load("/Home/Teste/" + id,
+        $("#conteudoModal").load("/Home/RecuperarImagem/" + id,
             function () {
                 $("#myModal").modal("show");
             }
