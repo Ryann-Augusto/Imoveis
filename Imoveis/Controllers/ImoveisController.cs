@@ -209,7 +209,7 @@ namespace Imoveis.Controllers
 
                         if (imagemCarregada != null)
                         {
-                            var img = Auxiliares.ResizeImg.TesteResizeImage(imagemCarregada);
+                            var img = Auxiliares.ResizeImg.ResizeImage(imagemCarregada);
 
                             MdImagens mdImagens = new MdImagens()
                             {

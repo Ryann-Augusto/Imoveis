@@ -10,79 +10,82 @@
     <h4>MdImoveis</h4>
     <hr />
     <dl class="row">
-        @foreach(var item in Model.oMdImagens)
+        @foreach (var item in Model.oMdImagens)
         {
             <img class="card-img-top mb-2" src="@Url.Action("VisualizarVariasImg", "Imoveis", new {id = item.Id, idImovel = @ViewBag.idImovel })" alt="Imagem de @item.Descricao" style="height:500px;">
         }
-        
-        <dt class = "col-sm-2 mt-2">
+
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.oMdImoveis.Nome)
         </dt>
-        <dt class = "col-sm-2 mt-2">
-            @Html.DisplayNameFor(model => model.oMdImoveis.Descricao)
-        </dt>
-        <dd>
-            <p class="">@Html.DisplayFor(model => model.oMdImoveis.Descricao)</p>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.oMdImoveis.Nome)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.oMdImoveis.Valor)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.oMdImoveis.Valor)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.oMdImoveis.Quarto)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.oMdImoveis.Quarto)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.oMdImoveis.Vagas)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.oMdImoveis.Vagas)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.oMdImoveis.Tipo)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.oMdImoveis.Tipo)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.oMdImoveis.Endereco.Rua)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.oMdImoveis.Endereco.Rua)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.oMdImoveis.Endereco.Bairro)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.oMdImoveis.Endereco.Bairro)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.oMdImoveis.Endereco.Cidade)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.oMdImoveis.Endereco.Cidade)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.oMdImoveis.Endereco.Estado)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.oMdImoveis.Endereco.Estado)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.oMdImoveis.Endereco.CEP)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.oMdImoveis.Endereco.CEP)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.oMdImoveis.Usuario)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.oMdImoveis.Usuario.Email)
+        </dd>
+        <dt class="col-sm-2 mt-2">
+            @Html.DisplayNameFor(model => model.oMdImoveis.Descricao)
+        </dt>
+        <dd class="col-sm-12 mt-2">
+            <pre>@Html.DisplayFor(model => model.oMdImoveis.Descricao)</pre>
         </dd>
     </dl>
 </div>
