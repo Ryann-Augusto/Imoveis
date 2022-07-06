@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Imoveis.Migrations
 {
-    public partial class AdicionandoImagens : Migration
+    public partial class Alterando_campo_Cpf_para_Cpf_Cnpj : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,9 +23,9 @@ namespace Imoveis.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    senha = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
+                    senha = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    cpf = table.Column<string>(type: "varchar(11)", nullable: false)
+                    cpf_cnpj = table.Column<string>(type: "varchar(14)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     telefone = table.Column<string>(type: "varchar(14)", maxLength: 14, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -44,13 +44,15 @@ namespace Imoveis.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    descricao = table.Column<string>(type: "varchar(100)", nullable: false)
+                    nome = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     quartos = table.Column<int>(type: "int", nullable: false),
                     vagas = table.Column<int>(type: "int", nullable: false),
                     tipo = table.Column<int>(type: "int", nullable: false),
                     situacao = table.Column<int>(type: "int", nullable: false),
+                    descricao = table.Column<string>(type: "text", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     endereco = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     numero = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false)
@@ -87,10 +89,10 @@ namespace Imoveis.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    descricao = table.Column<string>(type: "varchar(30)", nullable: false)
+                    descricao = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     dados = table.Column<byte[]>(type: "longblob", nullable: false),
-                    type = table.Column<string>(type: "varchar(30)", nullable: false)
+                    type = table.Column<string>(type: "varchar(60)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     imovelid = table.Column<int>(type: "int", nullable: false)
                 },

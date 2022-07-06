@@ -37,9 +37,9 @@ namespace Imoveis.Models
         [Compare("Senha", ErrorMessage = "A confirmação de senha não confere com a senha informada.")]
         public string ConfirmSenha { get; set; }
 
-        [Column("cpf", TypeName = "varchar(11)")]
+        [Column("cpf_cnpj", TypeName = "varchar(14)")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [RegularExpression(@"[0-9]{11}$", ErrorMessage = "O campo {0} deve ser preenchido com um CPF.")]
+        //[RegularExpression(@"[0-9]{11}$", ErrorMessage = "O campo {0} deve ser preenchido com um CPF.")]
         [UIHint("_CustomCPF")]
         public string Cpf { get; set; }
 

@@ -17,11 +17,6 @@ namespace Imoveis.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Column("descricao", TypeName = "text")]
-        [Display(Name = "Descrição")]
-        public string Descricao { get; set; }
-
-        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [Column("valor" ,TypeName= "decimal(18,2)")]
         [Display(Name = "Valor")]
         [DisplayFormat(DataFormatString = "{0:C}")]
@@ -44,6 +39,11 @@ namespace Imoveis.Models
 
         [Column("situacao", TypeName = "int")]
         public int Situacao { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
+        [Column("descricao", TypeName = "text")]
+        [Display(Name = "Descrição")]
+        public string Descricao { get; set; }
 
         public MdEndereco Endereco { get; set; }
 

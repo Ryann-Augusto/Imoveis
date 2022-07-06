@@ -52,6 +52,13 @@ namespace Imoveis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,ConfirmSenha,Cpf,Telefone,Nivel")] MdUsuarios mdUsuarios)
         {
+            var contcpf = mdUsuarios.Cpf.Trim().Length;
+
+            if (contcpf != 11 && contcpf != 14)
+            {
+                ModelState.AddModelError("Cpf", "Os valores do CPF ou CNPJ não são válidos!");
+            }
+
             Auxiliares.Hash hash = new Auxiliares.Hash(SHA256.Create());
             mdUsuarios.Senha = hash.CriptografarSenha(mdUsuarios.Senha);
 
@@ -102,7 +109,7 @@ namespace Imoveis.Controllers
 
             if (mdUsuarios.Senha != mdUsuarios.ConfirmSenha)
             {
-                return View(mdUsuarios);
+                ModelState.AddModelError("ConfirmSenha", "A confirmação de senha não confere com a senha informada.");
             }
 
             if (!string.IsNullOrEmpty(mdUsuarios.Senha))

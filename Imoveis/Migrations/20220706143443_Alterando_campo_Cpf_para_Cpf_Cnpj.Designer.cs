@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imoveis.Migrations
 {
     [DbContext(typeof(_DbContext))]
-    [Migration("20220629145128_Alterandosenha")]
-    partial class Alterandosenha
+    [Migration("20220706143443_Alterando_campo_Cpf_para_Cpf_Cnpj")]
+    partial class Alterando_campo_Cpf_para_Cpf_Cnpj
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,8 +110,8 @@ namespace Imoveis.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("varchar(11)")
-                        .HasColumnName("cpf");
+                        .HasColumnType("varchar(14)")
+                        .HasColumnName("cpf_cnpj");
 
                     b.Property<string>("Email")
                         .IsRequired()

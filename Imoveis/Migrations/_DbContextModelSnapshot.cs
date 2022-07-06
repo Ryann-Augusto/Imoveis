@@ -60,8 +60,13 @@ namespace Imoveis.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("varchar(100)")
+                        .HasColumnType("text")
                         .HasColumnName("descricao");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("nome");
 
                     b.Property<int>("Quarto")
                         .HasColumnType("int")
@@ -103,8 +108,8 @@ namespace Imoveis.Migrations
 
                     b.Property<string>("Cpf")
                         .IsRequired()
-                        .HasColumnType("varchar(11)")
-                        .HasColumnName("cpf");
+                        .HasColumnType("varchar(14)")
+                        .HasColumnName("cpf_cnpj");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -124,6 +129,7 @@ namespace Imoveis.Migrations
 
                     b.Property<string>("Senha")
                         .IsRequired()
+                        .HasMaxLength(255)
                         .HasColumnType("varchar(255)")
                         .HasColumnName("senha");
 
