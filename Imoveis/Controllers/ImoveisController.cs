@@ -39,9 +39,11 @@ namespace Imoveis.Controllers
             {
                 return NotFound();
             }
-            var model = new AgruparModels();
-            model.oMdImoveis = await DetailsImoveis(id);
-            model.oMdImagens = await ObterImagem(ViewBag.idImovel);
+            var model = new AgruparModels
+            {
+                oMdImoveis = await DetailsImoveis(id),
+                oMdImagens = await ObterImagem(ViewBag.idImovel)
+            };
 
             if (model.oMdImoveis == null || model.oMdImoveis == null)
             {
@@ -63,10 +65,10 @@ namespace Imoveis.Controllers
         {
             var imagens = await _context.Imagem.Where(m => m.ImovelId == idImovel)
                 .ToListAsync();
-            List<MdImagens> mdImagens = new List<MdImagens>();
+            List<MdImagens> mdImagens = new();
             foreach (var img in imagens)
             {
-                MdImagens Imag = new MdImagens()
+                MdImagens Imag = new()
                 {
                     Id = img.Id,
                     Descricao = img.Descricao,
@@ -120,7 +122,7 @@ namespace Imoveis.Controllers
                     {
                         var img = Auxiliares.ResizeImg.ResizeImage(imagemCarregada);
 
-                        MdImagens mdImagens = new MdImagens()
+                        MdImagens mdImagens = new()
                         {
                             Descricao = imagemCarregada.FileName,
                             Dados = img.ToArray(),
@@ -211,7 +213,7 @@ namespace Imoveis.Controllers
                         {
                             var img = Auxiliares.ResizeImg.ResizeImage(imagemCarregada);
 
-                            MdImagens mdImagens = new MdImagens()
+                            MdImagens mdImagens = new()
                             {
                                 Descricao = imagemCarregada.FileName,
                                 Dados = img.ToArray(),
@@ -323,12 +325,6 @@ namespace Imoveis.Controllers
             {
                 return NotFound();
             }
-        }
-
-        [AllowAnonymous]
-        public void Teste(int id)
-        {
-            var a = id;
         }
 
         public async Task<IActionResult> Block(int id)

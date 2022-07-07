@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace Imoveis.Controllers
 {
-    //[Authorize(Policy = "Admin")]
+    [Authorize(Policy = "Admin")]
     public class UsuariosController : Controller
     {
         private readonly _DbContext _context;
@@ -52,14 +52,14 @@ namespace Imoveis.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,ConfirmSenha,Cpf,Telefone,Nivel")] MdUsuarios mdUsuarios)
         {
-            var contcpf = mdUsuarios.Cpf.Trim().Length;
+            var contcpf = mdUsuarios.Cpf_Cnpj.Trim().Length;
 
             if (contcpf != 11 && contcpf != 14)
             {
                 ModelState.AddModelError("Cpf", "Os valores do CPF ou CNPJ não são válidos!");
             }
 
-            Auxiliares.Hash hash = new Auxiliares.Hash(SHA256.Create());
+            Auxiliares.Hash hash = new(SHA256.Create());
             mdUsuarios.Senha = hash.CriptografarSenha(mdUsuarios.Senha);
 
             mdUsuarios.Situacao = 0;
@@ -103,9 +103,9 @@ namespace Imoveis.Controllers
                 return NotFound();
             }
 
-            var usuarios = await _context.Usuario.Select(m => new { m.Id, m.Cpf, m.Senha }).FirstOrDefaultAsync(m => m.Id == id);
+            var usuarios = await _context.Usuario.Select(m => new { m.Id, m.Cpf_Cnpj, m.Senha }).FirstOrDefaultAsync(m => m.Id == id);
 
-            mdUsuarios.Cpf = usuarios.Cpf;
+            mdUsuarios.Cpf_Cnpj = usuarios.Cpf_Cnpj;
 
             if (mdUsuarios.Senha != mdUsuarios.ConfirmSenha)
             {
@@ -114,7 +114,7 @@ namespace Imoveis.Controllers
 
             if (!string.IsNullOrEmpty(mdUsuarios.Senha))
             {
-                Auxiliares.Hash hash = new Auxiliares.Hash(SHA256.Create());
+                Auxiliares.Hash hash = new(SHA256.Create());
                 mdUsuarios.Senha = hash.CriptografarSenha(mdUsuarios.Senha);
             }
             else

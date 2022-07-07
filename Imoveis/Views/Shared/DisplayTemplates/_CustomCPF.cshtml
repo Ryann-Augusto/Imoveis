@@ -1,5 +1,13 @@
 ﻿@model System.String
 
 <span>
-    @($"{Model.Substring(0,3)}.{Model.Substring(3,3)}.{Model.Substring(6,3)}-{Model.Substring(9,2)}")
+    @if(ViewBag.cpf_cnpj == 11)
+    {
+        @($"{Model.Substring(0,3)}.{Model.Substring(3,3)}.{Model.Substring(6,3)}-{Model.Substring(9,2)}")
+    }
+    else if (ViewBag.cpf_cnpj == 14)
+    {
+        @($"{Model.Substring(0,2)}.{Model.Substring(2,3)}.{Model.Substring(5,3)}/{Model.Substring(8,4)}-{Model.Substring(12,2)}")
+    }
+
 </span>

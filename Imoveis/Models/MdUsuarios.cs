@@ -41,7 +41,7 @@ namespace Imoveis.Models
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         //[RegularExpression(@"[0-9]{11}$", ErrorMessage = "O campo {0} deve ser preenchido com um CPF.")]
         [UIHint("_CustomCPF")]
-        public string Cpf { get; set; }
+        public string Cpf_Cnpj { get; set; }
 
         [Column("telefone", TypeName = "varchar(14)")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]

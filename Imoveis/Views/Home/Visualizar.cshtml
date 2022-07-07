@@ -9,7 +9,7 @@
 <body>
     <div class="row mt-2" id="linha">
         @*<div class="col-12">*@
-        <div id="meuSlider" class="carousel slider col-xl-6 col-lg-6 col-md-6 col-sm-12" data-bs-ride="carousel">
+        <div id="meuSlider" class="carousel slider col-xl-8 col-lg-8 col-md-8 col-sm-12" data-bs-ride="carousel">
             <div class="carousel-inner">
                 @foreach (var item in Model.oMdImagens)
                 {
@@ -41,14 +41,15 @@
                 </button>
             </div>
         </div>
-        <div class="col-3">
-            <p>
-                @Html.DisplayFor(model => model.oMdImoveis.Nome)
-            </p>
-            <p>
-                @Html.DisplayFor(model => model.oMdImoveis.Valor)
-            </p>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-5 mt-1">
+            <div class="col-12 h-100 rounded p-2" id="NomeValor">
+                <p class="nome text-wrap text-center">@Html.DisplayFor(model => model.oMdImoveis.Nome)</p>
+
+                <p class="valor">@Html.DisplayFor(model => model.oMdImoveis.Valor)</p>
+                <button class="btn btn-primary btn-lg">Entrar em Contato</button>
+            </div>
         </div>
+        <hr />
         <div class="col-3">
             <p class="col-sm-2">
                 @Html.DisplayNameFor(model => model.oMdImoveis.Quarto)

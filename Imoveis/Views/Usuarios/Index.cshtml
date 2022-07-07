@@ -20,7 +20,7 @@
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.Cpf)
+                    @Html.DisplayNameFor(model => model.Cpf_Cnpj)
                 </th>
                 <th scope="col">
                     @Html.DisplayNameFor(model => model.Telefone)
@@ -34,6 +34,8 @@
         <tbody>
             @foreach (var item in Model)
             {
+                
+                ViewBag.cpf_cnpj = item.Cpf_Cnpj.Trim().Length;
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Nome)
@@ -42,7 +44,7 @@
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Cpf)
+                        @Html.DisplayFor(modelItem => item.Cpf_Cnpj)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Telefone)

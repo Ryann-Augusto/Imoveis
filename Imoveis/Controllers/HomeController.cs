@@ -75,10 +75,10 @@ namespace Imoveis.Controllers
         {
             var imagens = await _context.Imagem.Where(m => m.ImovelId == idImovel)
                 .ToListAsync();
-            List<MdImagens> mdImagens = new List<MdImagens>();
+            List<MdImagens> mdImagens = new();
             foreach (var img in imagens)
             {
-                MdImagens Imag = new MdImagens()
+                MdImagens Imag = new()
                 {
                     Id = img.Id,
                     Descricao = img.Descricao,
@@ -123,10 +123,10 @@ namespace Imoveis.Controllers
 
             var imagens = await _context.Imagem.Where(m => m.ImovelId == id)
                 .ToListAsync();
-            List<MdImagens> mdImagens = new List<MdImagens>();
+            List<MdImagens> mdImagens = new();
             foreach (var img in imagens)
             {
-                MdImagens Imag = new MdImagens()
+                MdImagens Imag = new()
                 {
                     Id = img.Id,
                     Descricao = img.Descricao,
@@ -146,8 +146,10 @@ namespace Imoveis.Controllers
 
         public async Task<IActionResult> Visualizar(int id)
         {
-            var models = new AgruparModels();
-            models.oMdImoveis = await _context.Imovel.Include(u => u.Usuario).FirstOrDefaultAsync(i => i.Id == id);
+            var models = new AgruparModels
+            {
+                oMdImoveis = await _context.Imovel.Include(u => u.Usuario).FirstOrDefaultAsync(i => i.Id == id)
+            };
 
             ViewBag.idImovel = models.oMdImoveis.Id;
 

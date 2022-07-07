@@ -39,7 +39,7 @@ namespace Imoveis.Controllers
                 TempData["erro"] = "Usuario ou senha incorreto.";
             }
 
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
 
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -59,7 +59,7 @@ namespace Imoveis.Controllers
                 return RedirectToAction(nameof(Login), new { erroLogin = true });
             }
 
-            Auxiliares.Hash hash = new Auxiliares.Hash(SHA256.Create());
+            Auxiliares.Hash hash = new(SHA256.Create());
             var comparar = hash.VerificarSenha(Dados.Senha, Usuario.Senha);
 
             if (!Usuario.Email.Equals(Dados.Email) ||
@@ -82,11 +82,13 @@ namespace Imoveis.Controllers
 
         public async Task Autenticar(string Id, string Nome, string Nivel)
         {
-            var claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Sid, Id));
-            claims.Add(new Claim(ClaimTypes.Name, Nome));
-            claims.Add(new Claim(ClaimTypes.Email, Dados.Email));
-            claims.Add(new Claim(ClaimTypes.Role, Nivel));
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Sid, Id),
+                new Claim(ClaimTypes.Name, Nome),
+                new Claim(ClaimTypes.Email, Dados.Email),
+                new Claim(ClaimTypes.Role, Nivel)
+            };
 
             var claimsIdentity =
                 new ClaimsPrincipal(

@@ -33,3 +33,10 @@ body {
 .inline {
     display: inline-block;
 }
+
+/*Pagina Visualizar*/
+
+#NomeValor {
+    background-color: #f7f7f7;
+    border: 1px solid #dedede;
+}
