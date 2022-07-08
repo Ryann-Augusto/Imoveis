@@ -46,17 +46,18 @@
                 <p class="nome text-wrap text-center">@Html.DisplayFor(model => model.oMdImoveis.Nome)</p>
 
                 <p class="valor">@Html.DisplayFor(model => model.oMdImoveis.Valor)</p>
+
+                <p class="group-append">
+                <i class="fi-xwsuxl-house"></i>&nbsp;
+                    @Html.DisplayFor(model => model.oMdImoveis.Quarto)
+                </p>
+
                 <button class="btn btn-primary btn-lg">Entrar em Contato</button>
             </div>
         </div>
         <hr />
         <div class="col-3">
-            <p class="col-sm-2">
-                @Html.DisplayNameFor(model => model.oMdImoveis.Quarto)
-            </p>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.oMdImoveis.Quarto)
-            </dd>
+
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.oMdImoveis.Vagas)
             </dt>

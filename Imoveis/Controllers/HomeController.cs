@@ -31,7 +31,7 @@ namespace Imoveis.Controllers
             if (!string.IsNullOrEmpty(termoBusca))
             {
                 query = query.Where(i => i.Endereco.Cidade.ToUpper().Contains(termoBusca.ToUpper())
-                        || i.Descricao.ToUpper().Contains(termoBusca.ToUpper()));
+                        || i.Nome.ToUpper().Contains(termoBusca.ToUpper()));
 
                 ViewData["busca"] = termoBusca;
             }
