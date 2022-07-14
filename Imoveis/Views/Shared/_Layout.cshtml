@@ -7,15 +7,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Imoveis.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/all.min.css" />
-    <link rel="stylesheet" href="~/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="~/css/all.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/fontawesome.min.css" asp-append-version="true" />
 </head>
 <body>
-    <style>
-        .inline {
-            display: inline-block;
-        }
-    </style>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -52,14 +47,14 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script defer src="https://friconix.com/cdn/friconix.js"> </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/all.min.js"></script>
-    <script src="~/js/fontawesome.min.js"></script>
+    <script src="~/js/all.min.js" asp-append-version="true"></script>
+    <script src="~/js/fontawesome.min.js" asp-append-version="true"></script>
     @section Scripts {
-    @{
-    await Html.RenderPartialAsync("_CustomConfirm.cshtml");
-    }
+        @{
+            await Html.RenderPartialAsync("_CustomConfirm.cshtml");
+        }
     }
 
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
+    </html>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
 html {
     font-size: 14px;
 }
@@ -39,4 +41,26 @@ body {
 #NomeValor {
     background-color: #f7f7f7;
     border: 1px solid #dedede;
+}
+
+.nomeImovel {
+    font-family: 'Poppins', sans-serif;
+    color: gray;
+    font-size: 22px;
+}
+
+.valorImovel {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+}
+
+.infoImovel {
+    font-family: Consolas;
+    font-size: 22px;
+    padding: 15px;
+    border: 1px solid;
+    border-radius: 12px;
+    margin: 10px;
+    pointer-events: none;
+    color: darkgray;
 }

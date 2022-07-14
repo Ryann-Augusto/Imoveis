@@ -24,13 +24,18 @@ namespace Imoveis.Models
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [Column("quartos")]
-        [Display(Name = "Número de quartos")]
+        [Display(Name = "Número de Quartos")]
         public int Quarto { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [Column("vagas")]
-        [Display(Name = "Número de vagas")]
+        [Display(Name = "Número de Vagas")]
         public int Vagas { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
+        [Column("banheiro")]
+        [Display(Name = "Número de Banheiros")]
+        public int Banheiro { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
         [Column("tipo", TypeName = "int")]

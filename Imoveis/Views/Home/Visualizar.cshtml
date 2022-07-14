@@ -4,7 +4,7 @@
     var controle_ativo = 2;
     var numeracao = 1;
     var total = Model.oMdImagens.Count();
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdm.cshtml";
 }
 <body>
     <div class="row mt-2" id="linha">
@@ -43,21 +43,26 @@
         </div>
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-5 mt-1">
             <div class="col-12 h-100 rounded p-2" id="NomeValor">
-                <p class="nome text-wrap text-center">@Html.DisplayFor(model => model.oMdImoveis.Nome)</p>
+                <p class="nomeImovel text-wrap text-center">@Html.DisplayFor(model => model.oMdImoveis.Nome)</p>
 
-                <p class="valor">@Html.DisplayFor(model => model.oMdImoveis.Valor)</p>
+                <p class="valorImovel">@Html.DisplayFor(model => model.oMdImoveis.Valor)</p>
 
-                <p class="group-append">
+                <div class="group-append infoImovel inline">
                 <i class="fa-solid fa-bed"></i>&nbsp;
                     @Html.DisplayFor(model => model.oMdImoveis.Quarto)
-                </p>
+                </div>
 
-                <p class="group-append">
+                <div class="group-append infoImovel inline">
                 <i class="fa-solid fa-warehouse"></i>&nbsp;
                     @Html.DisplayFor(model => model.oMdImoveis.Vagas)
-                </p>
+                </div>
 
-                <button class="btn btn-primary btn-lg">Entrar em Contato</button>
+                <div class="group-append infoImovel inline">
+                <i class="fa-solid fa-shower"></i>&nbsp;
+                    @Html.DisplayFor(model => model.oMdImoveis.Banheiro)
+                </div>
+
+                <button class="btn btn-primary btn-lg center">Entrar em Contato</button>
             </div>
         </div>
         <hr />
