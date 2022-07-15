@@ -4,7 +4,7 @@
     var controle_ativo = 2;
     var numeracao = 1;
     var total = Model.oMdImagens.Count();
-    Layout = "~/Views/Shared/_LayoutAdm.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <body>
     <div class="row mt-2" id="linha">
@@ -47,19 +47,21 @@
 
                 <p class="valorImovel">@Html.DisplayFor(model => model.oMdImoveis.Valor)</p>
 
-                <div class="group-append infoImovel inline">
+                <div class="row center p-3">
+                    <div class="group-append infoImovel border rounded-pill center m-2 p-3 col-sm-6 col-md-3 col-lg-3 col-xl-3">
                 <i class="fa-solid fa-bed"></i>&nbsp;
                     @Html.DisplayFor(model => model.oMdImoveis.Quarto)
                 </div>
 
-                <div class="group-append infoImovel inline">
+                <div class="group-append infoImovel border rounded-pill center m-2 p-3 col-sm-6 col-md-3 col-lg-3 col-xl-3">
                 <i class="fa-solid fa-warehouse"></i>&nbsp;
                     @Html.DisplayFor(model => model.oMdImoveis.Vagas)
                 </div>
 
-                <div class="group-append infoImovel inline">
+                <div class="group-append infoImovel border rounded-pill center m-2 p-3 col-sm-6 col-md-3 col-lg-3 col-xl-3">
                 <i class="fa-solid fa-shower"></i>&nbsp;
                     @Html.DisplayFor(model => model.oMdImoveis.Banheiro)
+                </div>
                 </div>
 
                 <button class="btn btn-primary btn-lg center">Entrar em Contato</button>

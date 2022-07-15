@@ -57,10 +57,10 @@ body {
 .infoImovel {
     font-family: Consolas;
     font-size: 22px;
-    padding: 15px;
+    /*padding: 15px;
     border: 1px solid;
     border-radius: 12px;
     margin: 10px;
-    pointer-events: none;
+    pointer-events: none;*/
     color: darkgray;
 }
