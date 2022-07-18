@@ -37,6 +37,12 @@ $(".page-link").click(function () {
     $("#formBusca").submit();
 });
 
+var t = $("#t").val();
+
+if (t == '') {
+    $("#t").val(20);
+}
+
 $(".tamanhoPage").change(function () {
     $("#t").val($(".tamanhoPage").val());
     $("#formBusca").submit();

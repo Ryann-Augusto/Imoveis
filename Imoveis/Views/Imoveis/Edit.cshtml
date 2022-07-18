@@ -15,9 +15,11 @@
 }
 
 <style type="text/css">
-    body{
-        background-color:gray;
+    body {
+        background-color: gray;
     }
+
+
     #linha {
         justify-content: center;
         align-items: center;
@@ -49,8 +51,8 @@
                         {
                             <div class="carousel-item active">
                                 <img class="rounded d-block w-100" src="@Url.Action("VisualizarVariasImg", "Imoveis", new {id = item.Id, idImovel = @ViewBag.idImovel })">
-                                <button type="button" class="btn btn-danger btnDeleteImage" data-value="@item.Id" style="z-index: 3; position:relative;">
-                                    Apagar Imagem
+                                <button type="button" class="btn btn-danger btnDeleteImage" data-value="@item.Id">
+                                    <i class="fa fa-trash"></i>
                                 </button>
                             </div>
                             controle_ativo = 1;
@@ -59,8 +61,8 @@
                         {
                             <div class="carousel-item">
                                 <img class="rounded d-block w-100" src="@Url.Action("VisualizarVariasImg", "Imoveis", new {id = item.Id, idImovel = @ViewBag.idImovel })">
-                                <button type="button" class="btn btn-danger btnDeleteImage" data-value="@item.Id" style="z-index: 3; position:relative;">
-                                    Apagar Imagem
+                                <button type="button" class="btn btn-danger btnDeleteImage justify-content-end" data-value="@item.Id">
+                                    <i class="fa fa-trash"></i>
                                 </button>
                             </div>
 
@@ -80,6 +82,7 @@
             <form asp-action="Edit" enctype="multipart/form-data">
                 <br />
                 <fieldset>
+                    <div class="row">
                     <div class="form-group">
                         <div class="custom-file d-block">
                             <label for="formFileMultiple" class="form-label">Adicionar Imagens</label>
@@ -91,50 +94,51 @@
                     <legend>Imovel</legend>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="oMdImoveis.Id" />
-                    <div class="form-group mt-1 Editinline">
-                        <label asp-for="oMdImoveis.Nome" class="control-label"></label>
-                        <input asp-for="oMdImoveis.Nome" class="form-control" />
-                        <span asp-validation-for="oMdImoveis.Nome" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mt-2 Editinline">
-                        <label asp-for="oMdImoveis.Valor" class="control-label"></label>
-                        @Html.TextBoxFor(m => m.oMdImoveis.Valor, new { data_val = "false" , @class = "form-control" , @data_rule_Required = "true" , @data_rule_maxlength = "18" })
-                        <span asp-validation-for="oMdImoveis.Valor" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mt-2 Editinline">
-                        <label asp-for="oMdImoveis.Quarto" class="control-label"></label>
-                        <input asp-for="oMdImoveis.Quarto" class="form-control" />
-                        <span asp-validation-for="oMdImoveis.Quarto" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mt-2 Editinline">
-                        <label asp-for="oMdImoveis.Vagas" class="control-label"></label>
-                        <input asp-for="oMdImoveis.Vagas" class="form-control" />
-                        <span asp-validation-for="oMdImoveis.Vagas" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mt-2 Editinline">
-                        <label asp-for="oMdImoveis.Banheiro" class="control-label"></label>
-                        <input asp-for="oMdImoveis.Banheiro" class="form-control" />
-                        <span asp-validation-for="oMdImoveis.Banheiro" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mt-2 Editinline">
-                        <label asp-for="oMdImoveis.Tipo" class="control-label"></label>
-                        <select asp-for="oMdImoveis.Tipo" class="form-control">
-                            <option value="0">Vender</option>
-                            <option value="1">Alugar</option>
-                        </select>
-                        <span asp-validation-for="oMdImoveis.Tipo" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mt-1">
-                        <label asp-for="oMdImoveis.Descricao" class="control-label"></label>
-                        <textarea asp-for="oMdImoveis.Descricao" type="text" class="form-control"> </textarea>
-                        <span asp-validation-for="oMdImoveis.Descricao" class="text-danger"></span>
+                        <div class="form-group mt-2 pe-md-1 pe-lg-1 pe-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <label asp-for="oMdImoveis.Nome" class="control-label"></label>
+                            <input asp-for="oMdImoveis.Nome" class="form-control" />
+                            <span asp-validation-for="oMdImoveis.Nome" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2 ps-md-1 ps-lg-1 ps-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <label asp-for="oMdImoveis.Valor" class="control-label"></label>
+                            @Html.TextBoxFor(m => m.oMdImoveis.Valor, new { data_val = "false" , @class = "form-control" , @data_rule_Required = "true" , @data_rule_maxlength = "18" })
+                            <span asp-validation-for="oMdImoveis.Valor" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2 pe-md-1 pe-lg-1 pe-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <label asp-for="oMdImoveis.Quarto" class="control-label"></label>
+                            <input asp-for="oMdImoveis.Quarto" class="form-control" />
+                            <span asp-validation-for="oMdImoveis.Quarto" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2 ps-md-1 ps-lg-1 ps-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <label asp-for="oMdImoveis.Vagas" class="control-label"></label>
+                            <input asp-for="oMdImoveis.Vagas" class="form-control" />
+                            <span asp-validation-for="oMdImoveis.Vagas" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2 pe-md-1 pe-lg-1 pe-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <label asp-for="oMdImoveis.Banheiro" class="control-label"></label>
+                            <input asp-for="oMdImoveis.Banheiro" class="form-control" />
+                            <span asp-validation-for="oMdImoveis.Banheiro" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-2 ps-md-1 ps-lg-1 ps-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <label asp-for="oMdImoveis.Tipo" class="control-label"></label>
+                            <select asp-for="oMdImoveis.Tipo" class="form-control">
+                                <option value="0">Vender</option>
+                                <option value="1">Alugar</option>
+                            </select>
+                            <span asp-validation-for="oMdImoveis.Tipo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-1 col-12">
+                            <label asp-for="oMdImoveis.Descricao" class="control-label"></label>
+                            <textarea asp-for="oMdImoveis.Descricao" type="text" class="form-control"> </textarea>
+                            <span asp-validation-for="oMdImoveis.Descricao" class="text-danger"></span>
+                        </div>
                     </div>
                 </fieldset>
                 <br />
                 <hr />
                 <fieldset>
-                    <legend>Endereço</legend>
-                    <div class="form-group mt-2">
+                    <div class="row">
+                    <legend>Endereço</legend>                    
                         <label asp-for="oMdImoveis.Endereco.CEP" class="control-label"></label>
                         <span>(Somente Números)</span>
                         <div class="input-group">
@@ -149,37 +153,37 @@
                         </div>
                         <span class="text-muted d-block" id="endereco">Digite um CEP válido e aguarde</span>
                         <span asp-validation-for="oMdImoveis.Endereco.CEP" class="text-danger"></span>
-                        <div class="form-group mt-2 Editinline">
+                        <div class="form-group mt-2 pe-md-1 pe-lg-1 pe-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <label asp-for="oMdImoveis.Endereco.Rua" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Rua" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Rua" class="text-danger"></span>
                         </div>
-                        <div class="form-group mt-2 Editinline">
+                        <div class="form-group mt-2 ps-md-1 ps-lg-1 ps-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <label asp-for="oMdImoveis.Endereco.Bairro" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Bairro" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Bairro" class="text-danger"></span>
                         </div>
-                        <div class="form-group mt-2 Editinline">
+                        <div class="form-group mt-2 pe-md-1 pe-lg-1 pe-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <label asp-for="oMdImoveis.Endereco.Cidade" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Cidade" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Cidade" class="text-danger"></span>
                         </div>
-                        <div class="form-group mt-2 Editinline">
+                        <div class="form-group mt-2 ps-md-1 ps-lg-1 ps-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <label asp-for="oMdImoveis.Endereco.Estado" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Estado" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Estado" class="text-danger"></span>
                         </div>
-                        <div class="form-group mt-2 Editinline">
+                        <div class="form-group mt-2 pe-md-1 pe-lg-1 pe-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <label asp-for="oMdImoveis.Endereco.Numero" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Numero" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Numero" class="text-danger"></span>
                         </div>
-                        <div class="form-group mt-2 Editinline">
+                        <div class="form-group mt-2 ps-md-1 ps-lg-1 ps-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <label asp-for="oMdImoveis.Endereco.Referencia" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Referencia" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Referencia" class="text-danger"></span>
                         </div>
-                        <div class="form-group mt-2 Editinline">
+                        <div class="form-group mt-2 pe-md-1 pe-lg-1 pe-xl-1 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <label asp-for="oMdImoveis.Endereco.Complemento" class="control-label"></label>
                             <input asp-for="oMdImoveis.Endereco.Complemento" class="form-control" />
                             <span asp-validation-for="oMdImoveis.Endereco.Complemento" class="text-danger"></span>
@@ -209,9 +213,9 @@
 
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     @{
-    await Html.RenderPartialAsync("_ConsultaCEPedit");
-}
-}
+        await Html.RenderPartialAsync("_ConsultaCEPedit");
+    }
+        }

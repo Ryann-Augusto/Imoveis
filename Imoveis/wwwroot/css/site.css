@@ -64,3 +64,19 @@ body {
     pointer-events: none;*/
     color: darkgray;
 }
+
+pre {
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/*Pagina Edit*/
+.btnDeleteImage {
+    color: #fff;
+    margin: 0;
+    position: relative;
+    bottom: 50px;
+    left: 10px;
+    z-index: 3
+}

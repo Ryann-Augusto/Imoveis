@@ -107,6 +107,9 @@ namespace Imoveis.Controllers
 
             mdUsuarios.Cpf_Cnpj = usuarios.Cpf_Cnpj;
 
+            ModelState["Cpf_Cnpj"].Errors.Clear();
+            ModelState.Remove("Cpf_Cnpj");
+
             if (mdUsuarios.Senha != mdUsuarios.ConfirmSenha)
             {
                 ModelState.AddModelError("ConfirmSenha", "A confirmação de senha não confere com a senha informada.");
@@ -142,7 +145,7 @@ namespace Imoveis.Controllers
                     }
                     else
                     {
-                        throw;
+                        return RedirectToAction("Index", "Usuario");
                     }
                 }
                 return RedirectToAction(nameof(Index));
