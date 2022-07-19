@@ -80,3 +80,20 @@ pre {
     left: 10px;
     z-index: 3
 }
+
+/*Pagina Index Home*/
+.tipo {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding: 5px;
+    color: white;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #099ded;
+}
+
+#endereco {
+    color: red;
+    right: 300px;
+}

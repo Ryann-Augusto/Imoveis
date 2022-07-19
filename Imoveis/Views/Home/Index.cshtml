@@ -104,6 +104,14 @@
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
                 <a asp-controller="Home" asp-action="Visualizar" asp-route-id="@imovel.Id">
                     <div class="card text-center bg-light mb-4 col-12">
+                        @if(imovel.Tipo == 1){
+                            <p class="tipo">Alugando</p>
+                        }
+                        else
+                        {
+                            <p class="tipo">Vendendo</p>
+                        }
+
                         <img class="card-img-top img-thumbnail center col-12" src="@Url.Action("VisualizarUmaImg", "Home", new {id = imovel.Id})" alt="Imagem de @imovel.Descricao" style="height:300px; object-fit:cover;">
                         <div class="card-header">
                             R$ @imovel.Valor.ToString("#,##0.00")

@@ -50,7 +50,7 @@ namespace Imoveis.Controllers
         // POST: Usuarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,ConfirmSenha,Cpf,Telefone,Nivel")] MdUsuarios mdUsuarios)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,ConfirmSenha,Cpf_Cnpj,Telefone,Nivel")] MdUsuarios mdUsuarios)
         {
             var contcpf = mdUsuarios.Cpf_Cnpj.Trim().Length;
 
