@@ -9,7 +9,7 @@
 <p style="text-align:right">
     <a asp-action="Create" class="btn btn-success">Novo Usuário</a>
 </p>
-<div class="table-responsive">
+<div class="table-responsive p-4">
     <table class="table" id="myTable">
         <thead>
             <tr>
@@ -57,18 +57,18 @@
                     {
                         <td>Funcionario</td>
                     }
-                    <td class="btn-group btn-group-justified">
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editar</a>
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Detalhes</a>
+                    <td class="btn-group btn-group-justified col-12">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa-solid fa-circle-info"></i></a>
                         @if (item.Situacao == 0)
                         {
-                            <a asp-action="Block" asp-route-id="@item.Id" class="btn btn-warning">Bloquear</a>
+                            <a asp-action="Block" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa-solid fa-ban"></i></a>
                         }
                         else if (item.Situacao == 1)
                         {
-                            <a asp-action="Block" asp-route-id="@item.Id" class="btn btn-success">Desbloquear</a>
+                            <a asp-action="Block" asp-route-id="@item.Id" class="btn btn-success"><i class="fa-solid fa-ban"></a>
                         }
-                            <a href="#" class="btn btn-danger btnDeleteUsuario" data-value="@item.Id">Excluir</a>
+                            <a href="#" class="btn btn-danger btnDeleteUsuario" data-value="@item.Id"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
             }

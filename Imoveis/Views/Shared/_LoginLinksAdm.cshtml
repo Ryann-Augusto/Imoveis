@@ -12,16 +12,16 @@
     @if (_acessor.HttpContext.User.Identity.IsAuthenticated)
     {
         <li class="nav-link">
-            <a id="manager" class="nav-link text-white-50" asp-area="" asp-action="Index" title="Manager">Olá @appUser</a>
+            <a id="manager" class="nav-link text-white-50 linkNav" asp-area="" asp-action="Index" title="Manager"><i class="fa-solid fa-circle-user"></i>&nbsp;Olá @appUser</a>
         </li>
         <li class="nav-link">
-            <a class="nav-link btn-link text-white-50" asp-route-returnUrl="@Url.Page("/Index", new { area = ""})" asp-action="Sair" asp-controller="Conta">Sair</a>
+            <a class="nav-link btn-link text-white-50 linkNav" asp-route-returnUrl="@Url.Page("/Index", new { area = ""})" asp-action="Sair" asp-controller="Conta">Sair &nbsp;<i class="fa fa-arrow-right-from-bracket"></i></a>
         </li>
     }
     else
     {
         <li class="nav-link">
-            <a class="nav-link btn-link text-white-50" asp-action="Login" asp-controller="Conta">Área Administrativa</a>
+            <a class="nav-link btn-link text-white-50 linkNav" asp-action="Login" asp-controller="Conta"><i class="fa-solid fa-user-gear"></i>&nbsp;Área Administrativa</a>
         </li>
     }
 </ul>

@@ -57,11 +57,7 @@ body {
 .infoImovel {
     font-family: Consolas;
     font-size: 22px;
-    /*padding: 15px;
-    border: 1px solid;
-    border-radius: 12px;
-    margin: 10px;
-    pointer-events: none;*/
+    pointer-events: none;
     color: darkgray;
 }
 
@@ -93,7 +89,24 @@ pre {
     background-color: #099ded;
 }
 
-#endereco {
-    color: red;
-    right: 300px;
+/*Logo pagina Layout*/
+
+#logo{
+    height:60px;
+    width:250px;
+}
+
+/*Adicionando Fontes*/
+
+.consolas{
+    font-family: Consolas
+}
+
+.poppins{
+    font-family: 'Poppins', sans-serif;
+}
+
+.linkNav{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
 }

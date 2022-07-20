@@ -51,6 +51,11 @@ $(".tamanhoPage").change(function () {
 
 $(document).ready(function () {
 
+    $('textarea').on('keyup keypress', function () {
+        $(this).height(0);
+        $(this).height(this.scrollHeight);
+    });
+
     $('#myTable').DataTable({
         "language": {
             "url" : "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"

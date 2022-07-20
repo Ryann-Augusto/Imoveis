@@ -20,7 +20,7 @@
     <p style="text-align:right">
         <a asp-action="Create" title="Novo Imovel" class="btn btn-success"><i class="fa-solid fa-circle-plus"></i>&nbsp; Novo Imovel</a>
     </p>
-    <div class="table-responsive">
+    <div class="table-responsive p-4">
         <table class="table table-striped" id="myTable">
             <thead>
                 <tr>
@@ -66,7 +66,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Endereco.Estado)
                         </td>
-                        <td class="btn-group btn-group-justified">
+                        <td class="btn-group btn-group-justified col-12">
                             <a asp-action="Edit" asp-route-id="@item.Id" title="Editar" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a asp-action="Details" asp-route-id="@item.Id" title="Detalhes" class="btn btn-secondary"><i class="fa-solid fa-circle-info"></i></a>
                             @if (item.Situacao == 0)

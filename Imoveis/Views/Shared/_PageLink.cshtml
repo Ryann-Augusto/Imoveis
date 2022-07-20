@@ -11,18 +11,18 @@
 
 <ul class="navbar-nav flex-grow-1">
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        <a class="nav-link text-dark-50 linkNav" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-house"></i>&nbsp;Início</a>
     </li>
     @if (_acessor.HttpContext.User.Identity.IsAuthenticated)
     {
         @if (_acessor.HttpContext.User.IsInRole("1"))
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                <a class="nav-link text-dark-50 linkNav" asp-area="" asp-controller="Usuarios" asp-action="Index"><i class="fa fa-user"></i>&nbsp;Usuarios</a>
             </li>
         }
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Imoveis" asp-action="Index">Imoveis</a>
+            <a class="nav-link text-dark-50 linkNav" asp-area="" asp-controller="Imoveis" asp-action="Index"><i class="fa-solid fa-building"></i>&nbsp;Imoveis</a>
         </li>
     }
 </ul>
