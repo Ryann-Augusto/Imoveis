@@ -19,6 +19,10 @@ body {
     margin-bottom: 60px;
 }
 
+.bodylightgray{
+    background-color:lightgray;
+}
+
 .center {
     display: flex;
     flex-direction: row;
@@ -67,7 +71,7 @@ pre {
     word-wrap: break-word;
 }
 
-/*Pagina Edit*/
+/*Pagina Edit Imoveis*/
 .btnDeleteImage {
     color: #fff;
     margin: 0;
@@ -87,6 +91,28 @@ pre {
     font-size: 12px;
     font-family: 'Poppins', sans-serif;
     background-color: #099ded;
+}
+
+#cardImovel {
+    text-decoration: none;
+    color: black;
+}
+
+    #cardImovel:hover {
+        text-decoration: none;
+        color: blue;
+        filter: opacity(.5);
+    }
+
+.header-site {
+    background-image: url(../img/imoveis/imagem_fundo_imobil.jpg);
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    padding-top: 300px;
+    padding-bottom: 300px;
 }
 
 /*Logo pagina Layout*/

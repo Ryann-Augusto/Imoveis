@@ -36,7 +36,7 @@ namespace Imoveis.Controllers
         {
             if (erroLogin)
             {
-                TempData["erro"] = "Usuario ou senha incorreto.";
+                ModelState.AddModelError("Senha", "Usuário ou senha estão incorretos");
             }
 
             returnUrl ??= Url.Content("~/");
@@ -77,7 +77,7 @@ namespace Imoveis.Controllers
         public async Task<IActionResult> Sair()
         {
             await Logout();
-            return RedirectToAction(nameof(Login), "Conta");
+            return RedirectToAction(nameof(Index), "Home");
         }
 
         public async Task Autenticar(string Id, string Nome, string Nivel)

@@ -1,34 +1,17 @@
 ﻿@model IEnumerable<MdImoveis>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Página Inicial";
 }
-
-<style>
-    a {
-        text-decoration: none;
-        color: black;
-    }
-
-    .header-site{
-        background-image: url(../img/imoveis/imagem_fundo_imobil.jpg);
-        background-position: center top;
-        background-repeat: no-repeat;
-        background-size:cover;
-        background-attachment:fixed;
-        color:white;
-        padding-top:300px;
-        padding-bottom:300px;
-    }
-</style>
 
 <section class="header-site">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                
-                <h1 class="text-center text-black-50 poppins"><i class="fa-solid fa-city text-center"></i>
-                    <br />Site de imóveis</h1>
+                <h1 class="text-center text-black linkNav">
+                    <i class="fa-solid fa-city text-center"></i>
+                    <br />Site de Imóveis
+                </h1>
             </div>
         </div>
     </div>
@@ -102,9 +85,10 @@
         @foreach (var imovel in Model)
         {
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 d-flex align-items-center">
-                <a asp-controller="Home" asp-action="Visualizar" asp-route-id="@imovel.Id">
+                <a asp-controller="Home" asp-action="Visualizar" asp-route-id="@imovel.Id" id="cardImovel">
                     <div class="card text-center bg-light mb-4 col-12">
-                        @if(imovel.Tipo == 1){
+                        @if (imovel.Tipo == 1)
+                        {
                             <p class="tipo">Alugando</p>
                         }
                         else

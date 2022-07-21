@@ -16,19 +16,32 @@
     </div>
 }
 
-<h1>Login</h1>
-
 <div class="justify-content-center">
-    <form class="form-check-inline align-content-center" method="post" asp-action="Entrar">
-        <h4 class="mt-5 mb-3 font-weight-normal">Identifique-se</h4>
-        <div asp-validation-summary="ModelOnly" class="val-summary text-danger mb-3"></div>
+    <form class="center" method="post" asp-action="Entrar">
+        <div class="col-12 center mt-3">
+            <div class="card col-sm-8 col-md-4 col-lg-4 col-xl-4 pb-5 shadow-lg mt-5">
+                <h5 class="card-header">Identifique-se</h5>
+                <div class="card-body">
+                    <div asp-validation-summary="ModelOnly" class="val-summary text-danger mb-3"></div>
+                    <div class="input-group mt-3 p-2">
+                        <span class="input-group-text"><i class="fa-solid fa-at"></i></span>
+                        <input asp-for="Email" class="form-control" placeholder="Digite seu E-mail." required autofocus />
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger ps-2"></span>
 
-        <input asp-for="Email" class="form-control" placeholder="Digite seu E-mail." required autofocus />
-        <span asp-validation-for="Email" class="text-danger"></span>
+                    <div class="input-group mt-1 pt-0 p-2">
+                        <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                        <input asp-for="Senha" class="form-control" placeholder="Digite sua senha." required />
+                    </div>
+                    <span asp-validation-for="Senha" class="text-danger ps-2"></span>
+                    
+                    <div class="col-12 mt-4 p-2">
+                        <button type="submit" class="btn btn-primary float-end col-6">Entrar&nbsp;<i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <input asp-for="Senha" class="form-control" placeholder="Digite sua senha." required />
-        <span asp-validation-for="Senha" class="text-danger"></span>
 
-        <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
     </form>
 </div>
