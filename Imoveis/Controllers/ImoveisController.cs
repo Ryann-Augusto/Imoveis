@@ -145,7 +145,7 @@ namespace Imoveis.Controllers
         }
 
         // GET: Imoveis/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, bool ultimaImg)
         {
 
             var model = new AgruparModels();
@@ -158,6 +158,11 @@ namespace Imoveis.Controllers
                 return RedirectToAction(nameof(Index), "Home");
             }
 
+            if (ultimaImg)
+            {
+                ModelState.AddModelError("oMdImoveis.Imagens", "O anúncio precisa conter no mínimo uma imagem");
+            }
+
             model.oMdImagens = await ObterImagem(ViewBag.IdImovel);
 
             return View(model);
@@ -165,12 +170,11 @@ namespace Imoveis.Controllers
 
         public async Task<MdImoveis> EditImovel(int? id)
         {
+            
             var mdImoveis = await _context.Imovel.FindAsync(id);
 
             ViewBag.IdImovel = mdImoveis.Id;
 
-            //SELECIONAR UMA LISTA DO BANCO DE DADOS
-            //ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Nome", mdImoveis.UsuarioId);
             return (mdImoveis);
         }
 
@@ -307,9 +311,16 @@ namespace Imoveis.Controllers
         {
             if (id != 0)
             {
+                var mdImagens = await _context.Imagem.FindAsync(id);
+                int qtdImg = await _context.Imagem.CountAsync(i => i.ImovelId == mdImagens.ImovelId);
+
+                if (qtdImg == 1)
+                {
+                    return RedirectToRoute(new { controller = "Imoveis", action = "Edit", id = mdImagens.ImovelId, ultimaImg = true });
+                }
+
                 try
                 {
-                    var mdImagens = await _context.Imagem.FindAsync(id);
                     _context.Imagem.Remove(mdImagens);
                     await _context.SaveChangesAsync();
                     TempData["sucesso"] = "Imagem excluida com sucesso!";

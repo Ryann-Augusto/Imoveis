@@ -39,7 +39,7 @@ namespace Imoveis.Models
 
         [Column("cpf_cnpj", TypeName = "varchar(14)")]
         [Required(ErrorMessage = "O campo {0} é de preenchimento obrigatorio.")]
-        [Display(Name = "Cpf ou Cnpj")]
+        [Display(Name = "CPF ou CNPJ")]
         //[RegularExpression(@"[0-9]{11}$", ErrorMessage = "O campo {0} deve ser preenchido com um CPF.")]
         [UIHint("_CustomCPF")]
         public string Cpf_Cnpj { get; set; }

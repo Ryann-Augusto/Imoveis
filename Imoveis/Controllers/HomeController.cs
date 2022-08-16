@@ -19,8 +19,8 @@ namespace Imoveis.Controllers
 
         public int PaginaAtual { get; set; }
 
-        public async Task<IActionResult> Index([FromQuery(Name = "b")] string termoBusca, [FromQuery(Name = "o")]int? ordem,
-            [FromQuery(Name ="p")] int? pagina = 1, [FromQuery(Name = "t")] int tamanhoPagina = 20)
+        public async Task<IActionResult> Index([FromQuery(Name = "b")] string termoBusca, [FromQuery(Name = "o")] int? ordem,
+            [FromQuery(Name = "p")] int? pagina = 1, [FromQuery(Name = "t")] int tamanhoPagina = 20)
         {
             this.PaginaAtual = pagina.Value;
             ViewBag.PaginaAtual = pagina.Value;
@@ -64,9 +64,9 @@ namespace Imoveis.Controllers
 
             var queryCount = query;
             int qtdImovel = queryCount.Count();
-            ViewBag.QuantidadePaginas = Convert.ToInt32(Math.Ceiling(qtdImovel*1M / tamanhoPagina));
+            ViewBag.QuantidadePaginas = Convert.ToInt32(Math.Ceiling(qtdImovel * 1M / tamanhoPagina));
 
-            query = query.Skip(tamanhoPagina * (this.PaginaAtual -1 )).Take(tamanhoPagina);
+            query = query.Skip(tamanhoPagina * (this.PaginaAtual - 1)).Take(tamanhoPagina);
 
             return View(await query.ToListAsync());
         }
@@ -91,6 +91,22 @@ namespace Imoveis.Controllers
             return (mdImagens);
         }
 
+        public async Task<IActionResult> Imagem(int id)
+        {
+
+            var imagensBanco = await _context.Imagem.FirstOrDefaultAsync(a => a.ImovelId == id);
+            if (imagensBanco == null)
+            {
+                var filePath = "~/img/imoveis/sem_imagem.jpg";
+
+                return File(filePath, "image/jpeg");
+            }
+            else
+            {
+                return File(imagensBanco.Dados, imagensBanco.ContentType);
+            }
+        }
+
         public IActionResult VisualizarUmaImg(int id)
         {
             var imagemBanco = _context.Imagem.FirstOrDefault(a => a.ImovelId == id);
@@ -113,10 +129,20 @@ namespace Imoveis.Controllers
         {
             var imagensBanco = await _context.Imagem.Where(m => m.ImovelId == idImovel).FirstOrDefaultAsync(a => a.Id == id);
 
-            return File(imagensBanco.Dados, imagensBanco.ContentType);
+            if (imagensBanco == null)
+            {
+                var filePath = "~/img/imoveis/sem_imagem.jpg";
+
+                return File(filePath, "image/jpeg");
+
+            }
+            else
+            {
+                return File(imagensBanco.Dados, imagensBanco.ContentType);
+            }
         }
 
-        public async Task<IActionResult> RecuperarImagem(int id)
+            public async Task<IActionResult> RecuperarImagem(int id)
         {
 
             ViewBag.idImovel = id;

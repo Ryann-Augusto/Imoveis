@@ -96,7 +96,7 @@
                             <p class="tipo">Vendendo</p>
                         }
 
-                        <img class="card-img-top img-thumbnail center col-12" src="@Url.Action("VisualizarUmaImg", "Home", new {id = imovel.Id})" alt="Imagem de @imovel.Descricao" style="height:300px; object-fit:cover;">
+                        <img class="card-img-top img-thumbnail center col-12" src="@Url.Action("Imagem", "Home", new {id = imovel.Id})" alt="Imagem de @imovel.Descricao" style="height:300px; object-fit:cover;">
                         <div class="card-header">
                             R$ @imovel.Valor.ToString("#,##0.00")
                         </div>

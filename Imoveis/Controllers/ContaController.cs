@@ -39,7 +39,7 @@ namespace Imoveis.Controllers
                 ModelState.AddModelError("Senha", "Usuário ou senha estão incorretos");
             }
 
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/Imoveis");
 
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -50,7 +50,7 @@ namespace Imoveis.Controllers
 
         public async Task<IActionResult> Entrar(string returnUrl)
         {
-            returnUrl = ReturnUrl ?? Url.Content("~/");
+            returnUrl = ReturnUrl ?? Url.Content("~/Imoveis");
 
             var Usuario = await _context.Usuario.FirstOrDefaultAsync(u => u.Email == Dados.Email);
 
