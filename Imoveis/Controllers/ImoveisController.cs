@@ -215,12 +215,14 @@ namespace Imoveis.Controllers
 
                         if (imagemCarregada != null)
                         {
-                            var img = Auxiliares.ResizeImg.ResizeImage(imagemCarregada);
+                            //var img = Auxiliares.ResizeImg.ResizeImage(imagemCarregada);
+                            MemoryStream ms = new MemoryStream();
+                            imagemCarregada.OpenReadStream().CopyTo(ms);
 
                             MdImagens mdImagens = new()
                             {
                                 Descricao = imagemCarregada.FileName,
-                                Dados = img.ToArray(),
+                                Dados = ms.ToArray(),
                                 ContentType = imagemCarregada.ContentType,
                                 ImovelId = Imovel.Id
 

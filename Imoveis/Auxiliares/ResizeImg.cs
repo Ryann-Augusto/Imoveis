@@ -9,7 +9,9 @@ namespace Imoveis.Auxiliares
     {
         public static MemoryStream ResizeImage(IFormFile imagemCarregada)
         {
-            Image image = Image.FromStream(imagemCarregada.OpenReadStream(), true, true);
+            ImageConverter converter = new ImageConverter();
+
+            Image image = Image.FromStream(imagemCarregada.OpenReadStream(), false, false);
 
             MemoryStream ms = new MemoryStream();
 

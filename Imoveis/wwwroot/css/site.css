@@ -71,6 +71,12 @@ pre {
     word-wrap: break-word;
 }
 
+.imgModal {
+    max-width: 100%;
+    height:550px;
+    object-fit: contain;
+}
+
 /*Pagina Edit Imoveis*/
 .btnDeleteImage {
     color: #fff;
