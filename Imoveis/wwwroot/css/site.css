@@ -112,13 +112,15 @@ pre {
 
 .header-site {
     background-image: url(../img/imoveis/imagem_fundo_imobil.jpg);
+    filter: opacity(.5);
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     color: white;
-    padding-top: 300px;
-    padding-bottom: 300px;
+    padding-top: 200px;
+    padding-bottom: 200px;
+    z-index: -1;
 }
 
 /*Logo pagina Layout*/
@@ -141,4 +143,15 @@ pre {
 .linkNav{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
+}
+
+.imgRodape{
+    width: 150px !important;
+}
+
+.imgIndex {
+    width: 150px !important;
+    height: 200px !important;
+    z-index: 3;
+    filter: opacity(1);
 }
