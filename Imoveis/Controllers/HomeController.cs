@@ -45,7 +45,7 @@ namespace Imoveis.Controllers
                 switch (ordem)
                 {
                     case 1:
-                        query = query.OrderBy(i => i.Descricao.ToUpper());
+                        query = query.OrderByDescending(i => i.Descricao.ToUpper());
                         break;
                     case 2:
                         query = query.OrderBy(i => i.Valor);
