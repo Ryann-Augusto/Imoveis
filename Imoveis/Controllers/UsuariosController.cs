@@ -53,10 +53,16 @@ namespace Imoveis.Controllers
         public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha,ConfirmSenha,Cpf_Cnpj,Telefone,Nivel")] MdUsuarios mdUsuarios)
         {
             var contcpf = mdUsuarios.Cpf_Cnpj.Trim().Length;
+            var conttelefone = mdUsuarios.Telefone.Trim().Length;
 
             if (contcpf != 11 && contcpf != 14)
             {
-                ModelState.AddModelError("Cpf", "Os valores do CPF ou CNPJ não são válidos!");
+                ModelState.AddModelError("Cpf_Cnpj", "Os valores do CPF ou CNPJ não são válidos!");
+            }
+
+            if (conttelefone != 11)
+            {
+                ModelState.AddModelError("Telefone", "O Número informado não é válido ele deve conter 11 caracteres!");
             }
 
             Auxiliares.Hash hash = new(SHA256.Create());
