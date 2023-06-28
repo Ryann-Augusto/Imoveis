@@ -7,16 +7,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <body>
-    <div class="row mt-2" id="linha">
-        @*<div class="col-12">*@
-        <div id="meuSlider" class="carousel slider col-xl-8 col-lg-8 col-md-8 col-sm-12" data-bs-ride="carousel">
+    <div class="row mt-2 center" id="linha">
+        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+            <span class="titulo text-wrap text-right">@Html.DisplayFor(model => model.oMdImoveis.Nome)</span>
+            <p class="subtitulo text-wrap text-right">@Html.DisplayFor(model => model.oMdImoveis.Endereco.Bairro)</p>
+        </div>
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+            <div class="row">
+                <span class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-wrap text-right"><i class="fa-solid fa-user"></i> @Html.DisplayFor(model => model.oMdImoveis.Usuario.Nome)</span>
+                <span class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-wrap text-right"><i class="fa-solid fa-map-pin"></i> @Html.DisplayFor(model => model.oMdImoveis.Endereco.Rua)</span>
+                <span class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-wrap text-right"><i class="fa-regular fa-money-bill-1"></i> @Html.DisplayFor(model => model.oMdImoveis.Valor)</span>
+            </div>
+            
+        </div>
+        <div id="meuSlider" class="carousel slider col-xl-8 col-lg-8 col-md-8 col-sm-12 mt-1" data-bs-ride="carousel">
             <div class="carousel-inner">
                 @foreach (var item in Model.oMdImagens)
                 {
                     if (controle_ativo == 2)
                     {
                         <div class="carousel-item active">
-                            <img class="rounded d-block img-fluid img-thumbnail btnImage col-12" href="#" data-value="@item.ImovelId" style="height:500px; object-fit:cover; display:block;" src="@Url.Action("VisualizarVariasImg", "Home", new {id = item.Id, idImovel = @ViewBag.idImovel })">
+                            <img class="d-block img-fluid btnImage col-12" href="#" data-value="@item.ImovelId" style="height:500px; object-fit:cover; display:block;" src="@Url.Action("VisualizarVariasImg", "Home", new {id = item.Id, idImovel = @ViewBag.idImovel })">
                             <p class="center">@numeracao/@total</p>
                         </div>
                         controle_ativo = 1;
@@ -26,7 +37,7 @@
                     {
                         numeracao += 1;
                         <div class="carousel-item">
-                            <img class="rounded d-block img-fluid img-thumbnail btnImage col-12" href="#" data-value="@item.ImovelId" style="height:500px; object-fit:cover; display:block;" src="@Url.Action("VisualizarVariasImg", "Home", new {id = item.Id, idImovel = @ViewBag.idImovel })">
+                            <img class=" d-block img-fluid btnImage col-12" href="#" data-value="@item.ImovelId" style="height:500px; object-fit:cover; display:block;" src="@Url.Action("VisualizarVariasImg", "Home", new {id = item.Id, idImovel = @ViewBag.idImovel })">
                             <p class="center">@numeracao/@total</p>
                         </div>
                     }
@@ -41,74 +52,73 @@
                 </button>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-5 mt-1">
-            <div class="col-12 h-100 rounded p-2" id="NomeValor">
-                <p class="nomeImovel text-wrap text-center">@Html.DisplayFor(model => model.oMdImoveis.Nome)</p>
-
-                <p class="valorImovel">@Html.DisplayFor(model => model.oMdImoveis.Valor)</p>
-
-                <div class="row center p-3">
-                    <div class="group-append infoImovel border rounded-pill center m-2 p-3 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-                <i class="fa-solid fa-bed"></i>&nbsp;
-                    @Html.DisplayFor(model => model.oMdImoveis.Quarto)
-                </div>
-
-                <div class="group-append infoImovel border rounded-pill center m-2 p-3 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-                <i class="fa-solid fa-warehouse"></i>&nbsp;
-                    @Html.DisplayFor(model => model.oMdImoveis.Vagas)
-                </div>
-
-                <div class="group-append infoImovel border rounded-pill center m-2 p-3 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-                <i class="fa-solid fa-shower"></i>&nbsp;
-                    @Html.DisplayFor(model => model.oMdImoveis.Banheiro)
-                </div>
-                </div>
-
-                <button class="btn btn-primary btn-lg compWhats" data-id="@Model.oMdImoveis.Id" data-telefone="@Model.oMdImoveis.Usuario.Telefone" data-descricao="@Model.oMdImoveis.Nome">Entrar em Contato</button>
-            </div>
-        </div>
-        <hr />
+        <hr class="col-sm-12 col-md-8 col-lg-8 col-xl-8" />
         <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
-            <div class="col center">
-                <b>@Html.DisplayNameFor(model => model.oMdImoveis.Descricao)</b>
+            <div class="col">
+                <span class="titulo">@Html.DisplayNameFor(model => model.oMdImoveis.Descricao)</span>
             </div>
             <div class="mt-2">
-                <pre>@Html.DisplayFor(model => model.oMdImoveis.Descricao)</pre>
+                <div class="row">
+                    <pre>@Html.DisplayFor(model => model.oMdImoveis.Descricao)</pre>
+                    <span class="col-xl-8 col-lg-8 col-md-8 col-sm-12"><i class="fa-solid fa-bed"></i> @Html.DisplayFor(model => model.oMdImoveis.Quarto) Quartos</span>
+                    <span class="col-xl-8 col-lg-8 col-md-8 col-sm-12"><i class="fa-solid fa-warehouse"></i> @Html.DisplayFor(model => model.oMdImoveis.Vagas) Garagem</span>
+                    <span class="col-xl-8 col-lg-8 col-md-8 col-sm-12"><i class="fa-solid fa-shower"></i> @Html.DisplayFor(model => model.oMdImoveis.Banheiro) Banheiros</span>
+                </div>
             </div>
         </div>
-        <div class="col-4">
-            <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.oMdImoveis.Endereco.Bairro)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.oMdImoveis.Endereco.Bairro)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.oMdImoveis.Endereco.Cidade)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.oMdImoveis.Endereco.Cidade)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.oMdImoveis.Endereco.Estado)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.oMdImoveis.Endereco.Estado)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.oMdImoveis.Endereco.CEP)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.oMdImoveis.Endereco.CEP)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.oMdImoveis.Usuario)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.oMdImoveis.Usuario.Email)
-        </dd>
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+            <div class="row">
+                <span class="titulo mt-4">Informações do corretor</span>
+                <span class="mt-2"><i class="fa-solid fa-user"></i>&nbsp;&nbsp; @Html.DisplayFor(model => model.oMdImoveis.Usuario.Nome)</span>
+                <span class="mt-2"><i class="fa-solid fa-phone"></i>&nbsp;&nbsp; @Html.DisplayFor(model => model.oMdImoveis.Usuario.Telefone)</span>
+                <span class="mt-2"><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp; @Html.DisplayFor(model => model.oMdImoveis.Usuario.Email)</span>
+            </div>
         </div>
-        @* </div>*@
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+            @if (ViewData["message"] != null) {
+                <div class="text-danger">
+                @ViewData["message"];
+                </div>
+            }
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="center">ENTRE EM CONTATO</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Home" asp-action="SendContact" method="get">
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                <label class="control-label">Nome</label>
+                                <input name="Nome" id="Nome" required class="form-control" />
+                            </div>
+                            <div class="form-group col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                <label class="control-label">Email</label>
+                                <input name="Email" id="Email" required class="form-control" />
+                            </div>
+                            <div class="form-group col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                <label class="control-label">Telefone</label>
+                                <input name="Telefone" id="Telefone" class="form-control" />
+                            </div>
+                            <div class="form-group col-12 mt-2">
+                                <label class="control-label">Mensagem</label>
+                                <textarea name="Mensagem" id="Mensagem" required class="form-control"></textarea>
+                            </div>
+                            
+                            <div class="form-group mt-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="reset" class="btn btn-secondary center col-12" value="Limpar"></input>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="submit" value="Salvar" class="btn btn-primary center col-12" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <!-- INICIO DO POPUP VISUALIZAR-->
@@ -116,7 +126,16 @@
 <div class="modal fade" id="myModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
             <div id="conteudoModal"></div>
         </div>
     </div>
 </div>
+
+<a class="compWhats" data-id="@Model.oMdImoveis.Id" data-telefone="@Model.oMdImoveis.Usuario.Telefone" data-descricao="@Model.oMdImoveis.Nome" style="cursor:pointer;position:fixed;width:50px;height:50px;bottom:20px;right:20px;background-color:#25d366;color:#FFF;border-radius:50px;text-align:center;font-size:30px;box-shadow: 1px 1px 2px #888;
+  z-index:1000;" target="_blank">
+    <i style="margin-top:10px; margin-left:1px" class="fa-brands fa-whatsapp"></i>
+</a>
