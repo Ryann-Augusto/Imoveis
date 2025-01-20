@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AspNetCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Imoveis.Models
 {
@@ -10,6 +11,19 @@ namespace Imoveis.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<MdUsuarios>().HasData(
+                new MdUsuarios
+                {
+                    Id = 1,
+                    Email = "admin@gmail.com",
+                    Nome = "Admin",
+                    Cpf_Cnpj = "00000000000",
+                    Telefone = "00000000000",
+                    Senha = "123456",
+                    ConfirmSenha = "123456",
+                    Nivel = 1,
+                    Situacao = 1,
+                });
 
         }
 
